@@ -2,38 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>For Sai 💖</title>
+  <title>For Sai ❤️</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<audio id="happyMusic" src="assets/music/happy.mp3" loop></audio>
-<audio id="sadMusic" src="assets/music/sad.mp3" loop></audio>
 
 <div id="emoji-layer"></div>
 
 <div id="app">
 
-  <h1 id="question"></h1>
-
-  <div id="buttons">
-    <button id="yesBtn">❤️ YES</button>
-    <button id="noBtn">💔 NO</button>
+  <!-- QUESTION -->
+  <div id="question-screen">
+    <h1 id="question-text"></h1>
+    <div class="buttons">
+      <button id="yesBtn">❤️ YES</button>
+      <button id="noBtn">💔 NO</button>
+    </div>
   </div>
 
-  <img id="mainGif" hidden>
-
-  <button id="thinkAgain" hidden>THINK AGAIN MY LOVE 💔</button>
-
-  <div id="weekSection" hidden>
-    <h2>Are you ready for our love week, my Sai? 💕</h2>
-    <button id="weekYes">YES 💌</button>
+  <!-- NO SCREEN -->
+  <div id="no-screen" class="hidden">
+    <h1 id="sad-text"></h1>
+    <img src="assets/gifs/sad.gif" class="gif">
+    <button id="thinkAgain">THINK AGAIN MY LOVE ❤️</button>
   </div>
 
-  <div id="calendar" hidden></div>
+  <!-- YES SCREEN -->
+  <div id="yes-screen" class="hidden">
+    <img src="assets/gifs/happy.gif" class="gif">
+    <h1 id="ready-text"></h1>
+    <button id="readyBtn">YES 💌</button>
+  </div>
+
+  <!-- CALENDAR -->
+  <div id="calendar-screen" class="hidden"></div>
+
+  <!-- DAY VIEW -->
+  <div id="day-screen" class="hidden"></div>
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
