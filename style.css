@@ -90,4 +90,30 @@ h1, h2 {
   margin-top: 20px;
   padding: 10px 25px;
 }
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  max-width: 520px;
+  margin: auto;
+}
+
+.day {
+  background: white;
+  padding: 20px;
+  border-radius: 18px;
+  font-size: 18px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transition: 0.3s;
+}
+
+.day:hover {
+  transform: scale(1.08);
+  background: #ffe6f0;
+}
+
+.day.locked {
+  opacity: 0.4;
+}
+
 
