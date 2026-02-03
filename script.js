@@ -33,15 +33,19 @@ function typeText(el, text, speed = 50) {
 /* FLOATING EMOJIS */
 function floatingEmojis() {
   const layer = document.getElementById("emoji-layer");
-  for (let i = 0; i < 30; i++) {
+  emojiInterval = setInterval(() => {
     const e = document.createElement("div");
-    e.className = "emoji";
     e.innerText = Math.random() > 0.5 ? "❤️" : "🌼";
+    e.style.position = "fixed";
     e.style.left = Math.random() * 100 + "vw";
-    e.style.animationDuration = 6 + Math.random() * 6 + "s";
+    e.style.fontSize = "60px";
+    e.style.animation = "float 8s linear";
     layer.appendChild(e);
-  }
+
+    setTimeout(() => e.remove(), 8000);
+  }, 300);
 }
+let emojiInterval;
 floatingEmojis();
 
 /* BROKEN HEART RAIN */
@@ -74,6 +78,11 @@ noBtn.onclick = () => {
     noBtn.style.position = "absolute";
     noBtn.style.left = Math.random() * 80 + "vw";
     noBtn.style.top = Math.random() * 80 + "vh";
+  clearInterval(emojiInterval);
+  document.getElementById("emoji-layer").innerHTML = "";
+  brokenRain();
+
+
   }
 };
 
@@ -95,7 +104,8 @@ yesBtn.onclick = () => {
   ys.classList.remove("hidden");
 
   happyMusic.play();
-  confetti({ particleCount: 250, spread: 180 });
+  fireConfetti();
+
 
   typeText(
     readyText,
@@ -127,7 +137,12 @@ function showCalendar() {
     if (d > today && d !== 7 && d !== 14) {
       box.classList.add("locked");
     } else {
-      box.onclick = () => openDay(d);
+      if (d === 7 || d === 14) {
+       box.onclick = () => openDay(d);
+} else {
+  box.onclick = showWaitMessage;
+}
+
     }
     cal.appendChild(box);
   }
@@ -170,4 +185,42 @@ function openDay(day) {
   };
   ds.appendChild(back);
 }
+let heartbreakInterval;
+
+function brokenRain() {
+  clearInterval(heartbreakInterval);
+
+  heartbreakInterval = setInterval(() => {
+    const b = document.createElement("div");
+    b.innerText = "💔";
+    b.style.position = "fixed";
+    b.style.left = Math.random() * 100 + "vw";
+    b.style.fontSize = "90px";
+    b.style.animation = "fall 4s linear";
+    document.body.appendChild(b);
+
+    setTimeout(() => b.remove(), 4000);
+  }, 120);
+}
+function fireConfetti() {
+  const end = Date.now() + 3000;
+
+  (function frame() {
+    confetti({
+      particleCount: 6,
+      spread: 80,
+      origin: { x: Math.random(), y: Math.random() - 0.2 }
+    });
+    if (Date.now() < end) requestAnimationFrame(frame);
+  })();
+}
+function showWaitMessage() {
+  alert(
+    "Not today, my love 💗\n" +
+    "Some moments bloom only on their day 🌸\n" +
+    "Until then… hold my heart gently ✨"
+  );
+}
+
+
 
