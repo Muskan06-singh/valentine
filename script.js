@@ -10,14 +10,14 @@ const poems = {
     "Rose Day glows brighter with you ❤️"
   ],
   8: [
-    "💍 Sai, today my heart speaks 🥹",
-    "Not a question, but a promise 💞",
+    "💍 Sai, today my heart gathers courage 🥹",
+    "Not for a ring, but for forever 💞",
     "Every tomorrow feels safe with you ✨",
     "So here I stand, feelings true 🤍",
     "Will you always be mine 💖"
   ],
   9: [
-    "🍫 Sai, sweetness learned from you 🤎",
+    "🍫 Sai, sweetness learned your name 🤎",
     "One smile melts every fear 🍬",
     "Love tastes warmer near you ✨",
     "You are my favorite forever 💕",
@@ -38,11 +38,11 @@ const poems = {
     "Forever means you 💫"
   ],
   12: [
-    "🤗 Sai, hugs speak truth 🥹",
-    "Where words fall short 🤍",
+    "🤗 Sai, hugs speak when words fail 🥹",
+    "Your presence heals softly 🤍",
     "My heart rests with you ✨",
     "Every beat feels understood 💞",
-    "Saving all hugs for you 🤗"
+    "Saving my warmest hugs 🤗"
   ],
   13: [
     "😘 Sai, kisses are feelings 💗",
@@ -52,13 +52,24 @@ const poems = {
     "Kiss Day knows your name 💋"
   ],
   14: [
-    "❤️ Sai, this is us 🥹",
-    "Not a day, but forever ✨",
+    "❤️ Sai, this is our forever 🥹",
+    "Not a day, but a lifetime ✨",
     "Through storms and silence 💕",
     "Love chose us 🤍",
     "Forever with you, Sai 💖"
   ]
 };
+
+/* =========================
+   SAD MESSAGES (DRAMA)
+========================= */
+const sadMessages = [
+  "Sai… don’t you love me anymore? 💔",
+  "Sai… did my heart mean nothing to you? 🥀",
+  "Sai… was I ever special to you? 💔",
+  "Sai… my world feels empty without your yes 🖤",
+  "Sai… please don’t break my heart like this 💔"
+];
 
 /* =========================
    ELEMENTS
@@ -122,7 +133,7 @@ function stopEmojis() {
 startEmojis();
 
 /* =========================
-   BROKEN HEART RAIN
+   HEARTBREAK RAIN
 ========================= */
 let heartbreakInterval;
 function startHeartbreak() {
@@ -147,15 +158,15 @@ function stopHeartbreak() {
 }
 
 /* =========================
-   CONFETTI (SAFE)
+   CONFETTI SAFE
 ========================= */
-function fireConfettiSafe() {
+function fireConfettiSafe(duration = 3000) {
   if (typeof confetti !== "function") return;
-  const end = Date.now() + 3000;
+  const end = Date.now() + duration;
   (function frame() {
     confetti({
-      particleCount: 6,
-      spread: 100,
+      particleCount: 8,
+      spread: 120,
       origin: { x: Math.random(), y: Math.random() - 0.2 }
     });
     if (Date.now() < end) requestAnimationFrame(frame);
@@ -168,7 +179,7 @@ function fireConfettiSafe() {
 typeText(questionText, "Sai… will you be my Valentine? ❤️");
 
 /* =========================
-   NO CLICK
+   NO CLICK (DRAMA)
 ========================= */
 let noCount = 0;
 noBtn.onclick = () => {
@@ -177,7 +188,8 @@ noBtn.onclick = () => {
   ns.classList.remove("hidden");
 
   sadMusic.play();
-  typeText(sadText, "Sai… don’t you love me anymore? 💔");
+  const msg = sadMessages[(noCount - 1) % sadMessages.length];
+  typeText(sadText, msg);
 
   startHeartbreak();
 
@@ -245,7 +257,9 @@ function showCalendar() {
     if (d > today && d !== 7 && d !== 14) {
       box.classList.add("locked");
       box.onclick = () =>
-        alert("Please wait for the day, my love 🌸\nSome moments bloom only on time ✨");
+        alert(
+          "My love… 🌸\nPlease wait for the surprise ✨\nSome moments bloom only on their day 💖"
+        );
     } else {
       box.onclick = () => openDay(d);
     }
@@ -277,6 +291,19 @@ function openDay(day) {
     img.style.width = "150px";
     img.style.margin = "10px";
     ds.appendChild(img);
+  }
+
+  /* FINAL VALENTINE DAY EXPLOSION */
+  if (day === 14) {
+    fireConfettiSafe(6000);
+    setTimeout(() => {
+      const heart = document.createElement("div");
+      heart.innerHTML = "❤️";
+      heart.style.fontSize = "180px";
+      heart.style.textAlign = "center";
+      heart.style.animation = "pulse 1.5s infinite";
+      ds.appendChild(heart);
+    }, 2000);
   }
 
   const back = document.createElement("button");
