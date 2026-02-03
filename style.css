@@ -24,22 +24,54 @@ h1, h2 {
   cursor: pointer;
 }
 
-#yesBtn { background: white; color: red; }
-#noBtn { background: white; color: black; }
+#yesBtn { 
+  background: white; 
+  color: red; 
+}
+
+#noBtn { 
+  background: white; 
+  color: black; 
+}
 
 .gif {
   width: 280px;
   margin: 20px auto;
 }
 
-/* SAD SCREEN */
+/* =========================
+   💔 SAD SCREEN (NO CLICK)
+   ========================= */
+
 #no-screen {
   background: black;
   min-height: 100vh;
   color: white;
 }
 
-/* FLOATING EMOJIS */
+/* ✨ ADDED FOR DRAMA ✨ */
+/* Glittery white sad text */
+#sad-text {
+  color: white;
+  font-size: 30px;
+  text-shadow:
+    0 0 5px white,
+    0 0 10px #fff,
+    0 0 20px #ffd1dc,
+    0 0 40px #ff99cc;
+  animation: shimmer 2s infinite alternate;
+}
+
+/* ✨ ADDED FOR DRAMA ✨ */
+@keyframes shimmer {
+  from { opacity: 0.8; }
+  to { opacity: 1; }
+}
+
+/* =========================
+   💕 FLOATING EMOJIS
+   ========================= */
+
 .emoji {
   position: absolute;
   font-size: 65px;
@@ -51,45 +83,52 @@ h1, h2 {
   to { transform: translateY(-10vh); }
 }
 
-/* BROKEN HEART RAIN */
+/* ✨ ADDED FOR DRAMA ✨ */
+/* Stop emoji layer visually when NO */
+#no-screen .emoji {
+  display: none;
+}
+
+/* =========================
+   💔 BROKEN HEART RAIN
+   ========================= */
+
 .broken {
   position: fixed;
-  font-size: 75px;
-  animation: fall 3s linear infinite;
+  font-size: 95px;
+  animation: fall 2.5s linear infinite;
+  filter: drop-shadow(0 0 10px red);
 }
 
+/* ✨ ADDED FOR DRAMA ✨ */
 @keyframes fall {
-  from { top: -10%; }
-  to { top: 110%; }
+  from { 
+    top: -15%; 
+    transform: rotate(0deg);
+  }
+  to { 
+    top: 120%; 
+    transform: rotate(360deg);
+  }
 }
 
-/* CALENDAR */
-.calendar {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 15px;
-  max-width: 500px;
-  margin: auto;
-}
+/* =========================
+   🎉 CONFETTI SUPPORT
+   ========================= */
 
-.day {
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.day.locked {
-  opacity: 0.4;
+/* ✨ ADDED FOR DRAMA ✨ */
+canvas {
+  position: fixed !important;
+  top: 0;
+  left: 0;
   pointer-events: none;
+  z-index: 9999;
 }
 
-/* BACK BUTTON */
-.backBtn {
-  margin-top: 20px;
-  padding: 10px 25px;
-}
+/* =========================
+   📅 CALENDAR
+   ========================= */
+
 .calendar {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -112,8 +151,39 @@ h1, h2 {
   background: #ffe6f0;
 }
 
-.day.locked {
-  opacity: 0.4;
+/* ✨ ADDED FOR DRAMA ✨ */
+.day:not(.locked) {
+  animation: pulse 2s infinite;
 }
 
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 rgba(255,105,180,0.6); }
+  50% { box-shadow: 0 0 25px rgba(255,105,180,0.8); }
+  100% { box-shadow: 0 0 0 rgba(255,105,180,0.6); }
+}
+
+.day.locked {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* =========================
+   🔙 BACK BUTTON
+   ========================= */
+
+.backBtn {
+  margin-top: 20px;
+  padding: 12px 30px;
+  font-size: 18px;
+  border-radius: 25px;
+  background: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* ✨ ADDED FOR DRAMA ✨ */
+.backBtn:hover {
+  background: #ffd1dc;
+  transform: scale(1.1);
+}
 
