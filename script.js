@@ -158,4 +158,57 @@ function openDay(day) {
   };
   ds.appendChild(back);
 }
+/* =========================
+   YES / NO BUTTON ACTIONS
+   ========================= */
+
+yesBtn.onclick = () => {
+  qs.classList.add("hidden");
+  ys.classList.remove("hidden");
+
+  sadMusic.pause();
+  happyMusic.currentTime = 0;
+  happyMusic.play();
+
+  typeText(
+    readyText,
+    "Yayyy 🥹💖\nSai said YES!\nMy heart is dancing 🌸✨"
+  );
+};
+
+noBtn.onclick = () => {
+  noCount++;
+
+  qs.classList.add("hidden");
+  ns.classList.remove("hidden");
+
+  happyMusic.pause();
+  sadMusic.currentTime = 0;
+  sadMusic.play();
+
+  const sadLines = [
+    "Please think again 🥺",
+    "My heart is a little sad 💔",
+    "Don’t say no so fast 🥹",
+    "Sai… please? 🥺❤️"
+  ];
+
+  typeText(
+    sadText,
+    sadLines[Math.min(noCount - 1, sadLines.length - 1)]
+  );
+};
+
+/* THINK AGAIN BUTTON */
+thinkAgain.onclick = () => {
+  ns.classList.add("hidden");
+  qs.classList.remove("hidden");
+};
+
+/* READY BUTTON (SHOW CALENDAR) */
+readyBtn.onclick = () => {
+  ys.classList.add("hidden");
+  cs.classList.remove("hidden");
+};
+
 
