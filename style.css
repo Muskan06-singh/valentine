@@ -44,10 +44,17 @@ h1, h2 {
    ========================= */
 
 #no-screen {
+  position: fixed;
+  inset: 0;
   background: black;
-  min-height: 100vh;
   color: white;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
+
 
 /* ✨ ADDED FOR DRAMA ✨ */
 /* Glittery white sad text */
