@@ -1,7 +1,9 @@
+document.addEventListener("DOMContentLoaded", () => {
+
 /* =========================
    💖 POEMS
 ========================= */
-const poems = { /* SAME AS BEFORE */ 
+const poems = {
   7: [
     "🌹 Sai, roses learn softness from you 💖",
     "Every petal whispers your name 🌸",
@@ -61,104 +63,151 @@ const poems = { /* SAME AS BEFORE */
 };
 
 /* =========================
-   ELEMENTS
+   💔 SAD MESSAGES
 ========================= */
+const sadMessages = [
+  "Sai… don’t you love me anymore? 💔",
+  "Sai… did my heart mean nothing to you? 🥀",
+  "Sai… was I ever special to you? 💔",
+  "Sai… my world feels empty without your yes 🖤",
+  "Sai… please don’t break my heart like this 💔"
+];
+
+/* =========================
+   ELEMENTS (SAFE)
+========================= */
+const qs = document.getElementById("question-screen");
+const ns = document.getElementById("no-screen");
+const ys = document.getElementById("yes-screen");
 const cs = document.getElementById("calendar-screen");
 const ds = document.getElementById("day-screen");
+
+const questionText = document.getElementById("question-text");
+const sadText = document.getElementById("sad-text");
+const readyText = document.getElementById("ready-text");
+
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const thinkAgain = document.getElementById("thinkAgain");
+const readyBtn = document.getElementById("readyBtn");
+
+/* =========================
+   MUSIC
+========================= */
+const sadMusic = new Audio("assets/music/sad.mp3");
+const happyMusic = new Audio("assets/music/happy.mp3");
+happyMusic.loop = true;
 
 /* =========================
    TYPEWRITER
 ========================= */
-function typeText(el, text, speed = 45, callback) {
+function typeText(el, text, speed = 45) {
+  if (!el) return;
   el.innerHTML = "";
   let i = 0;
   const timer = setInterval(() => {
     el.innerHTML += text[i] === "\n" ? "<br>" : text[i];
     i++;
-    if (i >= text.length) {
-      clearInterval(timer);
-      if (callback) callback();
-    }
+    if (i >= text.length) clearInterval(timer);
   }, speed);
 }
 
 /* =========================
-   CORNER HEARTS
+   START
 ========================= */
-function showCornerHearts() {
-  removeCornerHearts();
-  ["tl","tr","bl","br"].forEach(pos => {
-    const h = document.createElement("div");
-    h.className = `corner-heart ${pos}`;
-    h.innerHTML = "❤️";
-    document.body.appendChild(h);
-  });
-}
-function removeCornerHearts() {
-  document.querySelectorAll(".corner-heart").forEach(h => h.remove());
-}
+typeText(questionText, "Sai… will you be my Valentine? ❤️");
+
+/* =========================
+   NO CLICK
+========================= */
+let noCount = 0;
+noBtn.onclick = () => {
+  noCount++;
+  qs.classList.add("hidden");
+  ns.classList.remove("hidden");
+
+  sadMusic.play();
+  typeText(sadText, sadMessages[(noCount - 1) % sadMessages.length]);
+};
+
+/* THINK AGAIN */
+thinkAgain.onclick = () => {
+  sadMusic.pause();
+  sadMusic.currentTime = 0;
+  ns.classList.add("hidden");
+  qs.classList.remove("hidden");
+};
+
+/* =========================
+   YES CLICK
+========================= */
+yesBtn.onclick = () => {
+  sadMusic.pause();
+  sadMusic.currentTime = 0;
+
+  qs.classList.add("hidden");
+  ys.classList.remove("hidden");
+
+  happyMusic.play();
+  typeText(
+    readyText,
+    "Are you ready, my love, for our magical love week together? ✨"
+  );
+};
+
+/* READY */
+readyBtn.onclick = () => {
+  ys.classList.add("hidden");
+  showCalendar();
+};
 
 /* =========================
    📅 CALENDAR
 ========================= */
 function showCalendar() {
+  cs.innerHTML = "";
   cs.classList.remove("hidden");
-  ds.classList.add("hidden");
+
+  const cal = document.createElement("div");
+  cal.className = "calendar";
+
+  for (let d = 7; d <= 14; d++) {
+    const box = document.createElement("div");
+    box.className = "day";
+    box.innerText = `Feb ${d}`;
+    box.onclick = () => openDay(d);
+    cal.appendChild(box);
+  }
+
+  cs.appendChild(cal);
 }
 
 /* =========================
-   💌 OPEN DAY (FIXED)
+   💌 OPEN DAY
 ========================= */
 function openDay(day) {
-  // HARD switch screens (this was missing clarity)
   cs.classList.add("hidden");
   ds.classList.remove("hidden");
   ds.innerHTML = "";
 
-  // Stop all rains OUTSIDE
-  if (typeof stopHeartbreak === "function") stopHeartbreak();
-  if (typeof stopEmojis === "function") stopEmojis();
-
-  // Show corner hearts INSIDE
-  showCornerHearts();
-
-  // 1️⃣ GIF FIRST
   const gif = document.createElement("img");
   gif.src = `assets/gifs/day${day}.gif`;
   gif.className = "gif";
   ds.appendChild(gif);
 
-  // 2️⃣ POEM AFTER GIF
   const poem = document.createElement("h2");
   ds.appendChild(poem);
+  typeText(poem, poems[day].join("\n"));
 
-  typeText(poem, poems[day].join("\n"), 45, () => {
-
-    // 3️⃣ IMAGES AFTER POEM
-    const imgWrap = document.createElement("div");
-    imgWrap.className = "image-wrap";
-
-    for (let i = 1; i <= 5; i++) {
-      const img = document.createElement("img");
-      img.src = `assets/images/day${day}-${i}.jpg`;
-      imgWrap.appendChild(img);
-    }
-    ds.appendChild(imgWrap);
-
-    // 4️⃣ FINAL DAY CONFETTI
-    if (day === 14 && typeof fireConfettiSafe === "function") {
-      fireConfettiSafe(6000);
-    }
-  });
-
-  // BACK BUTTON
   const back = document.createElement("button");
   back.className = "backBtn";
   back.innerText = "⬅ Back to Calendar";
   back.onclick = () => {
-    removeCornerHearts();
-    showCalendar();
+    ds.classList.add("hidden");
+    cs.classList.remove("hidden");
   };
   ds.appendChild(back);
 }
+
+});
 
