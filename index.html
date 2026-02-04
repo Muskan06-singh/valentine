@@ -1,49 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>For Sai ❤️</title>
-  <link rel="stylesheet" href="style.css">
+
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- CONFETTI LIB -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
+
 <body>
 
-<div id="emoji-layer"></div>
+  <!-- 🌼💖 EMOJI RAIN -->
+  <div class="emoji-layer" id="emoji-layer"></div>
 
-<div id="app">
+  <div id="app">
 
-  <!-- QUESTION -->
-  <div id="question-screen">
-    <h1 id="question-text"></h1>
-    <div class="buttons">
-      <button id="yesBtn">❤️ YES</button>
-      <button id="noBtn">💔 NO</button>
+    <!-- QUESTION SCREEN -->
+    <div id="question-screen">
+      <h1 id="question-text"></h1>
+
+      <div class="buttons">
+        <button id="yesBtn">Yes ❤️</button>
+        <button id="noBtn">No 💔</button>
+      </div>
     </div>
+
+    <!-- NO SCREEN -->
+    <div id="no-screen" class="hidden">
+      <div id="sad-text"></div>
+      <br />
+      <button id="thinkAgain">THINK AGAIN MY LOVE 💔</button>
+    </div>
+
+    <!-- YES SCREEN -->
+    <div id="yes-screen" class="hidden">
+      <h2 id="ready-text"></h2>
+      <br />
+      <button id="readyBtn">I’m ready 💘</button>
+    </div>
+
+    <!-- CALENDAR SCREEN -->
+    <div id="calendar-screen" class="hidden"></div>
+
+    <!-- DAY SCREEN -->
+    <div id="day-screen" class="hidden"></div>
+
   </div>
 
-  <!-- NO SCREEN -->
-  <div id="no-screen" class="hidden">
-    <h1 id="sad-text"></h1>
-    <img src="assets/gifs/sad.gif" class="gif">
-    <button id="thinkAgain">THINK AGAIN MY LOVE ❤️</button>
-  </div>
-
-  <!-- YES SCREEN -->
-  <div id="yes-screen" class="hidden">
-    <img src="assets/gifs/happy.gif" class="gif">
-    <h1 id="ready-text"></h1>
-    <button id="readyBtn">YES 💌</button>
-  </div>
-
-  <!-- CALENDAR -->
-  <div id="calendar-screen" class="hidden"></div>
-
-  <!-- DAY VIEW -->
-  <div id="day-screen" class="hidden"></div>
-
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
 
