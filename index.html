@@ -6,63 +6,43 @@
 
   <link rel="stylesheet" href="style.css">
 
-  <!-- Confetti -->
+  <!-- REAL CANVAS CONFETTI -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
-
 <body>
 
+<!-- FLOATING EMOJI RAIN -->
 <div id="emoji-layer"></div>
 
-<audio id="happyMusic" src="assets/music/happy.mp3" loop></audio>
-<audio id="sadMusic" src="assets/music/sad.mp3" loop></audio>
+<!-- QUESTION -->
+<div id="question-screen">
+  <h1 id="question-text"></h1>
 
-<div id="app">
-
-  <!-- QUESTION -->
-  <section id="question" class="screen active">
-    <h1 id="questionText"></h1>
-    <div class="btns">
-      <button id="yes">Yes ❤️</button>
-      <button id="no">No 💔</button>
-    </div>
-  </section>
-
-  <!-- SAD -->
-  <section id="sad" class="screen hidden">
-    <img src="assets/gifs/sad.gif" class="gif">
-    <p id="sadLine"></p>
-    <button id="think">❤️ Think Again ❤️</button>
-  </section>
-
-  <!-- HAPPY -->
-  <section id="happy" class="screen hidden">
-    <img src="assets/gifs/happy.gif" class="gif">
-    <button id="openCal">Open Our Days 💌</button>
-  </section>
-
-  <!-- CALENDAR -->
-  <section id="calendar" class="screen hidden">
-    <h2>February 💖</h2>
-    <div id="days"></div>
-  </section>
-
-  <!-- DAY VIEW -->
-  <section id="dayView" class="screen hidden">
-    <div class="corner tl">❤️</div>
-    <div class="corner tr">❤️</div>
-    <div class="corner bl">❤️</div>
-    <div class="corner br">❤️</div>
-
-    <img id="dayGif" class="gif">
-    <pre id="poem"></pre>
-
-    <div id="imgs"></div>
-
-    <button id="back">⬅ Back to Calendar</button>
-  </section>
-
+  <div class="buttons">
+    <button id="yesBtn">YES ❤️</button>
+    <button id="noBtn">NO 💔</button>
+  </div>
 </div>
+
+<!-- NO SCREEN -->
+<div id="no-screen" class="hidden">
+  <img src="assets/gifs/sad.gif" class="gif">
+  <h2 id="sad-text"></h2>
+  <button id="thinkAgain">❤️ THINK AGAIN ❤️</button>
+</div>
+
+<!-- YES SCREEN -->
+<div id="yes-screen" class="hidden">
+  <img src="assets/gifs/happy.gif" class="gif">
+  <h2 id="ready-text"></h2>
+  <button id="readyBtn">Open Love Calendar 💘</button>
+</div>
+
+<!-- CALENDAR -->
+<div id="calendar-screen" class="hidden"></div>
+
+<!-- DAY VIEW -->
+<div id="day-screen" class="hidden"></div>
 
 <script src="script.js"></script>
 </body>
