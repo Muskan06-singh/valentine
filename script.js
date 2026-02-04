@@ -1,62 +1,14 @@
-/* ================= POEMS FOR SAI ================= */
+/* ===== POEMS ===== */
 
-const poems = {
-  7: [
-    "🌹 Rose Day 🌹",
-    "Sai, every rose feels shy next to you",
-    "Because softness learned your name first",
-    "If love had a fragrance, it would be you",
-    "I give you my heart with every petal ❤️"
-  ],
-  8: [
-    "💍 Propose Day 💍",
-    "Sai, this is my forever question",
-    "Not just today, not just this week",
-    "But every sunrise and every storm",
-    "Will you be mine, always? 🤍"
-  ],
-  9: [
-    "🍫 Chocolate Day 🍫",
-    "Sweet like chocolate, warm like cocoa",
-    "Sai, you melt every fear in me",
-    "Life tastes better with you beside me",
-    "You are my favorite sweetness 💕"
-  ],
-  10: [
-    "🧸 Teddy Day 🧸",
-    "If I could hug you forever, I would",
-    "Sai, you are my safe place",
-    "Soft, warm, comforting",
-    "My heart rests in you 🤍"
-  ],
-  11: [
-    "🤞 Promise Day 🤞",
-    "Sai, I promise you patience",
-    "I promise you honesty",
-    "I promise to choose you",
-    "Even on the hardest days ❤️"
-  ],
-  12: [
-    "🤍 Hug Day 🤍",
-    "One hug from you feels like home",
-    "Sai, my worries dissolve in your arms",
-    "No words needed, no fear left",
-    "Just us, breathing together 🤍"
-  ],
-  13: [
-    "💋 Kiss Day 💋",
-    "A kiss from you is poetry",
-    "Sai, it speaks what words cannot",
-    "Soft, slow, full of promise",
-    "Sealing my heart to yours 💖"
-  ],
-  14: [
-    "❤️ Valentine’s Day ❤️",
-    "Sai, this is not a day",
-    "This is a lifetime I choose",
-    "Through chaos, calm, and change",
-    "Forever is you 💘"
-  ]
+const poems = { /* YOUR SAME POEMS – UNCHANGED */ 
+  7: ["🌹 Rose Day 🌹","Sai, every rose feels shy next to you","Because softness learned your name first","If love had a fragrance, it would be you","I give you my heart with every petal ❤️"],
+  8: ["💍 Propose Day 💍","Sai, this is my forever question","Not just today, not just this week","But every sunrise and every storm","Will you be mine, always? 🤍"],
+  9: ["🍫 Chocolate Day 🍫","Sweet like chocolate, warm like cocoa","Sai, you melt every fear in me","Life tastes better with you beside me","You are my favorite sweetness 💕"],
+  10:["🧸 Teddy Day 🧸","If I could hug you forever, I would","Sai, you are my safe place","Soft, warm, comforting","My heart rests in you 🤍"],
+  11:["🤞 Promise Day 🤞","Sai, I promise you patience","I promise you honesty","I promise to choose you","Even on the hardest days ❤️"],
+  12:["🤍 Hug Day 🤍","One hug from you feels like home","Sai, my worries dissolve in your arms","Just us, breathing together 🤍"],
+  13:["💋 Kiss Day 💋","A kiss from you is poetry","Sai, it speaks what words cannot","Soft, slow, full of promise","Sealing my heart to yours 💖"],
+  14:["❤️ Valentine’s Day ❤️","Sai, this is not a day","This is a lifetime I choose","Through chaos, calm, and change","Forever is you 💘"]
 };
 
 const sadMessages = [
@@ -65,7 +17,7 @@ const sadMessages = [
   "Sai… please don’t leave my heart like this"
 ];
 
-/* ================= ELEMENTS ================= */
+/* ===== ELEMENTS ===== */
 
 const qs = document.getElementById("question-screen");
 const ns = document.getElementById("no-screen");
@@ -79,32 +31,31 @@ const readyText = document.getElementById("ready-text");
 
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
-const thinkAgain = document.getElementById("thinkAgain");
 const readyBtn = document.getElementById("readyBtn");
 
-/* ================= MUSIC ================= */
+/* ===== MUSIC ===== */
 
 const sadMusic = new Audio("assets/music/sad.mp3");
 const happyMusic = new Audio("assets/music/happy.mp3");
 happyMusic.loop = true;
 
-/* ================= TYPEWRITER ================= */
+/* ===== TYPEWRITER ===== */
 
 function typeText(el, text, speed = 45) {
   el.innerHTML = "";
   let i = 0;
-  const timer = setInterval(() => {
+  const t = setInterval(() => {
     el.innerHTML += text[i] || "";
     i++;
-    if (i >= text.length) clearInterval(timer);
+    if (i >= text.length) clearInterval(t);
   }, speed);
 }
 
-/* ================= START ================= */
+/* ===== START ===== */
 
 typeText(questionText, "Sai… will you be my Valentine? ❤️");
 
-/* ================= NO BUTTON ================= */
+/* ===== NO BUTTON ===== */
 
 let noCount = 0;
 
@@ -119,8 +70,8 @@ noBtn.onclick = () => {
   } else {
     sadText.innerHTML = `
       <img src="assets/gifs/tease.gif" class="gif">
-      <p>Haha Sai… no matter how much you run,  
-      my heart already chose you 😌❤️</p>
+      <p>Haha Sai… no escape now 😌❤️  
+      destiny already clicked YES for you</p>
     `;
     moveNoButton();
   }
@@ -128,17 +79,11 @@ noBtn.onclick = () => {
 
 function moveNoButton() {
   noBtn.style.position = "absolute";
-  noBtn.style.left = Math.random() * 70 + "vw";
-  noBtn.style.top = Math.random() * 70 + "vh";
+  noBtn.style.left = Math.random() * 80 + "vw";
+  noBtn.style.top = Math.random() * 80 + "vh";
 }
 
-thinkAgain.onclick = () => {
-  ns.classList.add("hidden");
-  qs.classList.remove("hidden");
-  sadMusic.pause();
-};
-
-/* ================= YES ================= */
+/* ===== YES ===== */
 
 yesBtn.onclick = () => {
   qs.classList.add("hidden");
@@ -153,18 +98,18 @@ readyBtn.onclick = () => {
   showCalendar();
 };
 
-/* ================= CONFETTI ================= */
+/* ===== CONFETTI ===== */
 
 function fireConfetti(duration) {
-  if (!confetti) return;
+  if (!window.confetti) return;
   const end = Date.now() + duration;
   (function frame() {
-    confetti({ particleCount: 15, spread: 180 });
+    confetti({ particleCount: 18, spread: 180 });
     if (Date.now() < end) requestAnimationFrame(frame);
   })();
 }
 
-/* ================= CALENDAR ================= */
+/* ===== CALENDAR ===== */
 
 function showCalendar() {
   cs.classList.remove("hidden");
@@ -177,7 +122,6 @@ function showCalendar() {
     const day = document.createElement("div");
     day.className = "day";
     day.innerText = `Feb ${d}`;
-
     day.onclick = () => openDay(d);
     cal.appendChild(day);
   }
@@ -185,7 +129,7 @@ function showCalendar() {
   cs.appendChild(cal);
 }
 
-/* ================= OPEN DAY ================= */
+/* ===== OPEN DAY ===== */
 
 function openDay(day) {
   cs.classList.add("hidden");
@@ -210,3 +154,4 @@ function openDay(day) {
     });
   };
 }
+
