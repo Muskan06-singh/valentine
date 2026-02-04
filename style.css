@@ -213,3 +213,39 @@ canvas {
   background: #ffd1dc;
   transform: scale(1.1);
 }
+/* =========================
+   💖 BIG CENTER CALENDAR
+========================= */
+#calendar-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.calendar {
+  transform: scale(1.5);
+  animation: calendarGlow 3s ease-in-out infinite;
+}
+
+@keyframes calendarGlow {
+  0% { transform: scale(1.5); }
+  50% { transform: scale(1.55); }
+  100% { transform: scale(1.5); }
+}
+
+/* =========================
+   ❤️ CORNER HEARTS (DAY VIEW)
+========================= */
+.corner-heart {
+  position: fixed;
+  font-size: 90px;
+  z-index: 9999;
+  animation: pulse 1.5s infinite;
+}
+
+.corner-heart.tl { top: 10px; left: 10px; }
+.corner-heart.tr { top: 10px; right: 10px; }
+.corner-heart.bl { bottom: 10px; left: 10px; }
+.corner-heart.br { bottom: 10px; right: 10px; }
+
