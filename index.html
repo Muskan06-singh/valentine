@@ -1,46 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>For Sai ❤️</title>
-  <link rel="stylesheet" href="style.css" />
+
+  <link rel="stylesheet" href="style.css">
 
   <!-- Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
+
 <body>
 
-  <!-- Emoji Rain -->
-  <div id="emoji-layer"></div>
+<div id="emoji-layer"></div>
+
+<audio id="happyMusic" src="assets/music/happy.mp3" loop></audio>
+<audio id="sadMusic" src="assets/music/sad.mp3" loop></audio>
+
+<div id="app">
 
   <!-- QUESTION -->
-  <div id="question-screen" class="screen">
-    <h1 id="question-text"></h1>
-    <div class="buttons">
-      <button id="yesBtn">YES ❤️</button>
-      <button id="noBtn">NO 💔</button>
+  <section id="question" class="screen active">
+    <h1 id="questionText"></h1>
+    <div class="btns">
+      <button id="yes">Yes ❤️</button>
+      <button id="no">No 💔</button>
     </div>
-  </div>
+  </section>
 
-  <!-- NO SCREEN -->
-  <div id="no-screen" class="screen hidden">
-    <div id="sad-text"></div>
-    <button id="thinkAgain">Think again 💔</button>
-  </div>
+  <!-- SAD -->
+  <section id="sad" class="screen hidden">
+    <img src="assets/gifs/sad.gif" class="gif">
+    <p id="sadLine"></p>
+    <button id="think">❤️ Think Again ❤️</button>
+  </section>
 
-  <!-- YES SCREEN -->
-  <div id="yes-screen" class="screen hidden">
-    <h2 id="ready-text"></h2>
-    <button id="readyBtn">I’m ready 💘</button>
-  </div>
+  <!-- HAPPY -->
+  <section id="happy" class="screen hidden">
+    <img src="assets/gifs/happy.gif" class="gif">
+    <button id="openCal">Open Our Days 💌</button>
+  </section>
 
   <!-- CALENDAR -->
-  <div id="calendar-screen" class="screen hidden"></div>
+  <section id="calendar" class="screen hidden">
+    <h2>February 💖</h2>
+    <div id="days"></div>
+  </section>
 
   <!-- DAY VIEW -->
-  <div id="day-screen" class="screen hidden"></div>
+  <section id="dayView" class="screen hidden">
+    <div class="corner tl">❤️</div>
+    <div class="corner tr">❤️</div>
+    <div class="corner bl">❤️</div>
+    <div class="corner br">❤️</div>
 
-  <script src="script.js"></script>
+    <img id="dayGif" class="gif">
+    <pre id="poem"></pre>
+
+    <div id="imgs"></div>
+
+    <button id="back">⬅ Back to Calendar</button>
+  </section>
+
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
 
