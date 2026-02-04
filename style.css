@@ -1,115 +1,136 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', cursive;
-}
-
 body {
-  background: black;
-  color: white;
+  margin: 0;
+  background: #ffd6e8;
+  font-family: "Georgia", cursive;
   overflow: hidden;
-}
-
-/* Screens */
-.screen {
-  display: none;
-  height: 100vh;
   text-align: center;
-  padding-top: 80px;
 }
 
-.screen.active {
-  display: block;
+.hidden { display: none; }
+
+h1, h2 {
+  color: black;
+  text-shadow: 0 0 12px hotpink;
 }
 
-.hidden {
-  display: none;
-}
-
-/* Question */
-#questionText {
-  font-size: 2.7rem;
-  color: #ffb6c1;
-  text-shadow: 0 0 20px pink;
-}
-
-.btns {
-  margin-top: 40px;
-}
-
-button {
-  padding: 15px 35px;
-  font-size: 1.4rem;
+/* BUTTONS */
+.buttons button {
+  padding: 22px 50px;
+  font-size: 24px;
+  margin: 15px;
   border-radius: 40px;
-  border: none;
   cursor: pointer;
+  border: none;
 }
 
-#yes {
-  background: hotpink;
-  animation: beat 1.2s infinite;
-}
-
-#no {
-  background: #444;
-  color: white;
-  margin-left: 20px;
+#yesBtn {
+  background: white;
+  color: red;
+  animation: beat 1.5s infinite;
 }
 
 @keyframes beat {
   50% { transform: scale(1.15); }
 }
 
+#noBtn {
+  background: white;
+  color: black;
+}
+
 /* GIF */
 .gif {
-  width: 280px;
+  width: 300px;
   margin: 20px auto;
 }
 
-/* Calendar */
-#days {
+/* EMOJI RAIN */
+.emoji {
+  position: fixed;
+  font-size: 70px;
+  animation: float 8s linear;
+}
+
+@keyframes float {
+  from { top: 100vh; }
+  to { top: -10vh; }
+}
+
+/* NO SCREEN */
+#no-screen {
+  position: fixed;
+  inset: 0;
+  background: black;
+  color: white;
+  z-index: 9999;
+}
+
+#sad-text {
+  color: white;
+  font-size: 30px;
+  text-shadow: 0 0 20px pink;
+}
+
+/* THINK AGAIN BUTTON */
+#thinkAgain {
+  margin-top: 30px;
+  padding: 15px 35px;
+  font-size: 20px;
+  border-radius: 50px;
+  background: pink;
+  border: none;
+  animation: beat 1.5s infinite;
+}
+
+/* CALENDAR */
+#calendar-screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
-  width: 70%;
-  margin: 40px auto;
+  background: white;
+  padding: 40px;
+  border-radius: 30px;
+  animation: beat 2s infinite;
 }
 
 .day {
   padding: 25px;
-  background: #222;
-  border-radius: 15px;
-  box-shadow: 0 0 20px hotpink;
-  animation: beat 2s infinite;
+  border-radius: 18px;
+  background: #ffe6f0;
+  font-size: 20px;
+  cursor: pointer;
 }
 
-.locked {
+.day.locked {
   opacity: 0.4;
 }
 
-/* Day view */
-#poem {
-  white-space: pre-wrap;
-  width: 80%;
-  margin: 20px auto;
-  font-size: 1.15rem;
-}
-
-#imgs img {
-  width: 160px;
-  margin: 10px;
-}
-
-/* Hearts */
-.corner {
+/* DAY VIEW */
+.corner-heart {
   position: fixed;
-  font-size: 2rem;
-  animation: beat 1s infinite;
+  font-size: 40px;
+  animation: beat 1.2s infinite;
 }
 
 .tl { top: 10px; left: 10px; }
 .tr { top: 10px; right: 10px; }
 .bl { bottom: 10px; left: 10px; }
 .br { bottom: 10px; right: 10px; }
+
+.backBtn {
+  margin-top: 30px;
+  padding: 15px 35px;
+  border-radius: 40px;
+  font-size: 18px;
+  background: pink;
+  border: none;
+}
 
