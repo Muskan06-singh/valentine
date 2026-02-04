@@ -1,142 +1,173 @@
-* {
-  box-sizing: border-box;
+body{
+margin:0;
+background:#ffd6e8;
+font-family:cursive;
+overflow:hidden;
+text-align:center;
 }
 
-body {
-  margin: 0;
-  background: #ffd6e8;
-  font-family: 'Great Vibes', cursive;
-  overflow: hidden;
-  text-align: center;
+.hidden{display:none}
+
+/* TITLE */
+#title{
+font-size:60px;
+margin-top:120px;
+color:black;
+font-weight:bold;
+text-shadow:
+0 0 5px #fff,
+0 0 10px #ff69b4,
+0 0 20px #ff1493;
 }
 
-.hidden {
-  display: none;
+/* BUTTONS */
+.btns button{
+padding:20px 40px;
+font-size:22px;
+margin:20px;
+border:none;
+border-radius:40px;
+cursor:pointer;
+font-weight:bold;
 }
 
-/* ================= TEXT ================= */
-h1, h2 {
-  color: white;
-  text-shadow: 0 0 20px hotpink, 0 0 40px deeppink;
+.yes{
+background:white;
+color:red;
+animation:beat 1s infinite;
 }
 
-#question-text {
-  font-size: 70px;
-  margin-top: 120px;
+.no{background:white;color:black;}
+
+@keyframes beat{
+0%{transform:scale(1)}
+50%{transform:scale(1.15)}
+100%{transform:scale(1)}
 }
 
-/* ================= BUTTONS ================= */
-.buttons button {
-  font-size: 32px;
-  padding: 20px 60px;
-  margin: 20px;
-  border-radius: 60px;
-  border: none;
-  cursor: pointer;
+/* SAD */
+#sadScreen{
+background:black;
+color:white;
+height:100vh;
+padding-top:100px;
 }
 
-#yesBtn {
-  background: white;
-  color: red;
-  animation: beat 1.2s infinite;
+#sadText{
+font-size:34px;
+color:white;
+text-shadow:0 0 10px white;
 }
 
-#noBtn {
-  background: white;
-  color: black;
+#thinkBtn{
+margin-top:30px;
+font-size:20px;
+padding:25px 35px;
+background:white;
+border:none;
+cursor:pointer;
+border-radius:50%;
+width:180px;
+height:180px;
+font-weight:bold;
 }
 
-@keyframes beat {
-  0%,100% { transform: scale(1); }
-  50% { transform: scale(1.15); }
+/* GIF */
+.centerGif{
+width:300px;
+margin-top:40px;
 }
 
-/* ================= GIF ================= */
-.gif {
-  width: 300px;
-  margin: 30px auto;
+/* CALENDAR */
+#calendar{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+max-width:700px;
+margin:120px auto;
 }
 
-/* ================= NO SCREEN ================= */
-#no-screen {
-  position: fixed;
-  inset: 0;
-  background: black;
+.day{
+background:white;
+padding:30px;
+border-radius:20px;
+font-size:22px;
+cursor:pointer;
+box-shadow:0 0 20px pink;
+animation:pulse 2s infinite;
 }
 
-/* ================= THINK AGAIN ================= */
-#thinkAgain {
-  margin-top: 30px;
-  font-size: 26px;
-  padding: 18px 50px;
-  border-radius: 100px;
-  border: none;
-  background: red;
-  color: white;
-  animation: beat 1.3s infinite;
+@keyframes pulse{
+0%{transform:scale(1)}
+50%{transform:scale(1.07)}
+100%{transform:scale(1)}
 }
 
-/* ================= EMOJI RAIN ================= */
-.emoji {
-  position: fixed;
-  font-size: 70px;
-  animation: fall 6s linear forwards;
+.locked{
+opacity:0.3;
+cursor:not-allowed;
 }
 
-@keyframes fall {
-  from { transform: translateY(-10vh); }
-  to { transform: translateY(110vh); }
+/* POEM */
+#poem{
+font-size:28px;
+color:black;
+font-weight:bold;
+text-shadow:0 0 10px #ff69b4;
+width:80%;
+margin:30px auto;
 }
 
-/* ================= HEARTBREAK ================= */
-.broken {
-  position: fixed;
-  font-size: 90px;
-  animation: fall 3s linear forwards;
+/* IMAGES */
+#images img{
+width:150px;
+margin:10px;
+border-radius:15px;
+display:none;
 }
 
-/* ================= CALENDAR ================= */
-.calendar {
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  gap: 25px;
-  width: 600px;
-  margin: 120px auto;
-  animation: beat 2s infinite;
+/* BACK BTN */
+#backBtn{
+margin-top:20px;
+padding:15px 30px;
+font-size:18px;
+background:white;
+border:none;
+border-radius:20px;
+cursor:pointer;
+box-shadow:0 0 10px pink;
 }
 
-.day {
-  background: white;
-  padding: 25px;
-  border-radius: 20px;
-  font-size: 26px;
-  cursor: pointer;
-  box-shadow: 0 0 30px pink;
+/* EMOJI RAIN */
+.floating{
+position:fixed;
+font-size:45px;
+animation:float 8s linear infinite;
 }
 
-.day.locked {
-  opacity: 0.4;
+@keyframes float{
+from{transform:translateY(100vh)}
+to{transform:translateY(-10vh)}
 }
 
-/* ================= DAY SCREEN ================= */
-.corner {
-  position: fixed;
-  font-size: 60px;
-  animation: beat 1.5s infinite;
+.broken{
+position:fixed;
+font-size:90px;
+animation:fall 3s linear infinite;
 }
 
-.tl { top:10px; left:10px; }
-.tr { top:10px; right:10px; }
-.bl { bottom:10px; left:10px; }
-.br { bottom:10px; right:10px; }
-
-.backBtn {
-  margin-top: 30px;
-  font-size: 24px;
-  padding: 15px 40px;
-  border-radius: 50px;
-  background: white;
-  border: none;
-  animation: beat 1.4s infinite;
+@keyframes fall{
+from{top:-10%}
+to{top:110%}
 }
 
+/* CORNER HEART */
+.corner{
+position:fixed;
+font-size:55px;
+animation:beat 1s infinite;
+}
+.tl{top:10px;left:10px}
+.tr{top:10px;right:10px}
+.bl{bottom:10px;left:10px}
+.br{bottom:10px;right:10px}
