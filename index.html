@@ -1,33 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Will You Be My Valentine?</title>
-    <link rel="stylesheet" href="style.css">
-</head>
 <body>
 
-    <h1 id="question">Will you be my Valentine? 💖</h1>
+  <!-- EMOJI LAYER -->
+  <div id="emoji-layer"></div>
+
+  <!-- QUESTION SCREEN -->
+  <div id="question-screen">
+    <h1 id="question-text"></h1>
 
     <div class="buttons">
-        <button id="yesBtn">YES 💘</button>
-        <button id="noBtn">NO 💔</button>
+      <button id="yesBtn">YES 💘</button>
+      <button id="noBtn">NO 💔</button>
     </div>
+  </div>
 
-    <div class="date-buttons">
-        <button id="feb7">7th Feb</button>
-        <button id="feb14">14th Feb</button>
-    </div>
+  <!-- NO SCREEN -->
+  <div id="no-screen" class="hidden">
+    <div id="sad-text"></div>
+    <br />
+    <button id="thinkAgain">THINK AGAIN 💔</button>
+  </div>
 
-    <div class="gif-container">
-        <img id="gif" src="" alt="">
-    </div>
+  <!-- YES SCREEN -->
+  <div id="yes-screen" class="hidden">
+    <h2 id="ready-text"></h2>
+    <br />
+    <button id="readyBtn">I’m ready 💘</button>
+  </div>
 
-    <!-- Audio -->
-    <audio id="bgMusic" src="assets/audio/music.mp3"></audio>
+  <!-- CALENDAR -->
+  <div id="calendar-screen" class="hidden"></div>
 
-    <!-- JS -->
-    <script src="script.js"></script>
+  <!-- DAY VIEW -->
+  <div id="day-screen" class="hidden"></div>
+
+  <!-- MUSIC -->
+  <audio id="bgMusic"></audio>
+
+  <script src="script.js"></script>
 </body>
-</html>
 
