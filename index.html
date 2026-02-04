@@ -1,55 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>For Sai ❤️</title>
-
-  <link rel="stylesheet" href="style.css" />
-
-  <!-- CONFETTI LIB -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Will You Be My Valentine?</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-  <!-- 🌼💖 EMOJI RAIN -->
-  <div class="emoji-layer" id="emoji-layer"></div>
+    <h1 id="question">Will you be my Valentine? 💖</h1>
 
-  <div id="app">
-
-    <!-- QUESTION SCREEN -->
-    <div id="question-screen">
-      <h1 id="question-text"></h1>
-
-      <div class="buttons">
-        <button id="yesBtn">Yes ❤️</button>
-        <button id="noBtn">No 💔</button>
-      </div>
+    <div class="buttons">
+        <button id="yesBtn">YES 💘</button>
+        <button id="noBtn">NO 💔</button>
     </div>
 
-    <!-- NO SCREEN -->
-    <div id="no-screen" class="hidden">
-      <div id="sad-text"></div>
-      <br />
-      <button id="thinkAgain">THINK AGAIN MY LOVE 💔</button>
+    <div class="date-buttons">
+        <button id="feb7">7th Feb</button>
+        <button id="feb14">14th Feb</button>
     </div>
 
-    <!-- YES SCREEN -->
-    <div id="yes-screen" class="hidden">
-      <h2 id="ready-text"></h2>
-      <br />
-      <button id="readyBtn">I’m ready 💘</button>
+    <div class="gif-container">
+        <img id="gif" src="" alt="">
     </div>
 
-    <!-- CALENDAR SCREEN -->
-    <div id="calendar-screen" class="hidden"></div>
+    <!-- Audio -->
+    <audio id="bgMusic" src="assets/audio/music.mp3"></audio>
 
-    <!-- DAY SCREEN -->
-    <div id="day-screen" class="hidden"></div>
-
-  </div>
-
-  <script src="script.js"></script>
+    <!-- JS -->
+    <script src="script.js"></script>
 </body>
 </html>
 
