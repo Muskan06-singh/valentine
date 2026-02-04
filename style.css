@@ -248,4 +248,8 @@ canvas {
 .corner-heart.tr { top: 10px; right: 10px; }
 .corner-heart.bl { bottom: 10px; left: 10px; }
 .corner-heart.br { bottom: 10px; right: 10px; }
+#emoji-layer {
+  pointer-events: none;
+}
+
 
