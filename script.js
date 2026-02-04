@@ -61,7 +61,7 @@ const poems = {
 };
 
 /* =========================
-   SAD MESSAGES (DRAMA)
+   💔 SAD MESSAGES
 ========================= */
 const sadMessages = [
   "Sai… don’t you love me anymore? 💔",
@@ -133,7 +133,7 @@ function stopEmojis() {
 startEmojis();
 
 /* =========================
-   HEARTBREAK RAIN
+   💔 HEARTBREAK RAIN
 ========================= */
 let heartbreakInterval;
 function startHeartbreak() {
@@ -158,7 +158,7 @@ function stopHeartbreak() {
 }
 
 /* =========================
-   CONFETTI SAFE
+   🎉 CONFETTI SAFE
 ========================= */
 function fireConfettiSafe(duration = 3000) {
   if (typeof confetti !== "function") return;
@@ -174,12 +174,28 @@ function fireConfettiSafe(duration = 3000) {
 }
 
 /* =========================
+   💖 CORNER HEARTS (NEW)
+========================= */
+function showCornerHearts() {
+  removeCornerHearts();
+  ["top-left", "top-right", "bottom-left", "bottom-right"].forEach(pos => {
+    const h = document.createElement("div");
+    h.className = `corner-heart ${pos}`;
+    h.innerHTML = "❤️";
+    document.body.appendChild(h);
+  });
+}
+function removeCornerHearts() {
+  document.querySelectorAll(".corner-heart").forEach(h => h.remove());
+}
+
+/* =========================
    START
 ========================= */
 typeText(questionText, "Sai… will you be my Valentine? ❤️");
 
 /* =========================
-   NO CLICK (DRAMA)
+   NO CLICK
 ========================= */
 let noCount = 0;
 noBtn.onclick = () => {
@@ -192,12 +208,6 @@ noBtn.onclick = () => {
   typeText(sadText, msg);
 
   startHeartbreak();
-
-  if (noCount > 1) {
-    noBtn.style.position = "absolute";
-    noBtn.style.left = Math.random() * 80 + "vw";
-    noBtn.style.top = Math.random() * 80 + "vh";
-  }
 };
 
 /* THINK AGAIN */
@@ -238,11 +248,14 @@ readyBtn.onclick = () => {
 };
 
 /* =========================
-   CALENDAR
+   📅 CALENDAR (CENTERED)
 ========================= */
 function showCalendar() {
   cs.innerHTML = "";
   cs.classList.remove("hidden");
+
+  const wrapper = document.createElement("div");
+  wrapper.className = "calendar-wrapper";
 
   const cal = document.createElement("div");
   cal.className = "calendar";
@@ -265,16 +278,20 @@ function showCalendar() {
     }
     cal.appendChild(box);
   }
-  cs.appendChild(cal);
+
+  wrapper.appendChild(cal);
+  cs.appendChild(wrapper);
 }
 
 /* =========================
-   OPEN DAY
+   💌 OPEN DAY
 ========================= */
 function openDay(day) {
   cs.classList.add("hidden");
   ds.classList.remove("hidden");
   ds.innerHTML = "";
+
+  showCornerHearts(); // ❤️ DRAMA STARTS HERE
 
   const gif = document.createElement("img");
   gif.src = `assets/gifs/day${day}.gif`;
@@ -293,26 +310,17 @@ function openDay(day) {
     ds.appendChild(img);
   }
 
-  /* FINAL VALENTINE DAY EXPLOSION */
   if (day === 14) {
     fireConfettiSafe(6000);
-    setTimeout(() => {
-      const heart = document.createElement("div");
-      heart.innerHTML = "❤️";
-      heart.style.fontSize = "180px";
-      heart.style.textAlign = "center";
-      heart.style.animation = "pulse 1.5s infinite";
-      ds.appendChild(heart);
-    }, 2000);
   }
 
   const back = document.createElement("button");
   back.className = "backBtn";
   back.innerText = "⬅ Back to Calendar";
   back.onclick = () => {
+    removeCornerHearts();
     ds.classList.add("hidden");
     cs.classList.remove("hidden");
   };
   ds.appendChild(back);
 }
-
