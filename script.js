@@ -110,7 +110,7 @@ function typeText(el, text, speed = 45) {
 }
 
 /* =========================
-   🌼 FLOATING EMOJIS
+   FLOATING EMOJIS
 ========================= */
 let emojiInterval;
 
@@ -132,13 +132,36 @@ function stopEmojis() {
   document.getElementById("emoji-layer").innerHTML = "";
 }
 
-startEmojis();
+/* =========================
+   HEARTBEAT CORNERS
+========================= */
+let heartsInterval;
+function startHearts() {
+  stopHearts();
+  const corners = ["top-left","top-right","bottom-left","bottom-right"];
+  corners.forEach(c => {
+    const h = document.createElement("div");
+    h.className = "corner-heart "+c;
+    h.innerText = "❤️";
+    document.body.appendChild(h);
+  });
+
+  heartsInterval = setInterval(() => {
+    document.querySelectorAll(".corner-heart").forEach(h => {
+      h.style.transform = "scale(1.3)";
+      setTimeout(()=> h.style.transform="scale(1)",300);
+    });
+  }, 600);
+}
+function stopHearts() {
+  clearInterval(heartsInterval);
+  document.querySelectorAll(".corner-heart").forEach(h=>h.remove());
+}
 
 /* =========================
-   💔 HEARTBREAK RAIN
+   HEARTBREAK
 ========================= */
 let heartbreakInterval;
-
 function startHeartbreak() {
   stopEmojis();
   heartbreakInterval = setInterval(() => {
@@ -150,13 +173,12 @@ function startHeartbreak() {
     setTimeout(() => b.remove(), 3000);
   }, 120);
 }
-
 function stopHeartbreak() {
   clearInterval(heartbreakInterval);
 }
 
 /* =========================
-   🎉 CONFETTI SAFE
+   CONFETTI
 ========================= */
 function fireConfettiSafe(duration = 3000) {
   if (typeof confetti !== "function") return;
@@ -175,6 +197,7 @@ function fireConfettiSafe(duration = 3000) {
    START
 ========================= */
 typeText(questionText, "Sai… will you be my Valentine? ❤️");
+startEmojis();
 
 /* =========================
    NO CLICK
@@ -219,7 +242,7 @@ readyBtn.onclick = () => {
 };
 
 /* =========================
-   📅 CALENDAR
+   CALENDAR
 ========================= */
 function showCalendar() {
   cs.classList.remove("hidden");
@@ -229,18 +252,17 @@ function showCalendar() {
   const cal = cs.querySelector(".calendar");
   const today = new Date().getDate();
 
-  for (let d = 7; d <= 14; d++) {
+  for(let d=7; d<=14; d++){
     const box = document.createElement("div");
     box.className = "day";
     box.innerText = `Feb ${d}`;
 
-    // Unlock 7th–14th only if today >= day OR for testing we allow clicking
-    if (today < d && d !== 14) {
+    // 7th and 14th always open, rest according to real date
+    if((d!==7 && d!==14) && today < d){
       box.classList.add("locked");
-      box.onclick = () =>
-        alert("Please wait my love 💖 Surprise comes on its day ✨");
+      box.onclick = () => alert("🌸 Wait for the day, my love… the magic comes in its time 💖");
     } else {
-      box.onclick = () => openDay(d);
+      box.onclick = ()=> openDay(d);
     }
 
     cal.appendChild(box);
@@ -248,62 +270,82 @@ function showCalendar() {
 }
 
 /* =========================
-   💌 OPEN DAY
+   OPEN DAY
 ========================= */
-function openDay(day) {
-  // HIDE EVERYTHING ELSE
+function openDay(day){
   qs.classList.add("hidden");
   ns.classList.add("hidden");
   ys.classList.add("hidden");
   cs.classList.add("hidden");
 
   stopEmojis();
+  startHearts();
 
-  // SHOW DAY SCREEN
   ds.classList.remove("hidden");
-  ds.style.display = "flex";
-  ds.style.zIndex = "9999";
-  ds.innerHTML = "";
+  ds.style.display="flex";
+  ds.style.flexDirection="column";
+  ds.style.alignItems="center";
+  ds.style.zIndex="9999";
+  ds.innerHTML="";
 
-  // GIF
+  // BIG GIF at top
   const gif = document.createElement("img");
-  gif.src = `assets/gifs/day${day}.gif`;
-  gif.className = "gif";
+  gif.src=`assets/gifs/day${day}.gif`;
+  gif.style.width="80%";
+  gif.style.maxWidth="600px";
+  gif.style.borderRadius="15px";
   ds.appendChild(gif);
 
   // POEM
   const poem = document.createElement("h2");
-  poem.style.whiteSpace = "pre-line";
+  poem.style.whiteSpace="pre-line";
+  poem.style.marginTop="20px";
   ds.appendChild(poem);
 
-  setTimeout(() => {
-    typeText(poem, poems[day].join("\n"));
-  }, 600);
-
-  // IMAGES
-  setTimeout(() => {
-    for (let i = 1; i <= 5; i++) {
-      const img = document.createElement("img");
-      img.src = `assets/images/day${day}-${i}.jpg`;
-      img.style.width = "150px";
-      img.style.margin = "10px";
-      ds.appendChild(img);
+  // Type poem line by line
+  let lineIndex = 0;
+  function typeNextLine(){
+    if(lineIndex >= poems[day].length){
+      showImages(day);
+      return;
     }
-  }, 2200);
-
-  // CONFETTI FOR 14th
-  if (day === 14) fireConfettiSafe(6000);
+    typeText(poem, (poem.innerHTML ? poem.innerHTML + "\n":"") + poems[day][lineIndex] + "\n", 45);
+    lineIndex++;
+    setTimeout(typeNextLine, poems[day][lineIndex-1].length*50 + 800);
+  }
+  typeNextLine();
 
   // BACK BUTTON
   const back = document.createElement("button");
-  back.innerText = "⬅ Back to Calendar";
-  back.className = "backBtn";
-  back.onclick = () => {
+  back.innerText="⬅ Back to Calendar";
+  back.className="backBtn";
+  back.style.marginTop="20px";
+  back.onclick = ()=>{
     ds.classList.add("hidden");
-    ds.style.display = "none";
+    ds.style.display="none";
+    stopHearts();
     showCalendar();
-  };
-
+  }
   ds.appendChild(back);
+
+  // CONFETTI for 14th
+  if(day===14) fireConfettiSafe(6000);
 }
 
+/* =========================
+   SHOW IMAGES ONE BY ONE
+========================= */
+function showImages(day){
+  let i=1;
+  function showNext(){
+    if(i>5) return;
+    const img = document.createElement("img");
+    img.src=`assets/images/day${day}-${i}.jpg`;
+    img.style.width="150px";
+    img.style.margin="10px";
+    ds.appendChild(img);
+    i++;
+    setTimeout(showNext, 1000);
+  }
+  showNext();
+}
