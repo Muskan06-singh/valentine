@@ -97,20 +97,23 @@ const happyMusic = new Audio("assets/music/happy.mp3");
 happyMusic.loop = true;
 
 /* =========================
-   TYPEWRITER
+   TYPEWRITER (CALLBACK SAFE)
 ========================= */
-function typeText(el, text, speed = 45) {
+function typeText(el, text, speed = 45, callback) {
   el.innerHTML = "";
   let i = 0;
   const timer = setInterval(() => {
     el.innerHTML += text[i] === "\n" ? "<br>" : text[i];
     i++;
-    if (i >= text.length) clearInterval(timer);
+    if (i >= text.length) {
+      clearInterval(timer);
+      if (callback) callback();
+    }
   }, speed);
 }
 
 /* =========================
-   FLOATING EMOJIS
+   FLOATING EMOJIS (OUTSIDE ONLY)
 ========================= */
 let emojiInterval;
 function startEmojis() {
@@ -138,7 +141,6 @@ startEmojis();
 let heartbreakInterval;
 function startHeartbreak() {
   stopEmojis();
-  clearInterval(heartbreakInterval);
   heartbreakInterval = setInterval(() => {
     const b = document.createElement("div");
     b.innerText = "💔";
@@ -158,7 +160,7 @@ function stopHeartbreak() {
 }
 
 /* =========================
-   🎉 CONFETTI SAFE
+   🎉 CONFETTI
 ========================= */
 function fireConfettiSafe(duration = 3000) {
   if (typeof confetti !== "function") return;
@@ -174,7 +176,7 @@ function fireConfettiSafe(duration = 3000) {
 }
 
 /* =========================
-   💖 CORNER HEARTS (NEW)
+   ❤️ CORNER HEARTS
 ========================= */
 function showCornerHearts() {
   removeCornerHearts();
@@ -202,15 +204,11 @@ noBtn.onclick = () => {
   noCount++;
   qs.classList.add("hidden");
   ns.classList.remove("hidden");
-
   sadMusic.play();
-  const msg = sadMessages[(noCount - 1) % sadMessages.length];
-  typeText(sadText, msg);
-
+  typeText(sadText, sadMessages[(noCount - 1) % sadMessages.length]);
   startHeartbreak();
 };
 
-/* THINK AGAIN */
 thinkAgain.onclick = () => {
   sadMusic.pause();
   sadMusic.currentTime = 0;
@@ -221,38 +219,31 @@ thinkAgain.onclick = () => {
 };
 
 /* =========================
-   YES CLICK
+   YES FLOW
 ========================= */
 yesBtn.onclick = () => {
   sadMusic.pause();
   sadMusic.currentTime = 0;
   stopHeartbreak();
-
   qs.classList.add("hidden");
-  ns.classList.add("hidden");
   ys.classList.remove("hidden");
-
   happyMusic.play();
   fireConfettiSafe();
-
-  typeText(
-    readyText,
-    "Are you ready, my love, for our magical love week together? ✨"
-  );
+  typeText(readyText, "Are you ready, my love, for our magical love week together? ✨");
 };
 
-/* READY */
 readyBtn.onclick = () => {
   ys.classList.add("hidden");
   showCalendar();
 };
 
 /* =========================
-   📅 CALENDAR (CENTERED)
+   📅 CALENDAR
 ========================= */
 function showCalendar() {
   cs.innerHTML = "";
   cs.classList.remove("hidden");
+  startEmojis();
 
   const wrapper = document.createElement("div");
   wrapper.className = "calendar-wrapper";
@@ -269,10 +260,7 @@ function showCalendar() {
 
     if (d > today && d !== 7 && d !== 14) {
       box.classList.add("locked");
-      box.onclick = () =>
-        alert(
-          "My love… 🌸\nPlease wait for the surprise ✨\nSome moments bloom only on their day 💖"
-        );
+      box.onclick = () => alert("My love… 🌸\nPlease wait for the surprise 💖");
     } else {
       box.onclick = () => openDay(d);
     }
@@ -284,35 +272,36 @@ function showCalendar() {
 }
 
 /* =========================
-   💌 OPEN DAY
+   💌 OPEN DAY (SEQUENCE)
 ========================= */
 function openDay(day) {
   cs.classList.add("hidden");
   ds.classList.remove("hidden");
   ds.innerHTML = "";
 
-  showCornerHearts(); // ❤️ DRAMA STARTS HERE
+  stopEmojis();
+  showCornerHearts();
 
   const gif = document.createElement("img");
   gif.src = `assets/gifs/day${day}.gif`;
   gif.className = "gif";
   ds.appendChild(gif);
 
-  const poem = document.createElement("h2");
-  ds.appendChild(poem);
-  typeText(poem, poems[day].join("\n"));
+  gif.onload = () => {
+    const poem = document.createElement("h2");
+    ds.appendChild(poem);
 
-  for (let i = 1; i <= 5; i++) {
-    const img = document.createElement("img");
-    img.src = `assets/images/day${day}-${i}.jpg`;
-    img.style.width = "150px";
-    img.style.margin = "10px";
-    ds.appendChild(img);
-  }
+    typeText(poem, poems[day].join("\n"), 45, () => {
+      for (let i = 1; i <= 5; i++) {
+        const img = document.createElement("img");
+        img.src = `assets/images/day${day}-${i}.jpg`;
+        img.className = "memory-img";
+        ds.appendChild(img);
+      }
+    });
+  };
 
-  if (day === 14) {
-    fireConfettiSafe(6000);
-  }
+  if (day === 14) fireConfettiSafe(6000);
 
   const back = document.createElement("button");
   back.className = "backBtn";
@@ -321,6 +310,7 @@ function openDay(day) {
     removeCornerHearts();
     ds.classList.add("hidden");
     cs.classList.remove("hidden");
+    startEmojis();
   };
   ds.appendChild(back);
 }
