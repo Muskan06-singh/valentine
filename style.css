@@ -2,7 +2,6 @@ body {
   margin: 0;
   background: #ffd6e8;
   font-family: "Georgia", cursive;
-  overflow: hidden;
 }
 
 .hidden { display: none; }
@@ -10,6 +9,8 @@ body {
 #app {
   text-align: center;
   padding: 20px;
+  position: relative;
+  z-index: 2;
 }
 
 h1, h2, p {
@@ -17,7 +18,7 @@ h1, h2, p {
   text-shadow: 0 0 8px silver;
 }
 
-/* ================= BUTTONS ================= */
+/* ===== BUTTONS ===== */
 
 .buttons button {
   padding: 18px 45px;
@@ -46,34 +47,45 @@ h1, h2, p {
   position: relative;
 }
 
-/* ================= GIF ================= */
+/* ===== GIF ===== */
 
 .gif {
-  width: 300px;
+  width: 320px;
   display: block;
-  margin: 20px auto;
+  margin: 25px auto;
 }
 
-/* ================= NO SCREEN ================= */
+/* ===== NO SCREEN ===== */
 
 #no-screen {
   position: fixed;
   inset: 0;
+  width: 100vw;
+  height: 100vh;
   background: black;
   color: white;
-  z-index: 9999;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 #sad-text {
-  font-size: 32px;
-  margin-top: 40vh;
-  text-shadow:
-    0 0 5px white,
-    0 0 15px #ffd1dc,
-    0 0 30px #ff99cc;
+  font-size: 34px;
+  text-align: center;
+  text-shadow: 0 0 15px white, 0 0 35px hotpink;
 }
 
-/* ================= EMOJIS ================= */
+/* ===== EMOJI RAIN ===== */
+
+.emoji-layer {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
 
 .emoji {
   position: absolute;
@@ -82,33 +94,20 @@ h1, h2, p {
 }
 
 @keyframes float {
-  from { transform: translateY(100vh); }
+  from { transform: translateY(110vh); }
   to { transform: translateY(-10vh); }
 }
 
-/* ================= HEARTBREAK ================= */
-
-.broken {
-  position: fixed;
-  font-size: 90px;
-  animation: fall 2.5s linear infinite;
-}
-
-@keyframes fall {
-  from { top: -10%; }
-  to { top: 110%; }
-}
-
-/* ================= CONFETTI ================= */
+/* ===== CONFETTI ===== */
 
 canvas {
   position: fixed !important;
   inset: 0;
-  z-index: 9998;
+  z-index: 9999;
   pointer-events: none;
 }
 
-/* ================= CALENDAR ================= */
+/* ===== CALENDAR ===== */
 
 #calendar-screen {
   position: fixed;
@@ -116,6 +115,7 @@ canvas {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 9000;
 }
 
 .calendar {
@@ -123,42 +123,45 @@ canvas {
   grid-template-columns: repeat(4, 1fr);
   gap: 18px;
   background: white;
-  padding: 30px;
-  border-radius: 25px;
+  padding: 35px;
+  border-radius: 30px;
   animation: heartbeat 2s infinite;
 }
 
 @keyframes heartbeat {
-  0% { transform: scale(1); box-shadow: 0 0 10px pink; }
-  50% { transform: scale(1.06); box-shadow: 0 0 35px hotpink; }
-  100% { transform: scale(1); box-shadow: 0 0 10px pink; }
+  0% { transform: scale(1); box-shadow: 0 0 15px pink; }
+  50% { transform: scale(1.07); box-shadow: 0 0 40px hotpink; }
+  100% { transform: scale(1); box-shadow: 0 0 15px pink; }
 }
 
 .day {
-  padding: 20px;
+  padding: 22px;
   border-radius: 18px;
   background: #ffe6f0;
   cursor: pointer;
   font-size: 18px;
+  transition: 0.3s;
 }
 
-.day.locked {
-  opacity: 0.4;
+.day:hover {
+  background: #ffb6d5;
 }
 
-/* ================= DAY HEARTS ================= */
+/* ===== DAY HEARTS ===== */
 
 .corner-heart {
   position: fixed;
-  font-size: 40px;
+  font-size: 42px;
   animation: beat 1.2s infinite;
+  z-index: 8000;
 }
 
 @keyframes beat {
-  50% { transform: scale(1.3); }
+  50% { transform: scale(1.4); }
 }
 
-.corner-heart.tl { top: 10px; left: 10px; }
-.corner-heart.tr { top: 10px; right: 10px; }
-.corner-heart.bl { bottom: 10px; left: 10px; }
-.corner-heart.br { bottom: 10px; right: 10px; }
+.corner-heart.tl { top: 15px; left: 15px; }
+.corner-heart.tr { top: 15px; right: 15px; }
+.corner-heart.bl { bottom: 15px; left: 15px; }
+.corner-heart.br { bottom: 15px; right: 15px; }
+
