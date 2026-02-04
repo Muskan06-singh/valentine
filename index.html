@@ -1,41 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>For Sai ❤️</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
 <body>
 
-  <!-- EMOJI LAYER -->
+  <!-- Emoji Rain -->
   <div id="emoji-layer"></div>
 
-  <!-- QUESTION SCREEN -->
-  <div id="question-screen">
+  <!-- QUESTION -->
+  <div id="question-screen" class="screen">
     <h1 id="question-text"></h1>
-
     <div class="buttons">
-      <button id="yesBtn">YES 💘</button>
+      <button id="yesBtn">YES ❤️</button>
       <button id="noBtn">NO 💔</button>
     </div>
   </div>
 
   <!-- NO SCREEN -->
-  <div id="no-screen" class="hidden">
+  <div id="no-screen" class="screen hidden">
     <div id="sad-text"></div>
-    <br />
-    <button id="thinkAgain">THINK AGAIN 💔</button>
+    <button id="thinkAgain">Think again 💔</button>
   </div>
 
   <!-- YES SCREEN -->
-  <div id="yes-screen" class="hidden">
+  <div id="yes-screen" class="screen hidden">
     <h2 id="ready-text"></h2>
-    <br />
     <button id="readyBtn">I’m ready 💘</button>
   </div>
 
   <!-- CALENDAR -->
-  <div id="calendar-screen" class="hidden"></div>
+  <div id="calendar-screen" class="screen hidden"></div>
 
   <!-- DAY VIEW -->
-  <div id="day-screen" class="hidden"></div>
-
-  <!-- MUSIC -->
-  <audio id="bgMusic"></audio>
+  <div id="day-screen" class="screen hidden"></div>
 
   <script src="script.js"></script>
 </body>
+</html>
 
