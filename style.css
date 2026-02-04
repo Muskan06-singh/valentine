@@ -1,173 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
+
 body{
-margin:0;
-background:#ffd6e8;
-font-family:cursive;
-overflow:hidden;
-text-align:center;
+  margin:0;
+  background:#ffd6e8;
+  font-family: 'Rock Salt', cursive;
+  overflow:hidden;
+  text-align:center;
 }
 
+/* HIDDEN */
 .hidden{display:none}
 
 /* TITLE */
 #title{
-font-size:60px;
-margin-top:120px;
-color:black;
-font-weight:bold;
-text-shadow:
-0 0 5px #fff,
-0 0 10px #ff69b4,
-0 0 20px #ff1493;
+  font-size:50px;
+  margin-top:100px;
+  color:black;
+  font-weight:bold;
+  text-shadow: 0 0 5px #fff, 0 0 10px #ff69b4, 0 0 20px #ff1493;
+  transition: font-size 0.3s ease;
 }
 
 /* BUTTONS */
 .btns button{
-padding:20px 40px;
-font-size:22px;
-margin:20px;
-border:none;
-border-radius:40px;
-cursor:pointer;
-font-weight:bold;
+  padding:20px 40px;
+  font-size:22px;
+  margin:20px;
+  border:none;
+  border-radius:40px;
+  cursor:pointer;
+  font-weight:bold;
 }
 
-.yes{
-background:white;
-color:red;
-animation:beat 1s infinite;
-}
-
-.no{background:white;color:black;}
+.yes{ background:white; color:red; animation:beat 1s infinite; }
+.no{ background:white; color:black; }
 
 @keyframes beat{
-0%{transform:scale(1)}
-50%{transform:scale(1.15)}
-100%{transform:scale(1)}
+  0%{transform:scale(1)}
+  50%{transform:scale(1.15)}
+  100%{transform:scale(1)}
 }
 
 /* SAD */
 #sadScreen{
-background:black;
-color:white;
-height:100vh;
-padding-top:100px;
+  background:black;
+  color:white;
+  height:100vh;
+  padding-top:100px;
 }
 
 #sadText{
-font-size:34px;
-color:white;
-text-shadow:0 0 10px white;
+  font-size:34px;
+  color:white;
+  text-shadow:0 0 10px white;
 }
 
 #thinkBtn{
-margin-top:30px;
-font-size:20px;
-padding:25px 35px;
-background:white;
-border:none;
-cursor:pointer;
-border-radius:50%;
-width:180px;
-height:180px;
-font-weight:bold;
+  margin-top:30px;
+  font-size:20px;
+  padding:25px 35px;
+  background:white;
+  border:none;
+  cursor:pointer;
+  border-radius:50%;
+  width:180px;
+  height:180px;
+  font-weight:bold;
 }
 
 /* GIF */
-.centerGif{
-width:300px;
-margin-top:40px;
-}
+.centerGif{ width:300px; margin-top:40px; }
 
 /* CALENDAR */
+#calendarScreen{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
 #calendar{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:20px;
-max-width:700px;
-margin:120px auto;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:25px;
+  max-width:900px;
+  transform-origin:center;
+  animation:beatCalendar 1.2s infinite;
+}
+
+@keyframes beatCalendar{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.05)}
 }
 
 .day{
-background:white;
-padding:30px;
-border-radius:20px;
-font-size:22px;
-cursor:pointer;
-box-shadow:0 0 20px pink;
-animation:pulse 2s infinite;
+  background:white;
+  padding:40px;
+  border-radius:20px;
+  font-size:28px;
+  cursor:pointer;
+  box-shadow:0 0 25px pink;
+  animation:pulse 2s infinite;
+  font-family: 'Rock Salt', cursive;
 }
 
 @keyframes pulse{
-0%{transform:scale(1)}
-50%{transform:scale(1.07)}
-100%{transform:scale(1)}
+  0%{transform:scale(1)}
+  50%{transform:scale(1.07)}
+  100%{transform:scale(1)}
 }
 
-.locked{
-opacity:0.3;
-cursor:not-allowed;
-}
+.locked{ opacity:0.3; cursor:not-allowed; }
 
 /* POEM */
 #poem{
-font-size:28px;
-color:black;
-font-weight:bold;
-text-shadow:0 0 10px #ff69b4;
-width:80%;
-margin:30px auto;
+  font-size:28px;
+  color:black;
+  font-weight:bold;
+  text-shadow:0 0 10px #ff69b4;
+  width:80%;
+  margin:30px auto;
+  font-family: 'Rock Salt', cursive;
 }
 
 /* IMAGES */
 #images img{
-width:150px;
-margin:10px;
-border-radius:15px;
-display:none;
+  width:180px;
+  margin:10px;
+  border-radius:15px;
+  display:none;
 }
 
 /* BACK BTN */
 #backBtn{
-margin-top:20px;
-padding:15px 30px;
-font-size:18px;
-background:white;
-border:none;
-border-radius:20px;
-cursor:pointer;
-box-shadow:0 0 10px pink;
+  margin-top:20px;
+  padding:15px 30px;
+  font-size:18px;
+  background:white;
+  border:none;
+  border-radius:20px;
+  cursor:pointer;
+  box-shadow:0 0 10px pink;
 }
 
 /* EMOJI RAIN */
 .floating{
-position:fixed;
-font-size:45px;
-animation:float 8s linear infinite;
+  position:fixed;
+  font-size:45px;
+  animation:float 8s linear infinite;
 }
 
 @keyframes float{
-from{transform:translateY(100vh)}
-to{transform:translateY(-10vh)}
+  from{transform:translateY(100vh)}
+  to{transform:translateY(-10vh)}
 }
 
 .broken{
-position:fixed;
-font-size:90px;
-animation:fall 3s linear infinite;
+  position:fixed;
+  font-size:90px;
+  animation:fall 3s linear infinite;
 }
 
 @keyframes fall{
-from{top:-10%}
-to{top:110%}
+  0%{top:-10%; transform:rotate(0deg)}
+  25%{transform:rotate(20deg)}
+  50%{transform:rotate(-15deg)}
+  75%{transform:rotate(10deg)}
+  100%{top:110%; transform:rotate(0deg)}
 }
 
 /* CORNER HEART */
 .corner{
-position:fixed;
-font-size:55px;
-animation:beat 1s infinite;
+  position:fixed;
+  font-size:80px;
+  animation:beat 1s infinite;
 }
+
 .tl{top:10px;left:10px}
 .tr{top:10px;right:10px}
 .bl{bottom:10px;left:10px}
 .br{bottom:10px;right:10px}
+
