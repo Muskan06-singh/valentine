@@ -1,111 +1,111 @@
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+  font-family: 'Segoe UI', cursive;
 }
 
 body {
-  margin: 0;
-  background: #ffd6e8;
-  font-family: Georgia, cursive;
+  background: black;
+  color: white;
   overflow: hidden;
 }
 
 /* Screens */
 .screen {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: none;
+  height: 100vh;
   text-align: center;
+  padding-top: 80px;
+}
+
+.screen.active {
+  display: block;
 }
 
 .hidden {
   display: none;
 }
 
-/* Buttons */
-.buttons button,
+/* Question */
+#questionText {
+  font-size: 2.7rem;
+  color: #ffb6c1;
+  text-shadow: 0 0 20px pink;
+}
+
+.btns {
+  margin-top: 40px;
+}
+
 button {
-  padding: 14px 30px;
-  font-size: 20px;
-  margin: 10px;
-  border-radius: 30px;
+  padding: 15px 35px;
+  font-size: 1.4rem;
+  border-radius: 40px;
   border: none;
   cursor: pointer;
 }
 
-/* Emoji rain */
-#emoji-layer div {
-  position: fixed;
-  font-size: 60px;
-  animation: float 8s linear;
+#yes {
+  background: hotpink;
+  animation: beat 1.2s infinite;
 }
 
-@keyframes float {
-  from { top: 100%; }
-  to { top: -10%; }
-}
-
-/* NO screen */
-#no-screen {
-  background: black;
+#no {
+  background: #444;
   color: white;
-  z-index: 999;
+  margin-left: 20px;
 }
 
-/* Broken hearts */
-.broken {
-  position: fixed;
-  font-size: 80px;
-  animation: fall 3s linear;
+@keyframes beat {
+  50% { transform: scale(1.15); }
 }
 
-@keyframes fall {
-  from { top: -10%; }
-  to { top: 110%; }
+/* GIF */
+.gif {
+  width: 280px;
+  margin: 20px auto;
 }
 
 /* Calendar */
-.calendar {
+#days {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
-  background: white;
-  padding: 40px;
-  border-radius: 30px;
-  box-shadow: 0 0 40px hotpink;
-  animation: heartbeat 1.8s infinite;
-}
-
-@keyframes heartbeat {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.04); }
-  100% { transform: scale(1); }
+  width: 70%;
+  margin: 40px auto;
 }
 
 .day {
-  padding: 20px;
-  background: #ffe6f0;
-  border-radius: 20px;
-  font-size: 18px;
-  cursor: pointer;
+  padding: 25px;
+  background: #222;
+  border-radius: 15px;
+  box-shadow: 0 0 20px hotpink;
+  animation: beat 2s infinite;
 }
 
-.day.locked {
+.locked {
   opacity: 0.4;
 }
 
 /* Day view */
-.gif {
-  width: 260px;
-  margin-bottom: 20px;
+#poem {
+  white-space: pre-wrap;
+  width: 80%;
+  margin: 20px auto;
+  font-size: 1.15rem;
 }
 
+#imgs img {
+  width: 160px;
+  margin: 10px;
+}
+
+/* Hearts */
 .corner {
   position: fixed;
-  font-size: 40px;
-  animation: heartbeat 1.5s infinite;
+  font-size: 2rem;
+  animation: beat 1s infinite;
 }
 
 .tl { top: 10px; left: 10px; }
