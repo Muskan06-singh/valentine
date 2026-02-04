@@ -249,9 +249,18 @@ function showCalendar() {
    💌 OPEN DAY (FIXED)
 ========================= */
 function openDay(day) {
-  stopEmojis();
+  // HIDE EVERYTHING ELSE
+  qs.classList.add("hidden");
+  ns.classList.add("hidden");
+  ys.classList.add("hidden");
   cs.classList.add("hidden");
+
+  stopEmojis();
+
+  // FORCE SHOW DAY SCREEN
   ds.classList.remove("hidden");
+  ds.style.display = "flex";
+  ds.style.zIndex = "9999";
   ds.innerHTML = "";
 
   const gif = document.createElement("img");
@@ -260,11 +269,12 @@ function openDay(day) {
   ds.appendChild(gif);
 
   const poem = document.createElement("h2");
+  poem.style.whiteSpace = "pre-line";
   ds.appendChild(poem);
 
   setTimeout(() => {
     typeText(poem, poems[day].join("\n"));
-  }, 800);
+  }, 600);
 
   setTimeout(() => {
     for (let i = 1; i <= 5; i++) {
@@ -274,17 +284,18 @@ function openDay(day) {
       img.style.margin = "10px";
       ds.appendChild(img);
     }
-  }, 2500);
+  }, 2200);
 
   if (day === 14) fireConfettiSafe(6000);
 
   const back = document.createElement("button");
-  back.className = "backBtn";
   back.innerText = "⬅ Back to Calendar";
+  back.className = "backBtn";
   back.onclick = () => {
     ds.classList.add("hidden");
+    ds.style.display = "none";
     showCalendar();
   };
+
   ds.appendChild(back);
 }
-
