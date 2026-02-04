@@ -1,48 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>For Sai ❤️</title>
+
+  <!-- Google cursive font -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
 
-  <!-- REAL CANVAS CONFETTI -->
+  <!-- CANVAS CONFETTI -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
 
-<!-- FLOATING EMOJI RAIN -->
 <div id="emoji-layer"></div>
 
-<!-- QUESTION -->
-<div id="question-screen">
-  <h1 id="question-text"></h1>
+<div id="app">
 
-  <div class="buttons">
-    <button id="yesBtn">YES ❤️</button>
-    <button id="noBtn">NO 💔</button>
+  <div id="question-screen">
+    <h1 id="question-text"></h1>
+    <div class="buttons">
+      <button id="yesBtn">YES ❤️</button>
+      <button id="noBtn">NO 💔</button>
+    </div>
   </div>
+
+  <div id="no-screen" class="hidden">
+    <img src="assets/gifs/sad.gif" class="gif">
+    <h2 id="sad-text"></h2>
+    <button id="thinkAgain">💔 THINK AGAIN 💔</button>
+  </div>
+
+  <div id="yes-screen" class="hidden">
+    <img src="assets/gifs/happy.gif" class="gif">
+    <h2 id="ready-text"></h2>
+    <button id="readyBtn">✨ ENTER OUR LOVE WEEK ✨</button>
+  </div>
+
+  <div id="calendar-screen" class="hidden"></div>
+  <div id="day-screen" class="hidden"></div>
+
 </div>
-
-<!-- NO SCREEN -->
-<div id="no-screen" class="hidden">
-  <img src="assets/gifs/sad.gif" class="gif">
-  <h2 id="sad-text"></h2>
-  <button id="thinkAgain">❤️ THINK AGAIN ❤️</button>
-</div>
-
-<!-- YES SCREEN -->
-<div id="yes-screen" class="hidden">
-  <img src="assets/gifs/happy.gif" class="gif">
-  <h2 id="ready-text"></h2>
-  <button id="readyBtn">Open Love Calendar 💘</button>
-</div>
-
-<!-- CALENDAR -->
-<div id="calendar-screen" class="hidden"></div>
-
-<!-- DAY VIEW -->
-<div id="day-screen" class="hidden"></div>
 
 <script src="script.js"></script>
 </body>
