@@ -186,4 +186,15 @@ canvas {
   background: #ffd1dc;
   transform: scale(1.1);
 }
+/* =========================
+   🖤 FIX: FULL BLACK NO SCREEN
+========================= */
+#no-screen {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9998;
+}
+
 
