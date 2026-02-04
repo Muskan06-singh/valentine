@@ -219,7 +219,7 @@ readyBtn.onclick = () => {
 };
 
 /* =========================
-   📅 CALENDAR (FIXED)
+   📅 CALENDAR
 ========================= */
 function showCalendar() {
   cs.classList.remove("hidden");
@@ -234,19 +234,21 @@ function showCalendar() {
     box.className = "day";
     box.innerText = `Feb ${d}`;
 
-    if (d > today && d !== 14) {
+    // Unlock 7th–14th only if today >= day OR for testing we allow clicking
+    if (today < d && d !== 14) {
       box.classList.add("locked");
       box.onclick = () =>
         alert("Please wait my love 💖 Surprise comes on its day ✨");
     } else {
       box.onclick = () => openDay(d);
     }
+
     cal.appendChild(box);
   }
 }
 
 /* =========================
-   💌 OPEN DAY (FIXED)
+   💌 OPEN DAY
 ========================= */
 function openDay(day) {
   // HIDE EVERYTHING ELSE
@@ -257,17 +259,19 @@ function openDay(day) {
 
   stopEmojis();
 
-  // FORCE SHOW DAY SCREEN
+  // SHOW DAY SCREEN
   ds.classList.remove("hidden");
   ds.style.display = "flex";
   ds.style.zIndex = "9999";
   ds.innerHTML = "";
 
+  // GIF
   const gif = document.createElement("img");
   gif.src = `assets/gifs/day${day}.gif`;
   gif.className = "gif";
   ds.appendChild(gif);
 
+  // POEM
   const poem = document.createElement("h2");
   poem.style.whiteSpace = "pre-line";
   ds.appendChild(poem);
@@ -276,6 +280,7 @@ function openDay(day) {
     typeText(poem, poems[day].join("\n"));
   }, 600);
 
+  // IMAGES
   setTimeout(() => {
     for (let i = 1; i <= 5; i++) {
       const img = document.createElement("img");
@@ -286,8 +291,10 @@ function openDay(day) {
     }
   }, 2200);
 
+  // CONFETTI FOR 14th
   if (day === 14) fireConfettiSafe(6000);
 
+  // BACK BUTTON
   const back = document.createElement("button");
   back.innerText = "⬅ Back to Calendar";
   back.className = "backBtn";
@@ -299,3 +306,4 @@ function openDay(day) {
 
   ds.appendChild(back);
 }
+
