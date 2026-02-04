@@ -9,48 +9,6 @@ const poems = {
     "My heart blooms when you smile 💫",
     "Rose Day glows brighter with you ❤️"
   ],
-  8: [
-    "💍 Sai, today my heart gathers courage 🥹",
-    "Not for a ring, but for forever 💞",
-    "Every tomorrow feels safe with you ✨",
-    "So here I stand, feelings true 🤍",
-    "Will you always be mine 💖"
-  ],
-  9: [
-    "🍫 Sai, sweetness learned your name 🤎",
-    "One smile melts every fear 🍬",
-    "Love tastes warmer near you ✨",
-    "You are my favorite forever 💕",
-    "Chocolate Day whispers Sai 😘"
-  ],
-  10: [
-    "🧸 Sai, comfort has your name 🤍",
-    "In every hug I find home 🥹",
-    "Soft love, silent care ✨",
-    "You are my safe place 💞",
-    "Teddy Day feels warmer 🧸"
-  ],
-  11: [
-    "💌 Sai, promises live quietly 🤍",
-    "In patience, care and time ✨",
-    "I choose you in every storm 💕",
-    "This promise never fades 🌧️",
-    "Forever means you 💫"
-  ],
-  12: [
-    "🤗 Sai, hugs speak when words fail 🥹",
-    "Your presence heals softly 🤍",
-    "My heart rests with you ✨",
-    "Every beat feels understood 💞",
-    "Saving my warmest hugs 🤗"
-  ],
-  13: [
-    "😘 Sai, kisses are feelings 💗",
-    "Not lips, but souls 💫",
-    "Even your smile feels like one 😌",
-    "Soft, safe, unforgettable 💕",
-    "Kiss Day knows your name 💋"
-  ],
   14: [
     "❤️ Sai, this is our forever 🥹",
     "Not a day, but a lifetime ✨",
@@ -61,14 +19,12 @@ const poems = {
 };
 
 /* =========================
-   SAD MESSAGES (DRAMA)
+   SAD MESSAGES
 ========================= */
 const sadMessages = [
   "Sai… don’t you love me anymore? 💔",
   "Sai… did my heart mean nothing to you? 🥀",
-  "Sai… was I ever special to you? 💔",
-  "Sai… my world feels empty without your yes 🖤",
-  "Sai… please don’t break my heart like this 💔"
+  "Sai… please don’t leave my heart like this 🖤"
 ];
 
 /* =========================
@@ -118,13 +74,11 @@ function startEmojis() {
   emojiInterval = setInterval(() => {
     const e = document.createElement("div");
     e.innerText = Math.random() > 0.5 ? "❤️" : "🌼";
-    e.style.position = "fixed";
+    e.className = "emoji";
     e.style.left = Math.random() * 100 + "vw";
-    e.style.fontSize = "65px";
-    e.style.animation = "float 8s linear";
     layer.appendChild(e);
-    setTimeout(() => e.remove(), 8000);
-  }, 300);
+    setTimeout(() => e.remove(), 10000);
+  }, 400);
 }
 function stopEmojis() {
   clearInterval(emojiInterval);
@@ -133,42 +87,33 @@ function stopEmojis() {
 startEmojis();
 
 /* =========================
-   HEARTBREAK RAIN
+   HEARTBREAK
 ========================= */
 let heartbreakInterval;
 function startHeartbreak() {
   stopEmojis();
-  clearInterval(heartbreakInterval);
   heartbreakInterval = setInterval(() => {
     const b = document.createElement("div");
     b.innerText = "💔";
-    b.style.position = "fixed";
+    b.className = "broken";
     b.style.left = Math.random() * 100 + "vw";
-    b.style.fontSize = "95px";
-    b.style.animation = "fall 3.5s linear";
     document.body.appendChild(b);
-    setTimeout(() => b.remove(), 3500);
-  }, 120);
+    setTimeout(() => b.remove(), 3000);
+  }, 150);
 }
 function stopHeartbreak() {
   clearInterval(heartbreakInterval);
-  document.querySelectorAll("div").forEach(d => {
-    if (d.innerText === "💔") d.remove();
-  });
+  document.querySelectorAll(".broken").forEach(b => b.remove());
 }
 
 /* =========================
-   CONFETTI SAFE
+   CONFETTI
 ========================= */
 function fireConfettiSafe(duration = 3000) {
   if (typeof confetti !== "function") return;
   const end = Date.now() + duration;
   (function frame() {
-    confetti({
-      particleCount: 8,
-      spread: 120,
-      origin: { x: Math.random(), y: Math.random() - 0.2 }
-    });
+    confetti({ particleCount: 8, spread: 120 });
     if (Date.now() < end) requestAnimationFrame(frame);
   })();
 }
@@ -179,7 +124,7 @@ function fireConfettiSafe(duration = 3000) {
 typeText(questionText, "Sai… will you be my Valentine? ❤️");
 
 /* =========================
-   NO CLICK (DRAMA)
+   NO CLICK
 ========================= */
 let noCount = 0;
 noBtn.onclick = () => {
@@ -188,22 +133,13 @@ noBtn.onclick = () => {
   ns.classList.remove("hidden");
 
   sadMusic.play();
-  const msg = sadMessages[(noCount - 1) % sadMessages.length];
-  typeText(sadText, msg);
-
+  typeText(sadText, sadMessages[noCount % sadMessages.length]);
   startHeartbreak();
-
-  if (noCount > 1) {
-    noBtn.style.position = "absolute";
-    noBtn.style.left = Math.random() * 80 + "vw";
-    noBtn.style.top = Math.random() * 80 + "vh";
-  }
 };
 
 /* THINK AGAIN */
 thinkAgain.onclick = () => {
   sadMusic.pause();
-  sadMusic.currentTime = 0;
   stopHeartbreak();
   ns.classList.add("hidden");
   qs.classList.remove("hidden");
@@ -215,23 +151,14 @@ thinkAgain.onclick = () => {
 ========================= */
 yesBtn.onclick = () => {
   sadMusic.pause();
-  sadMusic.currentTime = 0;
   stopHeartbreak();
-
   qs.classList.add("hidden");
-  ns.classList.add("hidden");
   ys.classList.remove("hidden");
-
   happyMusic.play();
   fireConfettiSafe();
-
-  typeText(
-    readyText,
-    "Are you ready, my love, for our magical love week together? ✨"
-  );
+  typeText(readyText, "Are you ready, my love, for our magical love week? ✨");
 };
 
-/* READY */
 readyBtn.onclick = () => {
   ys.classList.add("hidden");
   showCalendar();
@@ -241,25 +168,22 @@ readyBtn.onclick = () => {
    CALENDAR
 ========================= */
 function showCalendar() {
+  stopEmojis();
   cs.innerHTML = "";
   cs.classList.remove("hidden");
 
   const cal = document.createElement("div");
   cal.className = "calendar";
 
-  const today = new Date().getDate();
-
   for (let d = 7; d <= 14; d++) {
     const box = document.createElement("div");
     box.className = "day";
     box.innerText = `Feb ${d}`;
 
-    if (d > today && d !== 7 && d !== 14) {
+    if (d !== 7 && d !== 14) {
       box.classList.add("locked");
       box.onclick = () =>
-        alert(
-          "My love… 🌸\nPlease wait for the surprise ✨\nSome moments bloom only on their day 💖"
-        );
+        alert("Please wait, my love 🌸\nSome moments bloom only on their day 💖");
     } else {
       box.onclick = () => openDay(d);
     }
@@ -272,6 +196,7 @@ function showCalendar() {
    OPEN DAY
 ========================= */
 function openDay(day) {
+  stopEmojis();
   cs.classList.add("hidden");
   ds.classList.remove("hidden");
   ds.innerHTML = "";
@@ -283,35 +208,30 @@ function openDay(day) {
 
   const poem = document.createElement("h2");
   ds.appendChild(poem);
-  typeText(poem, poems[day].join("\n"));
 
-  for (let i = 1; i <= 5; i++) {
-    const img = document.createElement("img");
-    img.src = `assets/images/day${day}-${i}.jpg`;
-    img.style.width = "150px";
-    img.style.margin = "10px";
-    ds.appendChild(img);
-  }
+  setTimeout(() => {
+    typeText(poem, poems[day].join("\n"));
+  }, 800);
 
-  /* FINAL VALENTINE DAY EXPLOSION */
-  if (day === 14) {
-    fireConfettiSafe(6000);
-    setTimeout(() => {
-      const heart = document.createElement("div");
-      heart.innerHTML = "❤️";
-      heart.style.fontSize = "180px";
-      heart.style.textAlign = "center";
-      heart.style.animation = "pulse 1.5s infinite";
-      ds.appendChild(heart);
-    }, 2000);
-  }
+  setTimeout(() => {
+    for (let i = 1; i <= 5; i++) {
+      const img = document.createElement("img");
+      img.src = `assets/images/day${day}-${i}.jpg`;
+      img.style.width = "150px";
+      img.style.margin = "10px";
+      ds.appendChild(img);
+    }
+  }, 3000);
+
+  fireConfettiSafe(5000);
 
   const back = document.createElement("button");
   back.className = "backBtn";
-  back.innerText = "⬅ Back to Calendar";
+  back.innerText = "⬅ Back";
   back.onclick = () => {
     ds.classList.add("hidden");
-    cs.classList.remove("hidden");
+    showCalendar();
   };
   ds.appendChild(back);
 }
+
