@@ -1,17 +1,18 @@
 /* =========================
-   GIFS (DAY VIEW)
+   💖 DAY SCREEN (Poem + Images + Hearts)
 ========================= */
-.gif {
-  width: 80%;
-  max-width: 600px;
-  margin: 20px auto;
-  border-radius: 15px;
-  display: block;
+#day-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding: 20px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
 }
 
-/* =========================
-   POEM (DAY VIEW)
-========================= */
+/* Poem typing */
 #day-screen h2 {
   font-size: 28px;
   color: #ff0066;
@@ -19,32 +20,26 @@
   margin: 20px 0;
   line-height: 1.6;
   text-shadow: 0 0 8px pink;
+  white-space: pre-line;
 }
 
-/* =========================
-   DAY IMAGES (POP ONE BY ONE)
-========================= */
-#day-screen img {
-  border-radius: 15px;
+/* Images appear horizontally */
+#day-screen .day-images {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 15px 0;
+}
+
+#day-screen .day-images img {
+  width: 120px;
+  border-radius: 10px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  margin: 10px 0;
   transition: transform 0.5s, opacity 0.5s;
 }
 
-/* =========================
-   LOCKED DAYS (POETIC MESSAGE)
-========================= */
-.day.locked {
-  opacity: 0.5;
-  pointer-events: none;
-  font-style: italic;
-  color: #a0003a;
-  text-shadow: 0 0 5px #ff9ac1;
-}
-
-/* =========================
-   CORNER HEARTS (BEATING)
-========================= */
+/* Corner hearts */
 .corner-heart {
   position: fixed;
   font-size: 90px;
@@ -64,33 +59,3 @@
 .bottom-left { bottom: 10px; left: 10px; }
 .bottom-right { bottom: 10px; right: 10px; }
 
-/* =========================
-   BACK BUTTON
-========================= */
-.backBtn {
-  margin-top: 20px;
-  padding: 12px 30px;
-  font-size: 18px;
-  border-radius: 25px;
-  background: white;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.backBtn:hover {
-  background: #ffd1dc;
-  transform: scale(1.1);
-}
-
-/* =========================
-   DAY SCREEN FLEX
-========================= */
-#day-screen {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  min-height: 100vh;
-  padding: 20px;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-}
