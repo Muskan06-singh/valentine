@@ -1,188 +1,62 @@
-body {
-  margin: 0;
-  background: #ffd6e8;
-  font-family: "Georgia", cursive;
-  overflow: hidden;
-}
-
-.hidden { display: none; }
-
-#app {
-  text-align: center;
-  padding: 20px;
-}
-
-h1, h2 {
-  color: black;
-  text-shadow: 0 0 8px silver;
-}
-
-.buttons button {
-  padding: 15px 35px;
-  font-size: 20px;
-  margin: 15px;
-  cursor: pointer;
-}
-
-#yesBtn { 
-  background: white; 
-  color: red; 
-}
-
-#noBtn { 
-  background: white; 
-  color: black; 
-}
-
+/* =========================
+   GIFS (DAY VIEW)
+========================= */
 .gif {
-  width: 280px;
+  width: 80%;
+  max-width: 600px;
   margin: 20px auto;
+  border-radius: 15px;
+  display: block;
 }
 
 /* =========================
-   💔 SAD SCREEN (NO CLICK)
-   ========================= */
-
-#no-screen {
-  background: black;
-  min-height: 100vh;
-  color: white;
-}
-
-/* ✨ GLITTERY SAD TEXT ✨ */
-#sad-text {
-  color: white;
-  font-size: 30px;
-  text-shadow:
-    0 0 5px white,
-    0 0 10px #fff,
-    0 0 20px #ffd1dc,
-    0 0 40px #ff99cc;
-  animation: shimmer 2s infinite alternate;
-}
-
-@keyframes shimmer {
-  from { opacity: 0.8; }
-  to { opacity: 1; }
+   POEM (DAY VIEW)
+========================= */
+#day-screen h2 {
+  font-size: 28px;
+  color: #ff0066;
+  text-align: center;
+  margin: 20px 0;
+  line-height: 1.6;
+  text-shadow: 0 0 8px pink;
 }
 
 /* =========================
-   💕 FLOATING EMOJIS
-   ========================= */
-
-.emoji {
-  position: absolute;
-  font-size: 65px;
-  animation: float 10s linear infinite;
-}
-
-@keyframes float {
-  from { transform: translateY(100vh); }
-  to { transform: translateY(-10vh); }
-}
-
-#no-screen .emoji {
-  display: none;
+   DAY IMAGES (POP ONE BY ONE)
+========================= */
+#day-screen img {
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  margin: 10px 0;
+  transition: transform 0.5s, opacity 0.5s;
 }
 
 /* =========================
-   💔 BROKEN HEART RAIN
-   ========================= */
-
-.broken {
-  position: fixed;
-  font-size: 95px;
-  animation: fall 2.5s linear infinite;
-  filter: drop-shadow(0 0 10px red);
-}
-
-@keyframes fall {
-  from { top: -15%; transform: rotate(0deg); }
-  to { top: 120%; transform: rotate(360deg); }
-}
-
-/* =========================
-   🎉 CONFETTI SUPPORT
-   ========================= */
-
-canvas {
-  position: fixed !important;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 9999;
-}
-
-/* =========================
-   📅 CALENDAR (CENTER + DRAMA)
-   ========================= */
-
-/* ❤️ SAFE DRAMA ADD-ON */
-.calendar-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 80vh;
-}
-
-/* ❤️ SAFE DRAMA ADD-ON */
-.calendar {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
-  max-width: 520px;
-  padding: 25px;
-  border-radius: 25px;
-  background: rgba(255,255,255,0.5);
-  box-shadow: 0 0 35px rgba(255,105,180,0.7);
-  animation: glowBox 3s infinite alternate;
-}
-
-@keyframes glowBox {
-  from { box-shadow: 0 0 20px rgba(255,105,180,0.6); }
-  to { box-shadow: 0 0 45px rgba(255,20,147,0.9); }
-}
-
-.day {
-  background: white;
-  padding: 20px;
-  border-radius: 18px;
-  font-size: 18px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  transition: 0.3s;
-}
-
-.day:hover {
-  transform: scale(1.08);
-  background: #ffe6f0;
-}
-
-.day:not(.locked) {
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 rgba(255,105,180,0.6); }
-  50% { box-shadow: 0 0 25px rgba(255,105,180,0.8); }
-  100% { box-shadow: 0 0 0 rgba(255,105,180,0.6); }
-}
-
+   LOCKED DAYS (POETIC MESSAGE)
+========================= */
 .day.locked {
-  opacity: 0.4;
+  opacity: 0.5;
   pointer-events: none;
+  font-style: italic;
+  color: #a0003a;
+  text-shadow: 0 0 5px #ff9ac1;
 }
 
 /* =========================
-   💖 HEARTS AT FOUR CORNERS
-   ========================= */
-
-/* ❤️ SAFE DRAMA ADD-ON */
+   CORNER HEARTS (BEATING)
+========================= */
 .corner-heart {
   position: fixed;
-  font-size: 85px;
-  animation: heartPop 1.2s infinite alternate;
-  z-index: 9998;
+  font-size: 90px;
+  z-index: 9999;
+  animation: heartBeat 1.2s infinite alternate;
   pointer-events: none;
+}
+
+@keyframes heartBeat {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
 }
 
 .top-left { top: 10px; left: 10px; }
@@ -190,15 +64,9 @@ canvas {
 .bottom-left { bottom: 10px; left: 10px; }
 .bottom-right { bottom: 10px; right: 10px; }
 
-@keyframes heartPop {
-  from { transform: scale(0.9); opacity: 0.7; }
-  to { transform: scale(1.2); opacity: 1; }
-}
-
 /* =========================
-   🔙 BACK BUTTON
-   ========================= */
-
+   BACK BUTTON
+========================= */
 .backBtn {
   margin-top: 20px;
   padding: 12px 30px;
@@ -208,48 +76,21 @@ canvas {
   cursor: pointer;
   transition: 0.3s;
 }
-
 .backBtn:hover {
   background: #ffd1dc;
   transform: scale(1.1);
 }
+
 /* =========================
-   💖 BIG CENTER CALENDAR
+   DAY SCREEN FLEX
 ========================= */
-#calendar-screen {
+#day-screen {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
   min-height: 100vh;
+  padding: 20px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
 }
-
-.calendar {
-  transform: scale(1.5);
-  animation: calendarGlow 3s ease-in-out infinite;
-}
-
-@keyframes calendarGlow {
-  0% { transform: scale(1.5); }
-  50% { transform: scale(1.55); }
-  100% { transform: scale(1.5); }
-}
-
-/* =========================
-   ❤️ CORNER HEARTS (DAY VIEW)
-========================= */
-.corner-heart {
-  position: fixed;
-  font-size: 90px;
-  z-index: 9999;
-  animation: pulse 1.5s infinite;
-}
-
-.corner-heart.tl { top: 10px; left: 10px; }
-.corner-heart.tr { top: 10px; right: 10px; }
-.corner-heart.bl { bottom: 10px; left: 10px; }
-.corner-heart.br { bottom: 10px; right: 10px; }
-#emoji-layer {
-  pointer-events: none;
-}
-
-
