@@ -188,3 +188,70 @@ color:red;
 cursor:pointer;
 box-shadow:0 0 30px hotpink;
 }
+/* tease gif */
+#teaseGif{
+display:none;
+width:200px;
+margin-top:20px;
+}
+
+/* day page */
+#dayPage{
+display:none;
+text-align:center;
+padding-top:40px;
+}
+
+/* proposal */
+#proposalScene{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:radial-gradient(circle,#ffb6d9,#ff69b4);
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+z-index:9999;
+color:white;
+text-align:center;
+}
+
+.foreverBtn{
+margin:15px;
+padding:15px 35px;
+font-size:22px;
+border:none;
+border-radius:30px;
+background:white;
+color:#ff1493;
+cursor:pointer;
+box-shadow:0 0 20px hotpink;
+}
+
+.rain{
+position:fixed;
+top:-20px;
+animation:fall 4s linear;
+}
+
+@keyframes fall{
+to{transform:translateY(110vh);}
+}
+#sadGif,#teaseGif{
+width:220px;
+margin-top:20px;
+display:none;
+}
+
+.rain{
+position:fixed;
+top:-20px;
+animation:fall 4s linear;
+}
+
+@keyframes fall{
+to{transform:translateY(110vh);}
+}
