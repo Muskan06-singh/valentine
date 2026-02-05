@@ -4,9 +4,10 @@ background:#ffd6e8;
 font-family:'Caveat',cursive;
 overflow:hidden;
 text-align:center;
+transition:1s;
 }
 
-/* screens */
+/* SCREENS */
 .screen{
 min-height:100vh;
 display:flex;
@@ -19,22 +20,22 @@ z-index:2;
 
 .hidden{display:none}
 
-/* ALL TEXT BOUNCY + GLOW */
+/* ALL TEXT INSANE GLOW + BOUNCE */
 h1,h2,button{
 animation:textBounce 2s infinite;
 text-shadow:
-0 0 8px #fff,
-0 0 18px hotpink,
-0 0 30px deeppink;
+0 0 10px #fff,
+0 0 20px hotpink,
+0 0 40px deeppink,
+0 0 80px #ff4da6;
 }
 
 @keyframes textBounce{
 0%{transform:translateY(0)}
-50%{transform:translateY(-8px)}
+50%{transform:translateY(-12px)}
 100%{transform:translateY(0)}
 }
 
-/* TEXT */
 h1,h2{
 font-size:55px;
 color:black;
@@ -49,6 +50,12 @@ margin:20px;
 border:none;
 border-radius:40px;
 cursor:pointer;
+transition:.3s;
+}
+
+.buttons button:hover{
+transform:scale(1.2);
+box-shadow:0 0 25px hotpink;
 }
 
 #yesBtn{
@@ -58,28 +65,17 @@ animation:beat 1s infinite;
 }
 
 @keyframes beat{
-50%{transform:scale(1.15);}
+50%{transform:scale(1.2);}
 }
 
-#noBtn{
-background:white;
-}
-
-/* HEART THINK BTN */
-.heart-btn{
-background:white;
-padding:20px 35px;
-border-radius:50px;
-font-size:22px;
-border:none;
-margin-top:30px;
-}
+#noBtn{background:white}
 
 /* GIF */
 .gif{
 width:320px;
 margin:20px;
 border-radius:20px;
+box-shadow:0 0 30px hotpink;
 }
 
 /* CALENDAR */
@@ -90,7 +86,7 @@ gap:20px;
 background:white;
 padding:40px;
 border-radius:30px;
-box-shadow:0 0 40px hotpink;
+box-shadow:0 0 60px hotpink;
 animation:breath 2s infinite;
 }
 
@@ -104,13 +100,17 @@ background:#ffe6f0;
 border-radius:20px;
 font-size:22px;
 cursor:pointer;
+transition:.3s;
 }
 
-.day.locked{
-opacity:.4;
+.day:hover{
+transform:scale(1.1);
+box-shadow:0 0 20px hotpink;
 }
 
-/* back buttons */
+.day.locked{opacity:.4}
+
+/* BACK BTN */
 .backBtn{
 margin-top:30px;
 padding:15px 30px;
@@ -120,12 +120,12 @@ font-size:20px;
 cursor:pointer;
 }
 
-/* 🌧️ FULL SCREEN RAIN */
+/* FULL SCREEN RAIN */
 .rain{
 position:fixed;
 top:-10vh;
 font-size:45px;
-animation:fall 8s linear infinite;
+animation:fall 7s linear infinite;
 pointer-events:none;
 z-index:1;
 }
@@ -135,14 +135,14 @@ from{transform:translateY(-10vh);}
 to{transform:translateY(110vh);}
 }
 
-/* 💔 FULL SCREEN BROKEN HEART */
+/* BROKEN HEART */
 .broken{
 position:fixed;
 top:-10vh;
 font-size:70px;
 animation:fallRotate 3s linear infinite;
 pointer-events:none;
-z-index:1;
+z-index:5;
 }
 
 @keyframes fallRotate{
@@ -150,7 +150,7 @@ from{transform:translateY(-10vh) rotate(0);}
 to{transform:translateY(110vh) rotate(360deg);}
 }
 
-/* SAD FULL DARK SCREEN */
+/* SAD MODE */
 #sad-screen{
 background:black;
 position:fixed;
@@ -158,26 +158,48 @@ top:0;
 left:0;
 width:100vw;
 height:100vh;
-z-index:5;
+z-index:10;
 }
 
-/* SAD TEXT WHITE GLOW */
 #sad-screen h2{
 color:white;
 text-shadow:
-0 0 10px #fff,
-0 0 25px #ffffff,
-0 0 45px #ffffff;
+0 0 15px #fff,
+0 0 40px white,
+0 0 80px white;
 }
 
-/* corner hearts */
-.corner{
-position:fixed;
-font-size:45px;
-animation:beat 1s infinite;
+/* SCREEN SHAKE */
+.shake{
+animation:shake 0.4s;
 }
-.tl{top:10px;left:10px}
-.tr{top:10px;right:10px}
-.bl{bottom:10px;left:10px}
-.br{bottom:10px;right:10px}
+
+@keyframes shake{
+0%{transform:translateX(0)}
+25%{transform:translateX(-20px)}
+50%{transform:translateX(20px)}
+75%{transform:translateX(-20px)}
+100%{transform:translateX(0)}
+}
+
+/* FLOATING SAI */
+.floatSai{
+position:fixed;
+font-size:28px;
+color:white;
+text-shadow:0 0 15px hotpink;
+animation:floatUp 8s linear infinite;
+pointer-events:none;
+z-index:0;
+}
+
+@keyframes floatUp{
+from{transform:translateY(110vh);opacity:1;}
+to{transform:translateY(-20vh);opacity:0;}
+}
+
+/* LOVE MODE AFTER YES */
+.loveMode{
+background:black !important;
+}
 
