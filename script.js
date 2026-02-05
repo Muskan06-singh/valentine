@@ -1,4 +1,3 @@
-/* TYPEWRITER */
 function typeWriter(el,text,speed=40){
 el.innerHTML="";
 let i=0;
@@ -9,7 +8,6 @@ if(i>=text.length) clearInterval(timer);
 },speed);
 }
 
-/* ELEMENTS */
 const qScreen=document.getElementById("question-screen");
 const sadScreen=document.getElementById("sad-screen");
 const yesScreen=document.getElementById("yes-screen");
@@ -24,36 +22,43 @@ const openCal=document.getElementById("openCal");
 const sadText=document.getElementById("sadText");
 const questionText=document.getElementById("questionText");
 
-/* MUSIC */
 const sadMusic=new Audio("assets/music/sad.mp3");
 const happyMusic=new Audio("assets/music/happy.mp3");
 happyMusic.loop=true;
 
-/* QUESTION */
 typeWriter(questionText,"Sai, will you be my valentine 💕");
 
-/* 🌸 FULL SCREEN RAIN */
+/* 💕 INSANE RAIN */
 let rainInt;
 function startRain(){
 stopRain();
 rainInt=setInterval(()=>{
 let e=document.createElement("div");
 e.className="rain";
-let emojis=["❤️","🌼","🌸","💖"];
+let emojis=["❤️","🌸","🌼","💖","💘"];
 e.innerText=emojis[Math.floor(Math.random()*emojis.length)];
 e.style.left=Math.random()*100+"vw";
 document.body.appendChild(e);
-setTimeout(()=>e.remove(),8000);
-},300);
+setTimeout(()=>e.remove(),7000);
+},200);
 }
-
 function stopRain(){
 clearInterval(rainInt);
 document.querySelectorAll(".rain").forEach(e=>e.remove());
 }
 startRain();
 
-/* 💔 HEARTBREAK FULL SCREEN */
+/* FLOATING SAI EVERYWHERE */
+setInterval(()=>{
+let s=document.createElement("div");
+s.className="floatSai";
+s.innerText="Sai 💕";
+s.style.left=Math.random()*100+"vw";
+document.body.appendChild(s);
+setTimeout(()=>s.remove(),8000);
+},800);
+
+/* 💔 HEARTBREAK MODE */
 let heartInt;
 function startHeartbreak(){
 stopRain();
@@ -75,12 +80,16 @@ document.querySelectorAll(".broken").forEach(e=>e.remove());
 let noCount=0;
 const sadLines=[
 "Sai… my heart is yours 💔",
-"Don’t leave me in silence 🥀",
-"I will still choose you 🖤"
+"Why are you doing this to me 😭",
+"I will still love you forever 🖤"
 ];
 
 noBtn.onclick=()=>{
 noCount++;
+
+document.body.classList.add("shake");
+setTimeout(()=>document.body.classList.remove("shake"),400);
+
 qScreen.classList.add("hidden");
 sadScreen.classList.remove("hidden");
 
@@ -95,7 +104,7 @@ typeWriter(sadText,sadLines[noCount-1]);
 if(noCount===3){
 setTimeout(()=>{
 document.getElementById("sadGif").src="assets/gifs/tease.gif";
-typeWriter(sadText,"You are mine already ❤️😌");
+typeWriter(sadText,"You cannot escape me 😈❤️");
 },2000);
 }
 
@@ -118,24 +127,35 @@ qScreen.classList.remove("hidden");
 startRain();
 };
 
-/* YES */
+/* YES = LOVE EXPLOSION */
 yesBtn.onclick=()=>{
 qScreen.classList.add("hidden");
 yesScreen.classList.remove("hidden");
 
+document.body.classList.add("loveMode");
+
 happyMusic.play();
-confetti({particleCount:200,spread:120,origin:{y:0.6}});
+
+for(let i=0;i<8;i++){
+setTimeout(()=>{
+confetti({
+particleCount:300,
+spread:120,
+origin:{y:0.6}
+});
+},i*400);
+}
+
 typeWriter(document.getElementById("yesText"),
-"Our love week begins now 💕");
+"Our love story begins forever 💍❤️");
 };
 
-/* OPEN CALENDAR */
+/* CALENDAR */
 openCal.onclick=()=>{
 yesScreen.classList.add("hidden");
 showCalendar();
 };
 
-/* CALENDAR */
 function showCalendar(){
 calScreen.classList.remove("hidden");
 const cal=document.getElementById("calendar");
@@ -148,7 +168,7 @@ box.innerText="Feb "+d;
 
 if(d!==7 && d!==14){
 box.classList.add("locked");
-box.onclick=()=>alert("Wait for the special day my love 💕");
+box.onclick=()=>alert("Wait for our special day 💕");
 }else{
 box.onclick=()=>openDay(d);
 }
@@ -176,19 +196,11 @@ const imgBox=document.getElementById("images");
 imgBox.innerHTML="";
 
 let poem=`Sai my love this is day ${day} 💕
-You make every moment magical ✨
-Your smile lights my world 💖
-Forever yours my Sai ❤️`;
+You are my heartbeat 💓
+My forever person 💖
+I love you endlessly ❤️`;
 
 setTimeout(()=>typeWriter(poemEl,poem),500);
-
-/* corner hearts */
-["tl","tr","bl","br"].forEach(c=>{
-let h=document.createElement("div");
-h.className="corner "+c;
-h.innerText="❤️";
-document.body.appendChild(h);
-});
 
 /* images */
 setTimeout(()=>{
@@ -201,27 +213,21 @@ img.style.width="150px";
 img.style.margin="10px";
 imgBox.appendChild(img);
 i++;
-},800);
-},4000);
+},700);
+},3000);
 
-/* 14 confetti */
 if(day==14){
-setTimeout(()=>{
-let int=setInterval(()=>{
+setInterval(()=>{
 confetti({
-particleCount:6,
+particleCount:8,
 spread:70,
 origin:{x:Math.random(),y:Math.random()-0.2},
-shapes:["circle"],
 colors:["#ff4d88","#ff99cc"]
 });
 },120);
-setTimeout(()=>clearInterval(int),3000);
-},2000);
 }
 }
 
-/* BACK CAL */
 document.getElementById("backCal").onclick=()=>{
 dayScreen.classList.add("hidden");
 showCalendar();
