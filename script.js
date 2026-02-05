@@ -17,11 +17,7 @@ const teaseText = document.getElementById("teaseText");
 const backToMain = document.getElementById("backToMain");
 const dayGif = document.getElementById("dayGif");
 const poemEl = document.getElementById("poem");
-const giftButtons = document.getElementById("giftButtons");
-const gift1Btn = document.getElementById("gift1");
-const gift2Btn = document.getElementById("gift2");
 const images = document.getElementById("images");
-const lyrics = document.getElementById("lyrics");
 const backBtn = document.getElementById("backBtn");
 
 // --- POEMS ---
@@ -39,12 +35,10 @@ const poems={
 // --- EMOJI RAIN ---
 let rainInterval, brokenInterval;
 
+// Start Daisy and Heart Rain
 function startRain(){
-  // Only run if we're not in sad or day screen or calendar screen
   stopRain();
-  if(main.classList.contains("hidden") && !happyScreen.classList.contains("hidden")) return;
   if(sadScreen.classList.contains("hidden") && !dayScreen.classList.contains("hidden")) return;
-
   rainInterval=setInterval(()=>{
     const e=document.createElement("div");
     e.className="floating";
@@ -56,8 +50,14 @@ function startRain(){
   },150);
 }
 
-function stopRain(){clearInterval(rainInterval); emojiRain.innerHTML="";}
+// Stop all rain
+function stopRain(){
+  clearInterval(rainInterval);
+  emojiRain.innerHTML="";
+  clearInterval(brokenInterval);
+}
 
+// Broken Heart Rain
 function brokenRain(){
   return setInterval(()=>{
     const b=document.createElement("div");
@@ -78,7 +78,7 @@ function typeWriter(el,text,speed=40,callback,fontSize=28){
   const timer=setInterval(()=>{
     el.innerHTML+=text[i];
     i++;
-    el.style.fontSize=(fontSize+i*0.1)+"px";
+    el.style.fontSize=(fontSize+i*0.05)+"px";
     if(i>=text.length){ clearInterval(timer); if(callback) callback();}
   },speed);
 }
@@ -95,6 +95,7 @@ noBtn.onclick = ()=>{
     teaseGif.classList.remove("hidden");
     teaseText.innerHTML="";
     typeWriter(teaseText,"You are already mine 🐒",50);
+    // Runaway no button
     setInterval(()=>{
       noBtn.style.position="absolute";
       noBtn.style.left=Math.random()*80+"vw";
@@ -142,7 +143,7 @@ document.getElementById("openCal").onclick = ()=>{
   calendarScreen.classList.remove("hidden");
   backToMain.style.display="block";
   loadCalendar();
-  stopRain(); // stop hearts/daisies
+  startRain(); // keep Daisy and Heart rain on calendar page
 };
 
 backToMain.onclick = ()=>{
@@ -172,12 +173,12 @@ function loadCalendar(){
 function openDay(day){
   calendarScreen.classList.add("hidden");
   dayScreen.classList.remove("hidden");
-  stopRain(); // no daisies/hearts
+  stopRain(); // stop Daisy/Heart emojis
   dayGif.src=`assets/gifs/day${day}.gif`;
-  giftButtons.classList.remove("hidden");
   images.innerHTML="";
-  lyrics.innerHTML="";
   poemEl.innerHTML="";
+  teaseGif.classList.add("hidden");
+  teaseText.innerHTML="";
   ["tl","tr","bl","br"].forEach(p=>{
     const h=document.createElement("div");
     h.className="corner "+p;
@@ -185,7 +186,6 @@ function openDay(day){
     document.body.appendChild(h);
   });
   typeWriter(poemEl,poems[day],40);
-
   if(day==14){
     setTimeout(()=>{
       const end=Date.now()+5000;
@@ -202,4 +202,5 @@ backBtn.onclick = ()=>{
   dayScreen.classList.add("hidden");
   calendarScreen.classList.remove("hidden");
   document.querySelectorAll(".corner").forEach(e=>e.remove());
+  startRain(); // resume Daisy/Heart on calendar
 };
