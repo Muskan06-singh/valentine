@@ -8,6 +8,7 @@ if(i>=text.length) clearInterval(timer);
 },speed);
 }
 
+/* elements */
 const qScreen=document.getElementById("question-screen");
 const sadScreen=document.getElementById("sad-screen");
 const yesScreen=document.getElementById("yes-screen");
@@ -28,10 +29,9 @@ happyMusic.loop=true;
 
 typeWriter(questionText,"Sai, will you be my valentine 💕");
 
-/* LOVE RAIN */
+/* rain */
 let rainInt;
 function startRain(){
-stopRain();
 rainInt=setInterval(()=>{
 let e=document.createElement("div");
 e.className="rain";
@@ -58,10 +58,9 @@ document.body.appendChild(s);
 setTimeout(()=>s.remove(),8000);
 },900);
 
-/* 💔 HEARTBREAK FIXED */
+/* heartbreak rain */
 let heartInt;
 function startHeartbreak(){
-stopHeartbreak();   // clear first
 heartInt=setInterval(()=>{
 let b=document.createElement("div");
 b.className="broken";
@@ -69,14 +68,14 @@ b.innerText="💔";
 b.style.left=Math.random()*100+"vw";
 document.body.appendChild(b);
 setTimeout(()=>b.remove(),3000);
-},100);
+},120);
 }
 function stopHeartbreak(){
 clearInterval(heartInt);
 document.querySelectorAll(".broken").forEach(e=>e.remove());
 }
 
-/* NO CLICK */
+/* NO */
 let noCount=0;
 const sadLines=[
 "Sai… my heart is breaking 💔",
@@ -86,25 +85,15 @@ const sadLines=[
 
 noBtn.onclick=()=>{
 noCount++;
-
 qScreen.classList.add("hidden");
 sadScreen.classList.remove("hidden");
 
 document.getElementById("sadGif").src="assets/gifs/sad.gif";
 sadMusic.play();
-
-/* start heartbreak shower */
 startHeartbreak();
 
 if(noCount<=3){
 typeWriter(sadText,sadLines[noCount-1]);
-}
-
-if(noCount===3){
-setTimeout(()=>{
-document.getElementById("sadGif").src="assets/gifs/tease.gif";
-typeWriter(sadText,"You can't escape me 😈❤️");
-},2000);
 }
 
 if(noCount>=4){
@@ -116,7 +105,7 @@ noBtn.style.top=Math.random()*80+"vh";
 }
 };
 
-/* THINK AGAIN */
+/* think again */
 thinkBtn.onclick=()=>{
 sadMusic.pause();
 sadMusic.currentTime=0;
@@ -126,29 +115,23 @@ qScreen.classList.remove("hidden");
 startRain();
 };
 
-/* 💍 YES = MARRY ME MODE */
+/* YES */
 yesBtn.onclick=()=>{
 qScreen.classList.add("hidden");
 yesScreen.classList.remove("hidden");
-
 happyMusic.play();
 
-/* massive confetti */
-for(let i=0;i<6;i++){
-setTimeout(()=>{
 confetti({
 particleCount:400,
 spread:140,
 origin:{y:0.6}
 });
-},i*400);
-}
 
 typeWriter(document.getElementById("yesText"),
-"From today… you are mine forever 💍❤️");
+"Our love story begins now 💕");
 };
 
-/* calendar */
+/* open calendar */
 openCal.onclick=()=>{
 yesScreen.classList.add("hidden");
 showCalendar();
@@ -166,7 +149,7 @@ box.innerText="Feb "+d;
 
 if(d!==7 && d!==14){
 box.classList.add("locked");
-box.onclick=()=>alert("Wait for our special day 💕");
+box.onclick=()=>alert("Wait for special day 💕");
 }else{
 box.onclick=()=>openDay(d);
 }
@@ -174,13 +157,14 @@ cal.appendChild(box);
 }
 }
 
+/* back home */
 document.getElementById("backHome").onclick=()=>{
 calScreen.classList.add("hidden");
 qScreen.classList.remove("hidden");
 startRain();
 };
 
-/* day open */
+/* open day */
 function openDay(day){
 calScreen.classList.add("hidden");
 dayScreen.classList.remove("hidden");
@@ -196,22 +180,16 @@ I love you endlessly ❤️`;
 
 setTimeout(()=>typeWriter(poemEl,poem),500);
 
+/* 💍 proposal on 14 */
 if(day==14){
 setTimeout(()=>{
 showProposal();
-},5000); // proposal after 5 sec
+},5000);
+}
 }
 
-
-document.getElementById("backCal").onclick=()=>{
-dayScreen.classList.add("hidden");
-showCalendar();
-startRain();
-};
-/* 💍 FINAL PROPOSAL SCENE */
+/* proposal scene */
 function showProposal(){
-
-// create overlay
 let box=document.createElement("div");
 box.id="proposalScene";
 
@@ -223,7 +201,7 @@ box.innerHTML=`
 
 document.body.appendChild(box);
 
-/* fireworks nonstop */
+/* fireworks */
 let fire=setInterval(()=>{
 confetti({
 particleCount:80,
@@ -233,33 +211,18 @@ colors:["#ff4d88","#ffffff","#ff99cc"]
 });
 },300);
 
-/* floating hearts blast */
-let loveRain=setInterval(()=>{
-let e=document.createElement("div");
-e.className="rain";
-e.innerText="💖";
-e.style.left=Math.random()*100+"vw";
-document.body.appendChild(e);
-setTimeout(()=>e.remove(),4000);
-},120);
-
-/* click yes forever */
+/* click */
 box.querySelector(".foreverBtn").onclick=()=>{
 clearInterval(fire);
-clearInterval(loveRain);
-
-box.innerHTML=`
-<h1 style="font-size:80px;color:white;text-shadow:0 0 40px hotpink;">
-She said YES 💍❤️
-</h1>
-`;
-
+box.innerHTML="<h1 style='font-size:80px'>She said YES 💍❤️</h1>";
 setInterval(()=>{
-confetti({
-particleCount:200,
-spread:140,
-origin:{y:0.6}
-});
+confetti({particleCount:200,spread:140,origin:{y:0.6}});
 },500);
 };
 }
+
+document.getElementById("backCal").onclick=()=>{
+dayScreen.classList.add("hidden");
+showCalendar();
+startRain();
+};
