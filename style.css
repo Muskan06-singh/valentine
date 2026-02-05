@@ -1,24 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
-
 body{
   margin:0;
   background:#ffd6e8;
-  font-family: 'Rock Salt', cursive;
+  font-family:'Dancing Script', cursive;
   overflow:hidden;
   text-align:center;
 }
-
-/* HIDDEN */
 .hidden{display:none}
 
-/* TITLE */
+/* MAIN TITLE */
 #title{
+  font-family:'Parisienne', cursive;
   font-size:50px;
   margin-top:100px;
   color:black;
   font-weight:bold;
-  text-shadow: 0 0 5px #fff, 0 0 10px #ff69b4, 0 0 20px #ff1493;
-  transition: font-size 0.3s ease;
+  text-shadow:0 0 10px #ff69b4, 0 0 20px #ff1493;
+  display:inline-block;
+}
+
+/* MAIN TEASE TEXT */
+#teaseText{
+  font-size:30px;
+  font-family:'Dancing Script', cursive;
+  font-weight:bold;
+  color:black;
+  text-shadow:0 0 10px #ff1493;
+  margin:20px 0;
 }
 
 /* BUTTONS */
@@ -29,35 +36,26 @@ body{
   border:none;
   border-radius:40px;
   cursor:pointer;
+  font-family:'Dancing Script', cursive;
   font-weight:bold;
 }
 
 .yes{ background:white; color:red; animation:beat 1s infinite; }
 .no{ background:white; color:black; }
 
-@keyframes beat{
-  0%{transform:scale(1)}
-  50%{transform:scale(1.15)}
-  100%{transform:scale(1)}
-}
+@keyframes beat{0%{transform:scale(1)}50%{transform:scale(1.15)}100%{transform:scale(1)}}
 
-/* SAD */
+/* SAD SCREEN */
 #sadScreen{
   background:black;
   color:white;
   height:100vh;
-  padding-top:100px;
+  padding-top:50px;
 }
-
-#sadText{
-  font-size:34px;
-  color:white;
-  text-shadow:0 0 10px white;
-}
-
+#sadText{ font-size:34px; color:white; text-shadow:0 0 20px red; }
 #thinkBtn{
   margin-top:30px;
-  font-size:20px;
+  font-size:22px;
   padding:25px 35px;
   background:white;
   border:none;
@@ -69,15 +67,28 @@ body{
 }
 
 /* GIF */
-.centerGif{ width:300px; margin-top:40px; }
+.centerGif{ width:350px; margin-top:40px; }
 
 /* CALENDAR */
 #calendarScreen{
   display:flex;
+  flex-direction:column;
   justify-content:center;
   align-items:center;
   height:100vh;
 }
+
+#calendarScreen #backToMain{
+  margin-bottom:20px;
+  padding:12px 25px;
+  font-size:18px;
+  border-radius:15px;
+  border:none;
+  background:white;
+  cursor:pointer;
+  box-shadow:0 0 10px pink;
+}
+
 #calendar{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -86,11 +97,7 @@ body{
   transform-origin:center;
   animation:beatCalendar 1.2s infinite;
 }
-
-@keyframes beatCalendar{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.05)}
-}
+@keyframes beatCalendar{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
 
 .day{
   background:white;
@@ -99,14 +106,6 @@ body{
   font-size:28px;
   cursor:pointer;
   box-shadow:0 0 25px pink;
-  animation:pulse 2s infinite;
-  font-family: 'Rock Salt', cursive;
-}
-
-@keyframes pulse{
-  0%{transform:scale(1)}
-  50%{transform:scale(1.07)}
-  100%{transform:scale(1)}
 }
 
 .locked{ opacity:0.3; cursor:not-allowed; }
@@ -119,16 +118,25 @@ body{
   text-shadow:0 0 10px #ff69b4;
   width:80%;
   margin:30px auto;
-  font-family: 'Rock Salt', cursive;
+  font-family:'Dancing Script', cursive;
 }
 
-/* IMAGES */
-#images img{
-  width:180px;
-  margin:10px;
-  border-radius:15px;
-  display:none;
+/* GIF & IMAGES */
+#images img{ width:180px; margin:10px; border-radius:15px; display:none; }
+
+/* DAY GIFT BUTTONS */
+.gift{
+  font-family:'Dancing Script', cursive;
+  font-size:22px;
+  border:none;
+  cursor:pointer;
+  border-radius:50%;
+  padding:20px 30px;
+  margin:15px;
 }
+
+.redHeart{ background:red; color:white;}
+.blackHeart{ background:black; color:white;}
 
 /* BACK BTN */
 #backBtn{
@@ -143,40 +151,15 @@ body{
 }
 
 /* EMOJI RAIN */
-.floating{
-  position:fixed;
-  font-size:45px;
-  animation:float 8s linear infinite;
-}
+.floating{ position:fixed; font-size:50px; animation:float 8s linear infinite; }
+@keyframes float{ from{transform:translateY(100vh)} to{transform:translateY(-10vh)} }
 
-@keyframes float{
-  from{transform:translateY(100vh)}
-  to{transform:translateY(-10vh)}
-}
-
-.broken{
-  position:fixed;
-  font-size:90px;
-  animation:fall 3s linear infinite;
-}
-
-@keyframes fall{
-  0%{top:-10%; transform:rotate(0deg)}
-  25%{transform:rotate(20deg)}
-  50%{transform:rotate(-15deg)}
-  75%{transform:rotate(10deg)}
-  100%{top:110%; transform:rotate(0deg)}
-}
+.broken{ position:fixed; font-size:90px; animation:fall 3s linear infinite; }
+@keyframes fall{0%{top:-10%; transform:rotate(0deg)}25%{transform:rotate(20deg)}50%{transform:rotate(-15deg)}75%{transform:rotate(10deg)}100%{top:110%; transform:rotate(0deg)}}
 
 /* CORNER HEART */
-.corner{
-  position:fixed;
-  font-size:80px;
-  animation:beat 1s infinite;
-}
-
+.corner{ position:fixed; font-size:90px; animation:beat 1s infinite; }
 .tl{top:10px;left:10px}
 .tr{top:10px;right:10px}
 .bl{bottom:10px;left:10px}
 .br{bottom:10px;right:10px}
-
