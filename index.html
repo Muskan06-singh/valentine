@@ -1,53 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Sai 💕</title>
 
 <link rel="stylesheet" href="style.css">
 
-<!-- scribble bold font -->
+<!-- scribble/cursive bold font -->
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
 
 <!-- confetti -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
-
 <body>
 
-<!-- floating layer -->
+<!-- Layer for floating emojis -->
 <div id="floating-layer"></div>
 
-<!-- MAIN -->
+<!-- MAIN CONTAINER -->
 <div id="app">
 
-<!-- FIRST PAGE -->
-<section id="valentine-page" class="page active">
-  <h1 id="mainText"></h1>
+  <!-- 1) Valentine ask page -->
+  <section id="page-ask" class="page active">
+    <h1 id="askText"></h1>
 
-  <div class="btns">
-    <button id="yesBtn" class="yes">YES 💘</button>
-    <button id="noBtn" class="no">NO 💔</button>
-  </div>
+    <div class="btns">
+      <button id="yesBtn" class="btn-yes">YES 💘</button>
+      <button id="noBtn" class="btn-no">NO 💔</button>
+    </div>
 
-  <img id="mainGif" class="gif hidden">
-</section>
+    <img id="askGif" class="main-gif hidden" />
+  </section>
 
-<!-- CALENDAR -->
-<section id="calendar-page" class="page">
-  <button id="backBtn">⬅ Back to Valentine</button>
-  <h2 class="title">Our Love Week 💕</h2>
-  <div id="calendar"></div>
-</section>
+  <!-- 2) Calendar page -->
+  <section id="page-calendar" class="page">
+    <button id="btn-back-home" class="btn-back">⬅ Back to Valentine</button>
+    <h2 class="title-glow">Our Love Week 💕</h2>
+    <div id="calendar"></div>
+  </section>
 
-<!-- DAY PAGE -->
-<section id="day-page" class="page">
-  <button id="backCal">⬅ Back to Calendar</button>
-  <img id="dayGif" class="gif">
-  <div id="poemBox"></div>
-  <div id="imagesBox"></div>
-</section>
+  <!-- 3) Day page -->
+  <section id="page-day" class="page">
+    <button id="btn-back-cal" class="btn-back">⬅ Back to Calendar</button>
+    <img id="dayGif" class="main-gif" />
+    <div id="poemBox"></div>
+    <div id="imagesBox"></div>
+  </section>
+
+  <!-- 4) Sad / NO path page -->
+  <section id="page-sad" class="page dark">
+    <img src="assets/gifs/sad.gif" class="main-gif" />
+    <h2 id="sadText"></h2>
+    <button id="btn-think" class="btn-think">❤️ Think again my Love</button>
+  </section>
 
 </div>
 
