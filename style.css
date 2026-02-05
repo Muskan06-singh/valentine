@@ -13,19 +13,32 @@ display:flex;
 flex-direction:column;
 align-items:center;
 justify-content:center;
+position:relative;
+z-index:2;
 }
 
 .hidden{display:none}
+
+/* ALL TEXT BOUNCY + GLOW */
+h1,h2,button{
+animation:textBounce 2s infinite;
+text-shadow:
+0 0 8px #fff,
+0 0 18px hotpink,
+0 0 30px deeppink;
+}
+
+@keyframes textBounce{
+0%{transform:translateY(0)}
+50%{transform:translateY(-8px)}
+100%{transform:translateY(0)}
+}
 
 /* TEXT */
 h1,h2{
 font-size:55px;
 color:black;
 font-weight:bold;
-text-shadow:
-0 0 5px #fff,
-0 0 15px #ffb6c1,
-0 0 25px hotpink;
 }
 
 /* BUTTONS */
@@ -107,11 +120,14 @@ font-size:20px;
 cursor:pointer;
 }
 
-/* rain */
+/* 🌧️ FULL SCREEN RAIN */
 .rain{
 position:fixed;
+top:-10vh;
 font-size:45px;
 animation:fall 8s linear infinite;
+pointer-events:none;
+z-index:1;
 }
 
 @keyframes fall{
@@ -119,16 +135,39 @@ from{transform:translateY(-10vh);}
 to{transform:translateY(110vh);}
 }
 
-/* heartbreak */
+/* 💔 FULL SCREEN BROKEN HEART */
 .broken{
 position:fixed;
+top:-10vh;
 font-size:70px;
 animation:fallRotate 3s linear infinite;
+pointer-events:none;
+z-index:1;
 }
 
 @keyframes fallRotate{
 from{transform:translateY(-10vh) rotate(0);}
 to{transform:translateY(110vh) rotate(360deg);}
+}
+
+/* SAD FULL DARK SCREEN */
+#sad-screen{
+background:black;
+position:fixed;
+top:0;
+left:0;
+width:100vw;
+height:100vh;
+z-index:5;
+}
+
+/* SAD TEXT WHITE GLOW */
+#sad-screen h2{
+color:white;
+text-shadow:
+0 0 10px #fff,
+0 0 25px #ffffff,
+0 0 45px #ffffff;
 }
 
 /* corner hearts */
@@ -141,3 +180,4 @@ animation:beat 1s infinite;
 .tr{top:10px;right:10px}
 .bl{bottom:10px;left:10px}
 .br{bottom:10px;right:10px}
+
