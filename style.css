@@ -1,4 +1,4 @@
-body{
+body {
   margin:0;
   background:#ffd6e8;
   font-family:'Shadows Into Light', cursive;
@@ -6,8 +6,10 @@ body{
   text-align:center;
 }
 
-.hidden{ display:none; }
+/* Hidden */
+.hidden { display:none; }
 
+/* TITLE */
 #title{
   font-size:60px;
   margin-top:120px;
@@ -16,6 +18,7 @@ body{
   text-shadow: 0 0 5px #fff, 0 0 15px #ff69b4, 0 0 25px #ff1493;
 }
 
+/* BUTTONS */
 .btns button{
   padding:20px 40px;
   font-size:22px;
@@ -28,6 +31,7 @@ body{
 .yes{ background:white; color:red; animation:beat 1s infinite; }
 .no{ background:white; color:black; position:relative; }
 
+/* BEAT ANIMATION */
 @keyframes beat{
   0%{transform:scale(1)}
   50%{transform:scale(1.15)}
@@ -59,9 +63,10 @@ body{
   font-weight:bold;
 }
 
-/* GIF */
+/* GIFS */
 .centerGif{ width:300px; margin-top:40px; }
-.bottomGif{ width:250px; margin-top:20px; }
+#teaseGif{ width:200px; margin-top:20px; }
+#teaseText{ color:black; font-size:20px; margin-top:10px; font-weight:bold; }
 
 /* CALENDAR */
 #calendarScreen{ display:flex; flex-direction:column; align-items:center; justify-content:center; margin-top:50px; }
@@ -171,14 +176,3 @@ body{
   0%,100%{transform:translateY(0);}
   50%{transform:translateY(-15px);}
 }
-
-#teaseContainer{
-  text-align:center;
-  margin-top:20px;
-}
-#teaseText{
-  font-size:24px;
-  font-weight:bold;
-  color:red;
-  text-shadow:0 0 10px pink;
-  }
