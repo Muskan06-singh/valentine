@@ -36,22 +36,15 @@ const poems={
 14:`❤️ Sai, this is our forever...\nNot just today...\nThrough smiles and storms...\nI choose you endlessly 💖`
 };
 
-// --- SONGS ---
-const giftLyrics = {
-7:`Roses bloom in skies so pink...\nEach petal whispers love we think...\nForever ours, my Valentine...`,
-8:`A ring, a vow, a loving gaze...\nEvery word I speak is true...\nI am yours eternally...`,
-9:`Chocolate sweet, like your kiss...\nEvery bite brings boundless bliss...\nOur love is cocoa warm and true...`,
-10:`Teddy soft, in arms so kind...\nEvery worry left behind...\nSleep wrapped in your gentle care...`,
-11:`Promises whispered, vows unseen...\nThrough the laughter, through the pain...\nHearts bound tightly, spirits free...`,
-12:`Hugs that heal, hands that guide...\nSilence speaks the words we feel...\nPeace and joy in every beat...`,
-13:`Kisses soft, like morning dew...\nMoments twirl and hearts ignite...\nSai, you are my sweetest bliss...`,
-14:`Hearts collide in endless dance...\nLove eternal, not by chance...\nValentine’s forever, we unite...`
-};
-
 // --- EMOJI RAIN ---
 let rainInterval, brokenInterval;
+
 function startRain(){
+  // Only run if we're not in sad or day screen or calendar screen
   stopRain();
+  if(main.classList.contains("hidden") && !happyScreen.classList.contains("hidden")) return;
+  if(sadScreen.classList.contains("hidden") && !dayScreen.classList.contains("hidden")) return;
+
   rainInterval=setInterval(()=>{
     const e=document.createElement("div");
     e.className="floating";
@@ -62,7 +55,9 @@ function startRain(){
     setTimeout(()=>e.remove(),5000);
   },150);
 }
-function stopRain(){clearInterval(rainInterval);emojiRain.innerHTML="";}
+
+function stopRain(){clearInterval(rainInterval); emojiRain.innerHTML="";}
+
 function brokenRain(){
   return setInterval(()=>{
     const b=document.createElement("div");
@@ -83,7 +78,7 @@ function typeWriter(el,text,speed=40,callback,fontSize=28){
   const timer=setInterval(()=>{
     el.innerHTML+=text[i];
     i++;
-    el.style.fontSize=(fontSize+i*0.2)+"px";
+    el.style.fontSize=(fontSize+i*0.1)+"px";
     if(i>=text.length){ clearInterval(timer); if(callback) callback();}
   },speed);
 }
@@ -100,7 +95,6 @@ noBtn.onclick = ()=>{
     teaseGif.classList.remove("hidden");
     teaseText.innerHTML="";
     typeWriter(teaseText,"You are already mine 🐒",50);
-    // NO button runs away continuously
     setInterval(()=>{
       noBtn.style.position="absolute";
       noBtn.style.left=Math.random()*80+"vw";
@@ -146,12 +140,15 @@ yesBtn.onclick = ()=>{
 document.getElementById("openCal").onclick = ()=>{
   happyScreen.classList.add("hidden");
   calendarScreen.classList.remove("hidden");
+  backToMain.style.display="block";
   loadCalendar();
-  startRain();
+  stopRain(); // stop hearts/daisies
 };
+
 backToMain.onclick = ()=>{
   calendarScreen.classList.add("hidden");
   main.classList.remove("hidden");
+  backToMain.style.display="none";
   startRain();
 };
 
@@ -175,7 +172,7 @@ function loadCalendar(){
 function openDay(day){
   calendarScreen.classList.add("hidden");
   dayScreen.classList.remove("hidden");
-  stopRain();
+  stopRain(); // no daisies/hearts
   dayGif.src=`assets/gifs/day${day}.gif`;
   giftButtons.classList.remove("hidden");
   images.innerHTML="";
@@ -198,27 +195,6 @@ function openDay(day){
       })();
     },1000);
   }
-
-  gift1Btn.onclick = ()=>{
-    let count=0;
-    const emoji = ["🌹","💍","🍫","🧸","💌","🤗","😘","❤️"];
-    const interval = setInterval(()=>{
-      const ic=document.createElement("div");
-      ic.className="floating";
-      ic.style.fontSize="60px";
-      ic.innerHTML = emoji[day-7];
-      ic.style.left = Math.random()*100+"vw";
-      ic.style.transform = `rotate(${Math.random()*60-30}deg)`;
-      document.body.appendChild(ic);
-      setTimeout(()=>ic.remove(),8000);
-      count++;
-      if(count>=40){ clearInterval(interval); }
-    },120);
-  }
-
-  gift2Btn.onclick = ()=>{
-    typeWriter(lyrics,giftLyrics[day],30);
-  }
 }
 
 // --- BACK BUTTON ---
@@ -226,5 +202,4 @@ backBtn.onclick = ()=>{
   dayScreen.classList.add("hidden");
   calendarScreen.classList.remove("hidden");
   document.querySelectorAll(".corner").forEach(e=>e.remove());
-  startRain();
 };
