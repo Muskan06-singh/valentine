@@ -1,124 +1,153 @@
 body{
-margin:0;
-background:#ffd6e8;
-font-family:'Caveat',cursive;
-overflow:hidden;
+  margin:0;
+  background:#ffd6e8;
+  font-family:'Caveat',cursive;
+  overflow:hidden;
+  text-align:center;
 }
 
-.page{display:none;text-align:center;padding-top:70px}
-.active{display:block}
+.page{ display:none; padding-top:70px; }
+.page.active{ display:block; }
 
 h1,h2{
-font-size:52px;
-color:black;
-text-shadow:0 0 10px white,0 0 25px pink;
+  font-size:50px;
+  font-weight:bold;
+  color:black;
+  text-shadow:0 0 8px white, 0 0 20px hotpink;
 }
 
-.title{font-size:45px}
+.title-glow{
+  animation:glow 2s infinite alternate;
+}
 
-.btns{margin-top:30px}
+@keyframes glow{
+  from{ text-shadow:0 0 8px white; }
+  to{ text-shadow:0 0 30px hotpink; }
+}
+
+.btns{ margin-top:30px; }
 
 button{
-padding:18px 35px;
-font-size:22px;
-border:none;
-border-radius:40px;
-cursor:pointer;
-font-family:'Caveat',cursive;
-box-shadow:0 0 15px pink;
+  padding:18px 40px;
+  font-size:22px;
+  border:none;
+  border-radius:40px;
+  cursor:pointer;
+  font-family:'Caveat',cursive;
+  box-shadow:0 0 15px pink;
+  background:white;
 }
 
-.yes{
-background:white;
-color:red;
-animation:beat 1s infinite;
-}
-
-.no{
-background:white;
-color:black;
+.btn-yes{
+  color:red;
+  animation:beat 1s infinite;
 }
 
 @keyframes beat{
-0%{transform:scale(1)}
-50%{transform:scale(1.15)}
-100%{transform:scale(1)}
+  0%{ transform:scale(1); }
+  50%{ transform:scale(1.15); }
+  100%{ transform:scale(1); }
 }
 
-.gif{
-width:260px;
-margin-top:20px;
+.btn-no{
+  color:black;
 }
 
-.hidden{display:none}
+.btn-back{
+  margin-bottom:20px;
+}
 
-/* floating emojis */
+.btn-think{
+  margin-top:30px;
+  padding:18px 40px;
+  font-size:22px;
+  border-radius:60px;
+}
+
+.main-gif{
+  width:260px;
+  margin:20px auto;
+}
+
+.hidden{ display:none; }
+
+/* Floating emojis */
 .float{
-position:fixed;
-font-size:38px;
-animation:floatUp linear forwards;
+  position:fixed;
+  font-size:40px;
+  animation:floatUp linear forwards;
 }
+
 @keyframes floatUp{
-0%{transform:translateY(100vh) rotate(0deg)}
-100%{transform:translateY(-10vh) rotate(360deg)}
+  0%{ transform:translateY(100vh) rotate(0deg); }
+  100%{ transform:translateY(-10vh) rotate(360deg); }
 }
 
-/* broken hearts */
+/* Broken hearts */
 .broken{
-position:fixed;
-font-size:60px;
-animation:fall linear forwards;
-}
-@keyframes fall{
-0%{transform:translateY(-10vh) rotate(0deg)}
-100%{transform:translateY(110vh) rotate(360deg)}
+  position:fixed;
+  font-size:65px;
+  animation:fallDown linear forwards;
 }
 
-/* calendar */
+@keyframes fallDown{
+  0%{ transform:translateY(-10vh) rotate(0deg); }
+  100%{ transform:translateY(110vh) rotate(360deg); }
+}
+
+/* Calendar styling */
 #calendar{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:20px;
-max-width:600px;
-margin:auto;
-margin-top:30px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+  max-width:600px;
+  margin:auto;
+  margin-top:30px;
 }
 
 .day{
-background:white;
-padding:22px;
-border-radius:20px;
-font-size:22px;
-cursor:pointer;
-box-shadow:0 0 15px pink;
-animation:breath 2s infinite;
+  background:white;
+  padding:22px;
+  border-radius:20px;
+  font-size:22px;
+  cursor:pointer;
+  box-shadow:0 0 15px pink;
+  animation:breath 2s infinite;
 }
 
 @keyframes breath{
-0%{transform:scale(1)}
-50%{transform:scale(1.07)}
-100%{transform:scale(1)}
+  0%{ transform:scale(1); }
+  50%{ transform:scale(1.07); }
+  100%{ transform:scale(1); }
 }
 
 .locked{
-opacity:.4;
-animation:none;
+  opacity:.35;
+  pointer-events:none;
+  animation:none;
 }
 
-/* poem */
+/* Poem */
 #poemBox{
-font-size:28px;
-color:black;
-text-shadow:0 0 8px white;
-margin-top:20px;
-min-height:220px;
+  font-size:28px;
+  color:black;
+  text-shadow:0 0 8px white;
+  margin-top:20px;
+  white-space:pre-line;
+  min-height:220px;
 }
 
-/* images */
+/* Images */
 #imagesBox img{
-width:140px;
-margin:8px;
-border-radius:14px;
-box-shadow:0 0 10px pink;
+  width:140px;
+  margin:8px;
+  border-radius:14px;
+  box-shadow:0 0 10px pink;
 }
 
+/* Dark page (sad) */
+.dark{
+  background:black;
+  color:white;
+  height:100vh;
+}
