@@ -1,157 +1,106 @@
 body{
 margin:0;
-background:#ffd6ea;
-font-family:'Caveat',cursive;
-overflow-x:hidden;
+font-family:'Segoe UI',cursive;
+background:#ffd6e8;
+overflow:hidden;
 text-align:center;
 }
 
-/* center everything */
-#main{
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-}
+.page{display:none; padding-top:80px;}
+.page.active{display:block;}
 
-/* MAIN TEXT */
-#mainText{
-font-size:55px;
-font-weight:bold;
+h1,h2{
+font-size:40px;
 color:black;
-text-shadow:0 0 8px white,0 0 20px pink;
-animation:bounce 2s infinite;
+font-weight:bold;
+text-shadow:0 0 10px white,0 0 20px hotpink;
 }
 
-/* bounce */
-@keyframes bounce{
-0%,100%{transform:translateY(0)}
-50%{transform:translateY(-10px)}
+.glow{
+animation:glow 2s infinite alternate;
+}
+@keyframes glow{
+from{text-shadow:0 0 10px white;}
+to{text-shadow:0 0 25px hotpink;}
 }
 
-/* buttons */
-.btns button{
-padding:18px 45px;
+.btns button,button{
+padding:18px 40px;
 font-size:22px;
-margin:15px;
 border:none;
-border-radius:30px;
+border-radius:40px;
+margin:15px;
 cursor:pointer;
+background:white;
 }
 
 #yesBtn{
-background:white;
-color:red;
 animation:beat 1s infinite;
+color:red;
 }
-
-#noBtn{
-background:white;
-color:black;
-}
-
-/* heart beat */
 @keyframes beat{
-0%,100%{transform:scale(1)}
+0%{transform:scale(1)}
 50%{transform:scale(1.15)}
+100%{transform:scale(1)}
 }
 
-/* gif */
-.gif{
+.mainGif{
 width:260px;
-margin:15px;
+margin:20px auto;
+display:block;
 }
 
-/* emoji rain layer */
-#emoji-layer{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-pointer-events:none;
-z-index:999;
-}
-
-/* sad screen */
-#sadScreen{
+.dark{
 background:black;
 color:white;
 height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
 }
 
-#sadText{
-font-size:35px;
-color:white;
-text-shadow:0 0 10px white;
-}
-
-/* heart button */
-#thinkBtn{
-margin-top:30px;
-padding:20px 40px;
-font-size:20px;
+#againBtn{
 background:white;
-border-radius:50px;
-border:none;
-cursor:pointer;
+color:black;
+font-size:18px;
+border-radius:60px;
+padding:15px 30px;
+}
+
+/* emoji rain */
+.emoji{
+position:fixed;
+top:-10%;
+font-size:60px;
+animation:fall linear forwards;
+}
+
+@keyframes fall{
+to{transform:translateY(120vh) rotate(360deg);}
 }
 
 /* calendar */
-#calendarPage{
-padding-top:60px;
-}
-
 #calendar{
 display:grid;
 grid-template-columns:repeat(4,1fr);
-gap:20px;
+gap:15px;
 max-width:600px;
-margin:auto;
+margin:30px auto;
 }
 
 .day{
 background:white;
-padding:25px;
+padding:20px;
 border-radius:20px;
 font-size:20px;
 cursor:pointer;
+box-shadow:0 0 15px pink;
 animation:beat 2s infinite;
 }
 
 .locked{
-opacity:0.3;
+opacity:.3;
 pointer-events:none;
 }
 
-/* day page */
-#dayPage{
-padding:20px;
+#backCal,#backHome{
+margin-top:30px;
 }
 
-#poemText{
-font-size:28px;
-color:black;
-text-shadow:0 0 6px white;
-white-space:pre-line;
-margin:20px;
-}
-
-#images img{
-width:160px;
-margin:10px;
-border-radius:15px;
-}
-
-.hidden{display:none}
-
-/* responsive */
-@media(max-width:600px){
-#mainText{font-size:34px}
-.day{padding:18px;font-size:16px}
-}
