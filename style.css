@@ -1,106 +1,124 @@
 body{
 margin:0;
-font-family:'Segoe UI',cursive;
 background:#ffd6e8;
+font-family:'Caveat',cursive;
 overflow:hidden;
-text-align:center;
 }
 
-.page{display:none; padding-top:80px;}
-.page.active{display:block;}
+.page{display:none;text-align:center;padding-top:70px}
+.active{display:block}
 
 h1,h2{
-font-size:40px;
+font-size:52px;
 color:black;
-font-weight:bold;
-text-shadow:0 0 10px white,0 0 20px hotpink;
+text-shadow:0 0 10px white,0 0 25px pink;
 }
 
-.glow{
-animation:glow 2s infinite alternate;
-}
-@keyframes glow{
-from{text-shadow:0 0 10px white;}
-to{text-shadow:0 0 25px hotpink;}
-}
+.title{font-size:45px}
 
-.btns button,button{
-padding:18px 40px;
+.btns{margin-top:30px}
+
+button{
+padding:18px 35px;
 font-size:22px;
 border:none;
 border-radius:40px;
-margin:15px;
 cursor:pointer;
-background:white;
+font-family:'Caveat',cursive;
+box-shadow:0 0 15px pink;
 }
 
-#yesBtn{
-animation:beat 1s infinite;
+.yes{
+background:white;
 color:red;
+animation:beat 1s infinite;
 }
+
+.no{
+background:white;
+color:black;
+}
+
 @keyframes beat{
 0%{transform:scale(1)}
 50%{transform:scale(1.15)}
 100%{transform:scale(1)}
 }
 
-.mainGif{
+.gif{
 width:260px;
-margin:20px auto;
-display:block;
+margin-top:20px;
 }
 
-.dark{
-background:black;
-color:white;
-height:100vh;
-}
+.hidden{display:none}
 
-#againBtn{
-background:white;
-color:black;
-font-size:18px;
-border-radius:60px;
-padding:15px 30px;
-}
-
-/* emoji rain */
-.emoji{
+/* floating emojis */
+.float{
 position:fixed;
-top:-10%;
+font-size:38px;
+animation:floatUp linear forwards;
+}
+@keyframes floatUp{
+0%{transform:translateY(100vh) rotate(0deg)}
+100%{transform:translateY(-10vh) rotate(360deg)}
+}
+
+/* broken hearts */
+.broken{
+position:fixed;
 font-size:60px;
 animation:fall linear forwards;
 }
-
 @keyframes fall{
-to{transform:translateY(120vh) rotate(360deg);}
+0%{transform:translateY(-10vh) rotate(0deg)}
+100%{transform:translateY(110vh) rotate(360deg)}
 }
 
 /* calendar */
 #calendar{
 display:grid;
 grid-template-columns:repeat(4,1fr);
-gap:15px;
+gap:20px;
 max-width:600px;
-margin:30px auto;
+margin:auto;
+margin-top:30px;
 }
 
 .day{
 background:white;
-padding:20px;
+padding:22px;
 border-radius:20px;
-font-size:20px;
+font-size:22px;
 cursor:pointer;
 box-shadow:0 0 15px pink;
-animation:beat 2s infinite;
+animation:breath 2s infinite;
+}
+
+@keyframes breath{
+0%{transform:scale(1)}
+50%{transform:scale(1.07)}
+100%{transform:scale(1)}
 }
 
 .locked{
-opacity:.3;
-pointer-events:none;
+opacity:.4;
+animation:none;
 }
 
-#backCal,#backHome{
-margin-top:30px;
+/* poem */
+#poemBox{
+font-size:28px;
+color:black;
+text-shadow:0 0 8px white;
+margin-top:20px;
+min-height:220px;
+}
+
+/* images */
+#imagesBox img{
+width:140px;
+margin:8px;
+border-radius:14px;
+box-shadow:0 0 10px pink;
 }
 
