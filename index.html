@@ -7,65 +7,53 @@
 
 <link rel="stylesheet" href="style.css">
 
-<!-- Scribble bold font -->
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+<!-- cursive font -->
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Caveat:wght@700&display=swap" rel="stylesheet">
 
-<!-- Canvas confetti -->
+<!-- confetti library -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 
 <body>
 
-<!-- 🌼❤️ Rain layer -->
-<div id="rain-layer"></div>
+<!-- floating emoji layer -->
+<div id="emoji-layer"></div>
 
-<!-- MAIN -->
-<div id="app">
+<!-- FIRST SCREEN -->
+<div id="main">
+<h1 id="mainText"></h1>
 
-  <!-- QUESTION -->
-  <div id="question-screen" class="screen">
-    <h1 id="questionText"></h1>
-
-    <div class="buttons">
-      <button id="yesBtn">YES 💘</button>
-      <button id="noBtn">NO 💔</button>
-    </div>
-  </div>
-
-  <!-- SAD SCREEN -->
-  <div id="sad-screen" class="screen hidden">
-    <img id="sadGif" class="gif">
-    <h2 id="sadText"></h2>
-
-    <button id="thinkBtn" class="heart-btn">❤️ Think again my Love ❤️</button>
-  </div>
-
-  <!-- YES SCREEN -->
-  <div id="yes-screen" class="screen hidden">
-    <img src="assets/gifs/happy.gif" class="gif">
-    <h2 id="yesText"></h2>
-    <button id="openCal">Open Love Calendar 💌</button>
-  </div>
-
-  <!-- CALENDAR -->
-  <div id="calendar-screen" class="screen hidden">
-    <h2 class="title">Our Love Week 💖</h2>
-    <div id="calendar"></div>
-
-    <button id="backHome" class="backBtn">⬅ Back to Valentine Page</button>
-  </div>
-
-  <!-- DAY PAGE -->
-  <div id="day-screen" class="screen hidden">
-    <img id="dayGif" class="gif">
-    <h2 id="poem"></h2>
-
-    <div id="images"></div>
-
-    <button id="backCal" class="backBtn">⬅ Back to Calendar</button>
-  </div>
-
+<div class="btns">
+<button id="yesBtn">YES 💘</button>
+<button id="noBtn">NO 💔</button>
 </div>
+
+<img id="mainGif" class="gif hidden">
+</div>
+
+<!-- SAD SCREEN -->
+<div id="sadScreen" class="hidden">
+<h2 id="sadText"></h2>
+<button id="thinkBtn">❤️ Think again my Love</button>
+</div>
+
+<!-- CALENDAR -->
+<div id="calendarPage" class="hidden">
+<h2 class="glow">Our Love Week 💕</h2>
+<div id="calendar"></div>
+</div>
+
+<!-- DAY PAGE -->
+<div id="dayPage" class="hidden">
+<img id="dayGif" class="gif">
+<h2 id="poemText"></h2>
+<div id="images"></div>
+<button id="backCal">⬅ Back to Calendar</button>
+</div>
+
+<!-- MUSIC -->
+<audio id="happyMusic" src="assets/music/happy.mp3" loop></audio>
+<audio id="sadMusic" src="assets/music/sad.mp3"></audio>
 
 <script src="script.js"></script>
 </body>
