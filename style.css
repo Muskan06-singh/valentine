@@ -1,173 +1,240 @@
-body{
-margin:0;
-background:#ffd6e8;
-font-family:cursive;
-overflow:hidden;
-text-align:center;
+/* ------------------------
+   BODY
+------------------------ */
+body {
+  margin:0;
+  background:#ffd6e8;
+  font-family:'Shadows Into Light', cursive;
+  overflow:hidden;
+  text-align:center;
+  position:relative;
 }
 
-.hidden{display:none}
+/* ------------------------
+   HIDDEN ELEMENTS
+------------------------ */
+.hidden { display:none; }
 
-/* TITLE */
-#title{
-font-size:60px;
-margin-top:120px;
-color:black;
-font-weight:bold;
-text-shadow:
-0 0 5px #fff,
-0 0 10px #ff69b4,
-0 0 20px #ff1493;
+/* ------------------------
+   TITLE
+------------------------ */
+#title {
+  font-size:50px;
+  color:black;
+  font-weight:bold;
+  text-shadow: 0 0 5px #fff, 0 0 15px #ff69b4, 0 0 25px #ff1493;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
 }
 
-/* BUTTONS */
+/* ------------------------
+   BUTTONS
+------------------------ */
+.btns {
+  position:absolute;
+  top:65%;
+  left:50%;
+  transform:translateX(-50%);
+}
 .btns button{
-padding:20px 40px;
-font-size:22px;
-margin:20px;
-border:none;
-border-radius:40px;
-cursor:pointer;
-font-weight:bold;
+  padding:20px 40px;
+  font-size:22px;
+  margin:20px;
+  border:none;
+  border-radius:40px;
+  cursor:pointer;
+  font-weight:bold;
+  box-shadow:0 0 10px #ff69b4;
 }
+.yes{ background:white; color:red; animation:beat 1s infinite; }
+.no{ background:white; color:black; }
 
-.yes{
-background:white;
-color:red;
-animation:beat 1s infinite;
-}
-
-.no{background:white;color:black;}
-
+/* ------------------------
+   BEAT ANIMATION
+------------------------ */
 @keyframes beat{
-0%{transform:scale(1)}
-50%{transform:scale(1.15)}
-100%{transform:scale(1)}
+  0%{transform:scale(1)}
+  50%{transform:scale(1.15)}
+  100%{transform:scale(1)}
 }
 
-/* SAD */
+/* ------------------------
+   SAD SCREEN
+------------------------ */
 #sadScreen{
-background:black;
-color:white;
-height:100vh;
-padding-top:100px;
+  background:black;
+  color:white;
+  height:100vh;
+  padding-top:20%;
 }
-
 #sadText{
-font-size:34px;
-color:white;
-text-shadow:0 0 10px white;
+  font-size:28px;
+  color:white;
+  text-shadow:0 0 10px white;
+  margin-top:20px;
 }
-
 #thinkBtn{
-margin-top:30px;
-font-size:20px;
-padding:25px 35px;
-background:white;
-border:none;
-cursor:pointer;
-border-radius:50%;
-width:180px;
-height:180px;
-font-weight:bold;
+  margin-top:30px;
+  font-size:20px;
+  padding:20px 30px;
+  background:white;
+  border:none;
+  cursor:pointer;
+  border-radius:50%;
+  width:180px;
+  height:180px;
+  font-weight:bold;
 }
 
-/* GIF */
-.centerGif{
-width:300px;
-margin-top:40px;
+/* ------------------------
+   HAPPY SCREEN
+------------------------ */
+.glow {
+  font-size:28px;
+  color:#ff1493;
+  text-shadow:0 0 10px #fff,0 0 20px #ff69b4;
 }
 
-/* CALENDAR */
+/* ------------------------
+   GIFS
+------------------------ */
+.centerGif{ width:300px; margin-top:20px; }
+
+/* ------------------------
+   CALENDAR
+------------------------ */
+#calendarScreen{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
+}
 #calendar{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:20px;
-max-width:700px;
-margin:120px auto;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+  width:60%;
+  max-width:600px;
+  animation:heartbeat 2s infinite;
 }
-
 .day{
-background:white;
-padding:30px;
-border-radius:20px;
-font-size:22px;
-cursor:pointer;
-box-shadow:0 0 20px pink;
-animation:pulse 2s infinite;
+  background:white;
+  padding:40px;
+  border-radius:20px;
+  font-size:28px;
+  cursor:pointer;
+  box-shadow:0 0 20px pink;
+  animation:pulse 2s infinite;
+  font-family:'Sacramento', cursive;
+}
+.locked{ opacity:0.3; cursor:not-allowed; }
+
+#backToMain{
+  margin-top:30px;
+  padding:15px 35px;
+  font-size:18px;
+  border:none;
+  border-radius:20px;
+  cursor:pointer;
+  box-shadow:0 0 10px pink;
+  background:white;
 }
 
-@keyframes pulse{
-0%{transform:scale(1)}
-50%{transform:scale(1.07)}
-100%{transform:scale(1)}
-}
-
-.locked{
-opacity:0.3;
-cursor:not-allowed;
-}
-
-/* POEM */
+/* ------------------------
+   POEM & IMAGES
+------------------------ */
 #poem{
-font-size:28px;
-color:black;
-font-weight:bold;
-text-shadow:0 0 10px #ff69b4;
-width:80%;
-margin:30px auto;
+  font-size:24px;
+  color:black;
+  font-weight:bold;
+  text-shadow:0 0 10px #ff69b4;
+  width:80%;
+  margin:30px auto;
+  font-family:'Pacifico', cursive;
 }
-
-/* IMAGES */
 #images img{
-width:150px;
-margin:10px;
-border-radius:15px;
-display:none;
+  width:150px;
+  margin:10px;
+  border-radius:15px;
+  display:none;
 }
 
-/* BACK BTN */
+/* ------------------------
+   BACK BUTTON
+------------------------ */
 #backBtn{
-margin-top:20px;
-padding:15px 30px;
-font-size:18px;
-background:white;
-border:none;
-border-radius:20px;
-cursor:pointer;
-box-shadow:0 0 10px pink;
+  margin-top:20px;
+  padding:15px 30px;
+  font-size:18px;
+  background:white;
+  border:none;
+  border-radius:20px;
+  cursor:pointer;
+  box-shadow:0 0 10px pink;
 }
 
-/* EMOJI RAIN */
+/* ------------------------
+   EMOJI RAIN
+------------------------ */
 .floating{
-position:fixed;
-font-size:45px;
-animation:float 8s linear infinite;
+  position:fixed;
+  font-size:45px;
+  animation:float 8s linear infinite;
+  pointer-events:none;
+  user-select:none;
 }
-
-@keyframes float{
-from{transform:translateY(100vh)}
-to{transform:translateY(-10vh)}
-}
+@keyframes float{ from{transform:translateY(100vh)} to{transform:translateY(-10vh)} }
 
 .broken{
-position:fixed;
-font-size:90px;
-animation:fall 3s linear infinite;
+  position:fixed;
+  font-size:80px;
+  animation:fall 3s linear infinite;
+  transform-origin:center;
+  pointer-events:none;
 }
+@keyframes fall{ from{top:-10%; transform:rotate(0deg);} to{top:110%; transform:rotate(360deg);} }
 
-@keyframes fall{
-from{top:-10%}
-to{top:110%}
-}
-
-/* CORNER HEART */
+/* ------------------------
+   CORNER HEARTS
+------------------------ */
 .corner{
-position:fixed;
-font-size:55px;
-animation:beat 1s infinite;
+  position:fixed;
+  font-size:80px;
+  animation:beat 1s infinite;
+  pointer-events:none;
 }
 .tl{top:10px;left:10px}
 .tr{top:10px;right:10px}
 .bl{bottom:10px;left:10px}
 .br{bottom:10px;right:10px}
+
+/* ------------------------
+   HEARTBEAT ANIMATION
+------------------------ */
+@keyframes heartbeat{
+  0%{transform:scale(1);}
+  25%{transform:scale(1.05);}
+  50%{transform:scale(1);}
+  75%{transform:scale(1.05);}
+  100%{transform:scale(1);}
+}
+
+/* ------------------------
+   DAY POP ANIMATION
+------------------------ */
+@keyframes pulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.07)}
+  100%{transform:scale(1)}
+}
+
+/* ------------------------
+   TITLE BOUNCE
+------------------------ */
+@keyframes bounce {
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-15px);}
+                 }
