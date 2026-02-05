@@ -12,7 +12,7 @@ const thinkBtn = document.getElementById("thinkBtn");
 const happyMusic = document.getElementById("happyMusic");
 const sadMusic = document.getElementById("sadMusic");
 const emojiRain = document.getElementById("emojiRain");
-const mainGif = document.getElementById("mainGif");
+const teaseGif = document.getElementById("teaseGif");
 const teaseText = document.getElementById("teaseText");
 const backToMain = document.getElementById("backToMain");
 const dayGif = document.getElementById("dayGif");
@@ -24,101 +24,28 @@ const images = document.getElementById("images");
 const lyrics = document.getElementById("lyrics");
 const backBtn = document.getElementById("backBtn");
 
-// --- POEMS (10-20 lines each) ---
+// --- POEMS ---
 const poems = {
-  7:`🌹 Sai, my rose blooms only for you,
-Your petals whisper secrets of love,
-Each morning greets me with your smile,
-Your laughter dances in the air,
-My heart beats in your rhythm,
-Every sigh carries your name,
-I bloom because of your light,
-Your eyes are the sun of my day,
-The world pales without your warmth,
-Forever I choose you, Sai,
-My Valentine, my rose, my everything 💖`,
-  8:`💍 Sai, today I gather courage,
-To vow my heart forever yours,
-Your gaze holds eternity,
-Every word you speak is a promise,
-My soul leaps at your smile,
-I bend, I bow to your grace,
-Rings and vows are just symbols,
-Your love is my eternal crown,
-I whisper your name in winds,
-And dream of our forever union 💞`,
-  9:`🍫 Sai, you taste like sweetest chocolate,
-Every hug melts my fears away,
-Your laughter sprinkles magic,
-My heart savors each moment,
-Life becomes creamy and rich,
-Moments coated in your love,
-Every glance like sugar dust,
-Even darkness tastes bright,
-Because of your glow, Sai,
-My sweetest chocolate of life 💝`,
-  10:`🧸 Sai, my comforting teddy,
-In your arms I find solace,
-Your hugs mend all storms,
-Your voice is my lullaby,
-Every heartbeat calms with you,
-Night whispers your name,
-Morning blooms with your touch,
-Safety dances in your warmth,
-Every fear dissolves in you,
-Forever I rest in your embrace 🤍`,
-  11:`💌 Sai, I promise through chaos and calm,
-Through laughter and tears,
-My soul chooses only you,
-Every breath carries devotion,
-Seasons change but not my love,
-Storms may come, yet I stay,
-My heart beats for your heartbeat,
-My hands reach only for yours,
-Every whisper, every silence,
-Echoes: I love you endlessly 💗`,
-  12:`🤗 Sai, your hugs heal my world,
-Presence like warm sunlight,
-Silence speaks our love,
-Moments linger in your arms,
-Peace wraps around my soul,
-Time slows in your gaze,
-Every heartbeat sings your name,
-Comfort dances in your touch,
-Love shelters and protects,
-Forever I rest in your warmth 💞`,
-  13:`😘 Sai, your smile kisses my soul,
-Eyes hold galaxies of magic,
-Every glance sparks love,
-Moments shimmer and shine,
-Your touch is gentle eternity,
-Your voice, a melody of peace,
-Love blooms in our silence,
-Every heartbeat beats together,
-Every sigh whispers forever,
-My sweetest kiss, my forever 💋`,
-  14:`❤️ Sai, our forever begins today,
-Not just in this moment,
-But in every lifetime ahead,
-Souls entwined in gentle rhythm,
-Love grows in every storm,
-Smiles echo in eternity,
-I choose you beyond all time,
-My heart beats only Sai,
-Forever and always my Valentine,
-My love, my soul, my everything 💖`
+7:`🌹 Sai, my rose blooms only for you,\nYour petals whisper secrets of love,\nEach morning greets me with your smile,\nYour laughter dances in the air,\nMy heart beats in your rhythm,\nEvery sigh carries your name,\nI bloom because of your light,\nYour eyes are the sun of my day,\nThe world pales without your warmth,\nForever I choose you, Sai,\nMy Valentine, my rose, my everything 💖`,
+8:`💍 Sai, today I gather courage,\nTo vow my heart forever yours,\nYour gaze holds eternity,\nEvery word you speak is a promise,\nMy soul leaps at your smile,\nI bend, I bow to your grace,\nRings and vows are just symbols,\nYour love is my eternal crown,\nI whisper your name in winds,\nAnd dream of our forever union 💞`,
+9:`🍫 Sai, you taste like sweetest chocolate,\nEvery hug melts my fears away,\nYour laughter sprinkles magic,\nMy heart savors each moment,\nLife becomes creamy and rich,\nMoments coated in your love,\nEvery glance like sugar dust,\nEven darkness tastes bright,\nBecause of your glow, Sai,\nMy sweetest chocolate of life 💝`,
+10:`🧸 Sai, my comforting teddy,\nIn your arms I find solace,\nYour hugs mend all storms,\nYour voice is my lullaby,\nEvery heartbeat calms with you,\nNight whispers your name,\nMorning blooms with your touch,\nSafety dances in your warmth,\nEvery fear dissolves in you,\nForever I rest in your embrace 🤍`,
+11:`💌 Sai, I promise through chaos and calm,\nThrough laughter and tears,\nMy soul chooses only you,\nEvery breath carries devotion,\nSeasons change but not my love,\nStorms may come, yet I stay,\nMy heart beats for your heartbeat,\nMy hands reach only for yours,\nEvery whisper, every silence,\nEchoes: I love you endlessly 💗`,
+12:`🤗 Sai, your hugs heal my world,\nPresence like warm sunlight,\nSilence speaks our love,\nMoments linger in your arms,\nPeace wraps around my soul,\nTime slows in your gaze,\nEvery heartbeat sings your name,\nComfort dances in your touch,\nLove shelters and protects,\nForever I rest in your warmth 💞`,
+13:`😘 Sai, your smile kisses my soul,\nEyes hold galaxies of magic,\nEvery glance sparks love,\nMoments shimmer and shine,\nYour touch is gentle eternity,\nYour voice, a melody of peace,\nLove blooms in our silence,\nEvery heartbeat beats together,\nEvery sigh whispers forever,\nMy sweetest kiss, my forever 💋`,
+14:`❤️ Sai, our forever begins today,\nNot just in this moment,\nBut in every lifetime ahead,\nSouls entwined in gentle rhythm,\nLove grows in every storm,\nSmiles echo in eternity,\nI choose you beyond all time,\nMy heart beats only Sai,\nForever and always my Valentine,\nMy love, my soul, my everything 💖`
 };
 
-// --- SONG LYRICS FOR GIFT2 (short example, can be extended to 100 lines per day) ---
+// --- SONG LYRICS FOR GIFT2 ---
 const giftLyrics = {
-  7:`Roses bloom in skies so pink,\nEach petal whispers love we think.\nYour smile, my guiding light,\nThrough the day and through the night.\nEvery heartbeat calls your name,\nLove in us will never wane.\nPetals fall, yet I rise,\nYour laughter bright, my sweetest prize.\nForever ours, my Valentine,\nForever yours, my heart entwined.\n`,
-  8:`A ring, a vow, a loving gaze,\nI promise you my endless days.\nEvery word I speak is true,\nForever I belong to you.\nHearts entwined in gentle light,\nOur souls together, shining bright.\nProposals whispered soft and near,\nI choose you always, my dear.\nYour love a song, my melody,\nForever bound, eternally.\n`,
-  9:`Chocolate sweet, like your kiss,\nEvery bite brings boundless bliss.\nMoments dipped in sugar skies,\nLove reflected in your eyes.\nEach hug, each laugh, a candy treat,\nWith you, my world is complete.\nMelting fears and soft delights,\nYou are my sweetest, endless nights.\nOur love is cocoa warm and true,\nForever I am yours, Sai, I do.\n`,
-  10:`Teddy soft, in arms so kind,\nEvery worry left behind.\nHugs that heal and whispers sweet,\nMoments where our hearts meet.\nSleep wrapped in your gentle care,\nMorning finds us always there.\nSoft and warm, our love remains,\nEvery heartbeat drops the chains.\nForever safe within your hold,\nOur story tender, yet so bold.\n`,
-  11:`Promises whispered, vows unseen,\nLove flowing through our in-between.\nEvery storm and every calm,\nYour presence, my eternal balm.\nThrough the laughter, through the pain,\nForever ours, love’s sweet refrain.\nHearts bound tightly, spirits free,\nI am yours eternally.\nEvery glance, a promise made,\nForever together, never fade.\n`,
-  12:`Hugs that heal, hands that guide,\nIn your warmth, I cannot hide.\nSilence speaks the words we feel,\nLove is ours, forever real.\nMoments pause in your embrace,\nTime slows down, we find our space.\nEvery sigh and tender touch,\nTells me, Sai, I love you much.\nPeace and joy in every beat,\nLife with you is oh so sweet.\n`,
-  13:`Kisses soft, like morning dew,\nEvery glance a spark anew.\nMoments twirl and hearts ignite,\nYour love is day, your love is night.\nSoft whispers in a gentle tone,\nTogether we are never alone.\nEvery laugh, a melody,\nEvery touch, a symphony.\nSai, you are my sweetest bliss,\nForever sealed with your soft kiss.\n`,
-  14:`Hearts collide in endless dance,\nLove eternal, not by chance.\nOur souls entwined, forever near,\nEvery heartbeat, every tear.\nCandles flicker, stars above,\nWhispered vows and endless love.\nTogether strong, together free,\nSai, you are my destiny.\nValentine’s forever, we unite,\nLove eternal, shining bright.\n`
+7:`Roses bloom in skies so pink,\nEach petal whispers love we think.\nYour smile, my guiding light,\nThrough the day and through the night.\nEvery heartbeat calls your name,\nLove in us will never wane.\nPetals fall, yet I rise,\nYour laughter bright, my sweetest prize.\nForever ours, my Valentine,\nForever yours, my heart entwined.\n`,
+8:`A ring, a vow, a loving gaze,\nI promise you my endless days.\nEvery word I speak is true,\nForever I belong to you.\nHearts entwined in gentle light,\nOur souls together, shining bright.\nProposals whispered soft and near,\nI choose you always, my dear.\nYour love a song, my melody,\nForever bound, eternally.\n`,
+9:`Chocolate sweet, like your kiss,\nEvery bite brings boundless bliss.\nMoments dipped in sugar skies,\nLove reflected in your eyes.\nEach hug, each laugh, a candy treat,\nWith you, my world is complete.\nMelting fears and soft delights,\nYou are my sweetest, endless nights.\nOur love is cocoa warm and true,\nForever I am yours, Sai, I do.\n`,
+10:`Teddy soft, in arms so kind,\nEvery worry left behind.\nHugs that heal and whispers sweet,\nMoments where our hearts meet.\nSleep wrapped in your gentle care,\nMorning finds us always there.\nSoft and warm, our love remains,\nEvery heartbeat drops the chains.\nForever safe within your hold,\nOur story tender, yet so bold.\n`,
+11:`Promises whispered, vows unseen,\nLove flowing through our in-between.\nEvery storm and every calm,\nYour presence, my eternal balm.\nThrough the laughter, through the pain,\nForever ours, love’s sweet refrain.\nHearts bound tightly, spirits free,\nI am yours eternally.\nEvery glance, a promise made,\nForever together, never fade.\n`,
+12:`Hugs that heal, hands that guide,\nIn your warmth, I cannot hide.\nSilence speaks the words we feel,\nLove is ours, forever real.\nMoments pause in your embrace,\nTime slows down, we find our space.\nEvery sigh and tender touch,\nTells me, Sai, I love you much.\nPeace and joy in every beat,\nLife with you is oh so sweet.\n`,
+13:`Kisses soft, like morning dew,\nEvery glance a spark anew.\nMoments twirl and hearts ignite,\nYour love is day, your love is night.\nSoft whispers in a gentle tone,\nTogether we are never alone.\nEvery laugh, a melody,\nEvery touch, a symphony.\nSai, you are my sweetest bliss,\nForever sealed with your soft kiss.\n`,
+14:`Hearts collide in endless dance,\nLove eternal, not by chance.\nOur souls entwined, forever near,\nEvery heartbeat, every tear.\nCandles flicker, stars above,\nWhispered vows and endless love.\nTogether strong, together free,\nSai, you are my destiny.\nValentine’s forever, we unite,\nLove eternal, shining bright.\n`
 };
 
 // --- EMOJI RAIN ---
@@ -165,35 +92,19 @@ function typeWriter(el,text,speed=40,callback,fontSize=28){
   },speed);
 }
 
-// --- MAIN TITLE ANIMATION ---
-const mainText="Sai… will you be my Valentine 💕";
-title.innerHTML="";
-mainText.split("").forEach((ch,i)=>{
-  const span=document.createElement("span");
-  span.textContent=ch;
-  span.style.display="inline-block";
-  span.style.transform="translateY(50px)";
-  span.style.opacity=0;
-  title.appendChild(span);
-  setTimeout(()=>{
-    span.style.transition="all 0.6s ease";
-    span.style.transform="translateY(0)";
-    span.style.opacity=1;
-    span.style.fontSize="50px";
-  }, i*100);
-});
-startRain();
+// --- MAIN TITLE ---
+typeWriter(title,"Sai… will you be my Valentine 💕",50,()=>{startRain();},36);
 
-// --- NO BUTTON ---
+// --- NO BUTTON LOGIC ---
 let noCount=0;
 noBtn.onclick = ()=>{
   noCount++;
   if(noCount>3){
-    mainGif.src="assets/gifs/tease.gif";
-    mainGif.classList.remove("hidden");
+    teaseGif.src="assets/gifs/tease.gif";
+    teaseGif.classList.remove("hidden");
     teaseText.innerHTML="";
-    typeWriter(teaseText,"Sai… you are mine ❤️",50);
-    // NO button keeps running away
+    typeWriter(teaseText,"You are already mine 🐒",50);
+    // Make NO button run away
     noBtn.style.position="absolute";
     noBtn.style.left=Math.random()*80+"vw";
     noBtn.style.top=Math.random()*60+"vh";
@@ -253,12 +164,7 @@ function loadCalendar(){
     const box=document.createElement("div");
     box.className="day";
     box.innerHTML="Feb "+d;
-    if(d!==7 && d!==14){
-      box.classList.add("locked");
-      box.onclick=()=>alert("Wait for our special day my love 💌");
-    }else{
-      box.onclick=()=>openDay(d);
-    }
+    box.onclick=()=>openDay(d);
     cal.appendChild(box);
   }
 }
