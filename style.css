@@ -1,13 +1,13 @@
 body{
 margin:0;
-background:#ffd6e8;
+background:#ffd6e8; /* keep pastel pink everywhere */
 font-family:'Caveat',cursive;
 overflow:hidden;
 text-align:center;
 transition:1s;
 }
 
-/* SCREENS */
+/* screens */
 .screen{
 min-height:100vh;
 display:flex;
@@ -20,19 +20,18 @@ z-index:2;
 
 .hidden{display:none}
 
-/* ALL TEXT INSANE GLOW + BOUNCE */
+/* TEXT GLOW + BOUNCE */
 h1,h2,button{
 animation:textBounce 2s infinite;
 text-shadow:
 0 0 10px #fff,
 0 0 20px hotpink,
-0 0 40px deeppink,
-0 0 80px #ff4da6;
+0 0 40px deeppink;
 }
 
 @keyframes textBounce{
 0%{transform:translateY(0)}
-50%{transform:translateY(-12px)}
+50%{transform:translateY(-10px)}
 100%{transform:translateY(0)}
 }
 
@@ -42,7 +41,7 @@ color:black;
 font-weight:bold;
 }
 
-/* BUTTONS */
+/* buttons */
 .buttons button{
 padding:20px 50px;
 font-size:24px;
@@ -50,12 +49,6 @@ margin:20px;
 border:none;
 border-radius:40px;
 cursor:pointer;
-transition:.3s;
-}
-
-.buttons button:hover{
-transform:scale(1.2);
-box-shadow:0 0 25px hotpink;
 }
 
 #yesBtn{
@@ -70,15 +63,15 @@ animation:beat 1s infinite;
 
 #noBtn{background:white}
 
-/* GIF */
+/* gif */
 .gif{
 width:320px;
 margin:20px;
 border-radius:20px;
-box-shadow:0 0 30px hotpink;
+box-shadow:0 0 25px hotpink;
 }
 
-/* CALENDAR */
+/* calendar */
 #calendar{
 display:grid;
 grid-template-columns:repeat(4,1fr);
@@ -87,11 +80,6 @@ background:white;
 padding:40px;
 border-radius:30px;
 box-shadow:0 0 60px hotpink;
-animation:breath 2s infinite;
-}
-
-@keyframes breath{
-50%{transform:scale(1.05);}
 }
 
 .day{
@@ -100,27 +88,11 @@ background:#ffe6f0;
 border-radius:20px;
 font-size:22px;
 cursor:pointer;
-transition:.3s;
-}
-
-.day:hover{
-transform:scale(1.1);
-box-shadow:0 0 20px hotpink;
 }
 
 .day.locked{opacity:.4}
 
-/* BACK BTN */
-.backBtn{
-margin-top:30px;
-padding:15px 30px;
-border:none;
-border-radius:30px;
-font-size:20px;
-cursor:pointer;
-}
-
-/* FULL SCREEN RAIN */
+/* rain */
 .rain{
 position:fixed;
 top:-10vh;
@@ -135,14 +107,14 @@ from{transform:translateY(-10vh);}
 to{transform:translateY(110vh);}
 }
 
-/* BROKEN HEART */
+/* 💔 broken hearts FULL SCREEN */
 .broken{
 position:fixed;
 top:-10vh;
-font-size:70px;
+font-size:65px;
 animation:fallRotate 3s linear infinite;
 pointer-events:none;
-z-index:5;
+z-index:999;
 }
 
 @keyframes fallRotate{
@@ -150,42 +122,30 @@ from{transform:translateY(-10vh) rotate(0);}
 to{transform:translateY(110vh) rotate(360deg);}
 }
 
-/* SAD MODE */
+/* ONLY SAD SCREEN BLACK */
 #sad-screen{
 background:black;
 position:fixed;
 top:0;
 left:0;
-width:100vw;
-height:100vh;
-z-index:10;
+width:100%;
+height:100%;
+z-index:20;
 }
 
+/* sad text glow */
 #sad-screen h2{
 color:white;
 text-shadow:
 0 0 15px #fff,
-0 0 40px white,
-0 0 80px white;
+0 0 35px white,
+0 0 60px white;
 }
 
-/* SCREEN SHAKE */
-.shake{
-animation:shake 0.4s;
-}
-
-@keyframes shake{
-0%{transform:translateX(0)}
-25%{transform:translateX(-20px)}
-50%{transform:translateX(20px)}
-75%{transform:translateX(-20px)}
-100%{transform:translateX(0)}
-}
-
-/* FLOATING SAI */
+/* floating sai */
 .floatSai{
 position:fixed;
-font-size:28px;
+font-size:26px;
 color:white;
 text-shadow:0 0 15px hotpink;
 animation:floatUp 8s linear infinite;
@@ -197,9 +157,57 @@ z-index:0;
 from{transform:translateY(110vh);opacity:1;}
 to{transform:translateY(-20vh);opacity:0;}
 }
-
-/* LOVE MODE AFTER YES */
-.loveMode{
-background:black !important;
+/* 💍 PROPOSAL OVERLAY */
+#proposalScene{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:radial-gradient(circle,#000 40%,#1a001a);
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+z-index:9999;
+color:white;
+font-size:60px;
+text-align:center;
 }
 
+/* ring */
+.ring{
+font-size:120px;
+animation:ringPop 1.5s infinite;
+filter:drop-shadow(0 0 25px gold);
+}
+
+@keyframes ringPop{
+0%{transform:scale(1) rotate(0)}
+50%{transform:scale(1.3) rotate(15deg)}
+100%{transform:scale(1) rotate(0)}
+}
+
+/* marry text */
+.marryText{
+font-size:65px;
+margin-top:20px;
+text-shadow:
+0 0 20px white,
+0 0 40px pink,
+0 0 80px hotpink;
+animation:textBounce 2s infinite;
+}
+
+/* yes forever btn */
+.foreverBtn{
+margin-top:40px;
+padding:20px 40px;
+font-size:28px;
+border:none;
+border-radius:40px;
+background:white;
+color:red;
+cursor:pointer;
+box-shadow:0 0 30px hotpink;
+}
