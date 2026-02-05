@@ -28,19 +28,19 @@ happyMusic.loop=true;
 
 typeWriter(questionText,"Sai, will you be my valentine 💕");
 
-/* 💕 INSANE RAIN */
+/* LOVE RAIN */
 let rainInt;
 function startRain(){
 stopRain();
 rainInt=setInterval(()=>{
 let e=document.createElement("div");
 e.className="rain";
-let emojis=["❤️","🌸","🌼","💖","💘"];
+let emojis=["❤️","🌸","🌼","💖"];
 e.innerText=emojis[Math.floor(Math.random()*emojis.length)];
 e.style.left=Math.random()*100+"vw";
 document.body.appendChild(e);
 setTimeout(()=>e.remove(),7000);
-},200);
+},250);
 }
 function stopRain(){
 clearInterval(rainInt);
@@ -48,7 +48,7 @@ document.querySelectorAll(".rain").forEach(e=>e.remove());
 }
 startRain();
 
-/* FLOATING SAI EVERYWHERE */
+/* floating sai */
 setInterval(()=>{
 let s=document.createElement("div");
 s.className="floatSai";
@@ -56,12 +56,12 @@ s.innerText="Sai 💕";
 s.style.left=Math.random()*100+"vw";
 document.body.appendChild(s);
 setTimeout(()=>s.remove(),8000);
-},800);
+},900);
 
-/* 💔 HEARTBREAK MODE */
+/* 💔 HEARTBREAK FIXED */
 let heartInt;
 function startHeartbreak(){
-stopRain();
+stopHeartbreak();   // clear first
 heartInt=setInterval(()=>{
 let b=document.createElement("div");
 b.className="broken";
@@ -69,7 +69,7 @@ b.innerText="💔";
 b.style.left=Math.random()*100+"vw";
 document.body.appendChild(b);
 setTimeout(()=>b.remove(),3000);
-},120);
+},100);
 }
 function stopHeartbreak(){
 clearInterval(heartInt);
@@ -79,22 +79,21 @@ document.querySelectorAll(".broken").forEach(e=>e.remove());
 /* NO CLICK */
 let noCount=0;
 const sadLines=[
-"Sai… my heart is yours 💔",
-"Why are you doing this to me 😭",
+"Sai… my heart is breaking 💔",
+"Please don't leave me 😭",
 "I will still love you forever 🖤"
 ];
 
 noBtn.onclick=()=>{
 noCount++;
 
-document.body.classList.add("shake");
-setTimeout(()=>document.body.classList.remove("shake"),400);
-
 qScreen.classList.add("hidden");
 sadScreen.classList.remove("hidden");
 
 document.getElementById("sadGif").src="assets/gifs/sad.gif";
 sadMusic.play();
+
+/* start heartbreak shower */
 startHeartbreak();
 
 if(noCount<=3){
@@ -104,7 +103,7 @@ typeWriter(sadText,sadLines[noCount-1]);
 if(noCount===3){
 setTimeout(()=>{
 document.getElementById("sadGif").src="assets/gifs/tease.gif";
-typeWriter(sadText,"You cannot escape me 😈❤️");
+typeWriter(sadText,"You can't escape me 😈❤️");
 },2000);
 }
 
@@ -127,30 +126,29 @@ qScreen.classList.remove("hidden");
 startRain();
 };
 
-/* YES = LOVE EXPLOSION */
+/* 💍 YES = MARRY ME MODE */
 yesBtn.onclick=()=>{
 qScreen.classList.add("hidden");
 yesScreen.classList.remove("hidden");
 
-document.body.classList.add("loveMode");
-
 happyMusic.play();
 
-for(let i=0;i<8;i++){
+/* massive confetti */
+for(let i=0;i<6;i++){
 setTimeout(()=>{
 confetti({
-particleCount:300,
-spread:120,
+particleCount:400,
+spread:140,
 origin:{y:0.6}
 });
 },i*400);
 }
 
 typeWriter(document.getElementById("yesText"),
-"Our love story begins forever 💍❤️");
+"From today… you are mine forever 💍❤️");
 };
 
-/* CALENDAR */
+/* calendar */
 openCal.onclick=()=>{
 yesScreen.classList.add("hidden");
 showCalendar();
@@ -176,14 +174,13 @@ cal.appendChild(box);
 }
 }
 
-/* BACK HOME */
 document.getElementById("backHome").onclick=()=>{
 calScreen.classList.add("hidden");
 qScreen.classList.remove("hidden");
 startRain();
 };
 
-/* OPEN DAY */
+/* day open */
 function openDay(day){
 calScreen.classList.add("hidden");
 dayScreen.classList.remove("hidden");
@@ -192,44 +189,77 @@ stopRain();
 document.getElementById("dayGif").src=`assets/gifs/day${day}.gif`;
 
 const poemEl=document.getElementById("poem");
-const imgBox=document.getElementById("images");
-imgBox.innerHTML="";
-
 let poem=`Sai my love this is day ${day} 💕
-You are my heartbeat 💓
-My forever person 💖
+You are my forever 💖
+My future wife 💍
 I love you endlessly ❤️`;
 
 setTimeout(()=>typeWriter(poemEl,poem),500);
 
-/* images */
-setTimeout(()=>{
-let i=1;
-let inter=setInterval(()=>{
-if(i>5){clearInterval(inter);return;}
-let img=document.createElement("img");
-img.src=`assets/images/day${day}-${i}.jpg`;
-img.style.width="150px";
-img.style.margin="10px";
-imgBox.appendChild(img);
-i++;
-},700);
-},3000);
-
 if(day==14){
-setInterval(()=>{
-confetti({
-particleCount:8,
-spread:70,
-origin:{x:Math.random(),y:Math.random()-0.2},
-colors:["#ff4d88","#ff99cc"]
-});
-},120);
+setTimeout(()=>{
+showProposal();
+},5000); // proposal after 5 sec
 }
-}
+
 
 document.getElementById("backCal").onclick=()=>{
 dayScreen.classList.add("hidden");
 showCalendar();
 startRain();
 };
+/* 💍 FINAL PROPOSAL SCENE */
+function showProposal(){
+
+// create overlay
+let box=document.createElement("div");
+box.id="proposalScene";
+
+box.innerHTML=`
+<div class="ring">💍</div>
+<div class="marryText">Sai… Will you marry me? ❤️</div>
+<button class="foreverBtn">YES FOREVER 💕</button>
+`;
+
+document.body.appendChild(box);
+
+/* fireworks nonstop */
+let fire=setInterval(()=>{
+confetti({
+particleCount:80,
+spread:100,
+origin:{x:Math.random(),y:Math.random()-0.2},
+colors:["#ff4d88","#ffffff","#ff99cc"]
+});
+},300);
+
+/* floating hearts blast */
+let loveRain=setInterval(()=>{
+let e=document.createElement("div");
+e.className="rain";
+e.innerText="💖";
+e.style.left=Math.random()*100+"vw";
+document.body.appendChild(e);
+setTimeout(()=>e.remove(),4000);
+},120);
+
+/* click yes forever */
+box.querySelector(".foreverBtn").onclick=()=>{
+clearInterval(fire);
+clearInterval(loveRain);
+
+box.innerHTML=`
+<h1 style="font-size:80px;color:white;text-shadow:0 0 40px hotpink;">
+She said YES 💍❤️
+</h1>
+`;
+
+setInterval(()=>{
+confetti({
+particleCount:200,
+spread:140,
+origin:{y:0.6}
+});
+},500);
+};
+}
