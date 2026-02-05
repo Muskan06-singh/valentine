@@ -6,8 +6,10 @@ body{
   color:black;
   text-align:center;
   overflow:hidden;
-  text-shadow:0 0 8px #ff69b4,0 0 15px #ff1493;
 }
+
+/* TEXT GLOW */
+.glow{ text-shadow:0 0 15px #ff69b4,0 0 30px #ff1493;}
 
 /* HIDDEN */
 .hidden{display:none}
@@ -18,7 +20,6 @@ body{
   margin-top:100px;
   color:black;
   font-weight:bold;
-  text-shadow:0 0 15px #ff69b4,0 0 30px #ff1493;
 }
 
 /* TEASE TEXT */
@@ -26,7 +27,6 @@ body{
   font-size:30px;
   font-weight:bold;
   color:black;
-  text-shadow:0 0 10px #ff1493;
   margin:10px 0;
 }
 
@@ -72,7 +72,15 @@ body{
 }
 
 /* GIF */
-.centerGif{ width:350px; margin-top:20px; }
+.centerGif{
+  width:350px;
+  margin-top:20px;
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+  animation:popIn 0.8s ease-out;
+}
+@keyframes popIn{0%{transform:scale(0.5)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
 
 /* CALENDAR */
 #calendarScreen{
@@ -82,7 +90,6 @@ body{
   align-items:center;
   height:100vh;
 }
-
 #calendarScreen #backToMain{
   margin-bottom:20px;
   padding:12px 25px;
@@ -93,7 +100,6 @@ body{
   cursor:pointer;
   box-shadow:0 0 10px pink;
 }
-
 #calendar{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -132,8 +138,9 @@ body{
   padding:20px 30px;
   margin:15px;
   font-weight:bold;
+  transition:transform 0.2s;
 }
-
+.gift:hover{transform:scale(1.2);}
 .redHeart{ background:red; color:white;}
 .blackHeart{ background:black; color:white;}
 
@@ -150,15 +157,16 @@ body{
 }
 
 /* EMOJI RAIN */
-.floating{ position:fixed; font-size:50px; animation:float 8s linear infinite; }
-@keyframes float{ from{transform:translateY(100vh)} to{transform:translateY(-10vh)} }
+.floating{ position:fixed; font-size:50px; animation:float 5s linear infinite; }
+@keyframes float{ 0%{transform:translateY(100vh)} 50%{transform:translateY(50vh) rotate(15deg)} 100%{transform:translateY(-10vh) rotate(-15deg)} }
 
-.broken{ position:fixed; font-size:90px; animation:fall 3s linear infinite; }
-@keyframes fall{0%{top:-10%; transform:rotate(0deg)}25%{transform:rotate(20deg)}50%{transform:rotate(-15deg)}75%{transform:rotate(10deg)}100%{top:110%; transform:rotate(0deg)}}
+.broken{ position:fixed; font-size:90px; animation:fall 4s linear infinite; }
+@keyframes fall{0%{top:-10%; transform:rotate(0deg)}25%{transform:rotate(25deg)}50%{transform:rotate(-20deg)}75%{transform:rotate(15deg)}100%{top:110%; transform:rotate(0deg)}}
 
 /* CORNER HEART */
-.corner{ position:fixed; font-size:90px; animation:beat 1s infinite; }
-.tl{top:10px;left:10px}
-.tr{top:10px;right:10px}
-.bl{bottom:10px;left:10px}
-.br{bottom:10px;right:10px}
+.corner{ position:fixed; font-size:90px; animation:beatHeart 1s infinite; }
+.tl{top:10px;left:10px; animation-duration:1s;}
+.tr{top:10px;right:10px; animation-duration:1.1s;}
+.bl{bottom:10px;left:10px; animation-duration:0.9s;}
+.br{bottom:10px;right:10px; animation-duration:1.2s;}
+@keyframes beatHeart{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
