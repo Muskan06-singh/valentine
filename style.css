@@ -1,240 +1,143 @@
-/* ------------------------
-   BODY
------------------------- */
-body {
-  margin:0;
-  background:#ffd6e8;
-  font-family:'Shadows Into Light', cursive;
-  overflow:hidden;
-  text-align:center;
-  position:relative;
+body{
+margin:0;
+background:#ffd6e8;
+font-family:'Caveat',cursive;
+overflow:hidden;
+text-align:center;
 }
 
-/* ------------------------
-   HIDDEN ELEMENTS
------------------------- */
-.hidden { display:none; }
-
-/* ------------------------
-   TITLE
------------------------- */
-#title {
-  font-size:50px;
-  color:black;
-  font-weight:bold;
-  text-shadow: 0 0 5px #fff, 0 0 15px #ff69b4, 0 0 25px #ff1493;
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
+/* screens */
+.screen{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
 }
 
-/* ------------------------
-   BUTTONS
------------------------- */
-.btns {
-  position:absolute;
-  top:65%;
-  left:50%;
-  transform:translateX(-50%);
-}
-.btns button{
-  padding:20px 40px;
-  font-size:22px;
-  margin:20px;
-  border:none;
-  border-radius:40px;
-  cursor:pointer;
-  font-weight:bold;
-  box-shadow:0 0 10px #ff69b4;
-}
-.yes{ background:white; color:red; animation:beat 1s infinite; }
-.no{ background:white; color:black; }
+.hidden{display:none}
 
-/* ------------------------
-   BEAT ANIMATION
------------------------- */
+/* TEXT */
+h1,h2{
+font-size:55px;
+color:black;
+font-weight:bold;
+text-shadow:
+0 0 5px #fff,
+0 0 15px #ffb6c1,
+0 0 25px hotpink;
+}
+
+/* BUTTONS */
+.buttons button{
+padding:20px 50px;
+font-size:24px;
+margin:20px;
+border:none;
+border-radius:40px;
+cursor:pointer;
+}
+
+#yesBtn{
+background:white;
+color:red;
+animation:beat 1s infinite;
+}
+
 @keyframes beat{
-  0%{transform:scale(1)}
-  50%{transform:scale(1.15)}
-  100%{transform:scale(1)}
+50%{transform:scale(1.15);}
 }
 
-/* ------------------------
-   SAD SCREEN
------------------------- */
-#sadScreen{
-  background:black;
-  color:white;
-  height:100vh;
-  padding-top:20%;
-}
-#sadText{
-  font-size:28px;
-  color:white;
-  text-shadow:0 0 10px white;
-  margin-top:20px;
-}
-#thinkBtn{
-  margin-top:30px;
-  font-size:20px;
-  padding:20px 30px;
-  background:white;
-  border:none;
-  cursor:pointer;
-  border-radius:50%;
-  width:180px;
-  height:180px;
-  font-weight:bold;
+#noBtn{
+background:white;
 }
 
-/* ------------------------
-   HAPPY SCREEN
------------------------- */
-.glow {
-  font-size:28px;
-  color:#ff1493;
-  text-shadow:0 0 10px #fff,0 0 20px #ff69b4;
+/* HEART THINK BTN */
+.heart-btn{
+background:white;
+padding:20px 35px;
+border-radius:50px;
+font-size:22px;
+border:none;
+margin-top:30px;
 }
 
-/* ------------------------
-   GIFS
------------------------- */
-.centerGif{ width:300px; margin-top:20px; }
-
-/* ------------------------
-   CALENDAR
------------------------- */
-#calendarScreen{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  height:100vh;
+/* GIF */
+.gif{
+width:320px;
+margin:20px;
+border-radius:20px;
 }
+
+/* CALENDAR */
 #calendar{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:20px;
-  width:60%;
-  max-width:600px;
-  animation:heartbeat 2s infinite;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+background:white;
+padding:40px;
+border-radius:30px;
+box-shadow:0 0 40px hotpink;
+animation:breath 2s infinite;
 }
+
+@keyframes breath{
+50%{transform:scale(1.05);}
+}
+
 .day{
-  background:white;
-  padding:40px;
-  border-radius:20px;
-  font-size:28px;
-  cursor:pointer;
-  box-shadow:0 0 20px pink;
-  animation:pulse 2s infinite;
-  font-family:'Sacramento', cursive;
-}
-.locked{ opacity:0.3; cursor:not-allowed; }
-
-#backToMain{
-  margin-top:30px;
-  padding:15px 35px;
-  font-size:18px;
-  border:none;
-  border-radius:20px;
-  cursor:pointer;
-  box-shadow:0 0 10px pink;
-  background:white;
+padding:25px;
+background:#ffe6f0;
+border-radius:20px;
+font-size:22px;
+cursor:pointer;
 }
 
-/* ------------------------
-   POEM & IMAGES
------------------------- */
-#poem{
-  font-size:24px;
-  color:black;
-  font-weight:bold;
-  text-shadow:0 0 10px #ff69b4;
-  width:80%;
-  margin:30px auto;
-  font-family:'Pacifico', cursive;
-}
-#images img{
-  width:150px;
-  margin:10px;
-  border-radius:15px;
-  display:none;
+.day.locked{
+opacity:.4;
 }
 
-/* ------------------------
-   BACK BUTTON
------------------------- */
-#backBtn{
-  margin-top:20px;
-  padding:15px 30px;
-  font-size:18px;
-  background:white;
-  border:none;
-  border-radius:20px;
-  cursor:pointer;
-  box-shadow:0 0 10px pink;
+/* back buttons */
+.backBtn{
+margin-top:30px;
+padding:15px 30px;
+border:none;
+border-radius:30px;
+font-size:20px;
+cursor:pointer;
 }
 
-/* ------------------------
-   EMOJI RAIN
------------------------- */
-.floating{
-  position:fixed;
-  font-size:45px;
-  animation:float 8s linear infinite;
-  pointer-events:none;
-  user-select:none;
+/* rain */
+.rain{
+position:fixed;
+font-size:45px;
+animation:fall 8s linear infinite;
 }
-@keyframes float{ from{transform:translateY(100vh)} to{transform:translateY(-10vh)} }
 
+@keyframes fall{
+from{transform:translateY(-10vh);}
+to{transform:translateY(110vh);}
+}
+
+/* heartbreak */
 .broken{
-  position:fixed;
-  font-size:80px;
-  animation:fall 3s linear infinite;
-  transform-origin:center;
-  pointer-events:none;
+position:fixed;
+font-size:70px;
+animation:fallRotate 3s linear infinite;
 }
-@keyframes fall{ from{top:-10%; transform:rotate(0deg);} to{top:110%; transform:rotate(360deg);} }
 
-/* ------------------------
-   CORNER HEARTS
------------------------- */
+@keyframes fallRotate{
+from{transform:translateY(-10vh) rotate(0);}
+to{transform:translateY(110vh) rotate(360deg);}
+}
+
+/* corner hearts */
 .corner{
-  position:fixed;
-  font-size:80px;
-  animation:beat 1s infinite;
-  pointer-events:none;
+position:fixed;
+font-size:45px;
+animation:beat 1s infinite;
 }
 .tl{top:10px;left:10px}
 .tr{top:10px;right:10px}
 .bl{bottom:10px;left:10px}
 .br{bottom:10px;right:10px}
-
-/* ------------------------
-   HEARTBEAT ANIMATION
------------------------- */
-@keyframes heartbeat{
-  0%{transform:scale(1);}
-  25%{transform:scale(1.05);}
-  50%{transform:scale(1);}
-  75%{transform:scale(1.05);}
-  100%{transform:scale(1);}
-}
-
-/* ------------------------
-   DAY POP ANIMATION
------------------------- */
-@keyframes pulse{
-  0%{transform:scale(1)}
-  50%{transform:scale(1.07)}
-  100%{transform:scale(1)}
-}
-
-/* ------------------------
-   TITLE BOUNCE
------------------------- */
-@keyframes bounce {
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-15px);}
-                 }
