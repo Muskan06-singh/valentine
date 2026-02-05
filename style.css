@@ -1,31 +1,33 @@
 body{
   margin:0;
   background:#ffd6e8;
-  font-family:'Dancing Script', cursive;
-  overflow:hidden;
+  font-family:Arial, sans-serif;
+  font-weight:bold;
+  color:black;
   text-align:center;
+  overflow:hidden;
+  text-shadow:0 0 8px #ff69b4,0 0 15px #ff1493;
 }
+
+/* HIDDEN */
 .hidden{display:none}
 
 /* MAIN TITLE */
 #title{
-  font-family:'Parisienne', cursive;
   font-size:50px;
   margin-top:100px;
   color:black;
   font-weight:bold;
-  text-shadow:0 0 10px #ff69b4, 0 0 20px #ff1493;
-  display:inline-block;
+  text-shadow:0 0 15px #ff69b4,0 0 30px #ff1493;
 }
 
-/* MAIN TEASE TEXT */
+/* TEASE TEXT */
 #teaseText{
   font-size:30px;
-  font-family:'Dancing Script', cursive;
   font-weight:bold;
   color:black;
   text-shadow:0 0 10px #ff1493;
-  margin:20px 0;
+  margin:10px 0;
 }
 
 /* BUTTONS */
@@ -36,7 +38,6 @@ body{
   border:none;
   border-radius:40px;
   cursor:pointer;
-  font-family:'Dancing Script', cursive;
   font-weight:bold;
 }
 
@@ -52,7 +53,11 @@ body{
   height:100vh;
   padding-top:50px;
 }
-#sadText{ font-size:34px; color:white; text-shadow:0 0 20px red; }
+#sadText{
+  font-size:34px;
+  color:white;
+  text-shadow:0 0 20px red;
+}
 #thinkBtn{
   margin-top:30px;
   font-size:22px;
@@ -67,7 +72,7 @@ body{
 }
 
 /* GIF */
-.centerGif{ width:350px; margin-top:40px; }
+.centerGif{ width:350px; margin-top:20px; }
 
 /* CALENDAR */
 #calendarScreen{
@@ -107,32 +112,26 @@ body{
   cursor:pointer;
   box-shadow:0 0 25px pink;
 }
-
 .locked{ opacity:0.3; cursor:not-allowed; }
 
 /* POEM */
 #poem{
   font-size:28px;
-  color:black;
   font-weight:bold;
   text-shadow:0 0 10px #ff69b4;
   width:80%;
-  margin:30px auto;
-  font-family:'Dancing Script', cursive;
+  margin:20px auto;
 }
-
-/* GIF & IMAGES */
-#images img{ width:180px; margin:10px; border-radius:15px; display:none; }
 
 /* DAY GIFT BUTTONS */
 .gift{
-  font-family:'Dancing Script', cursive;
   font-size:22px;
   border:none;
   cursor:pointer;
   border-radius:50%;
   padding:20px 30px;
   margin:15px;
+  font-weight:bold;
 }
 
 .redHeart{ background:red; color:white;}
