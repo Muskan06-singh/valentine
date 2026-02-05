@@ -13,9 +13,11 @@ const sadMusic = document.getElementById("sadMusic");
 const emojiRain = document.getElementById("emojiRain");
 const backToMain = document.getElementById("backToMain");
 const teaseContainer = document.getElementById("teaseContainer");
+const happyGif = document.getElementById("happyGif");
+const happyText = document.getElementById("happyText");
 
 const poems={
-7:`🌹 Sai my rose blooms only for you... 💖`,
+7:`🌹 Sai my rose blooms only for you... ... 💖`,
 8:`💍 Sai today I gather courage... 💞`,
 9:`🍫 Sai you taste like happiness... 💝`,
 10:`🧸 Sai my comfort teddy... 🤍`,
@@ -27,7 +29,7 @@ const poems={
 
 let rainInterval, brokenInterval, noCount=0;
 
-// Typewriter
+// Typewriter animation
 function typeWriter(el, text, speed=50, callback=null){
     el.innerHTML="";
     let i=0;
@@ -44,23 +46,26 @@ function typeWriter(el, text, speed=50, callback=null){
     }, speed);
 }
 
-// DAISY + HEART RAIN (continuous)
+// EMOJI RAIN
 function startRain(){
     stopRain();
     rainInterval=setInterval(()=>{
-        if(main.classList.contains("hidden") || happyScreen.classList.contains("hidden") || calendarScreen.classList.contains("hidden")) return;
         const e=document.createElement("div");
         e.className="floating";
         e.innerHTML = Math.random()>0.5 ? "🌼":"❤️";
         e.style.left = Math.random()*100 + "vw";
+        e.style.fontSize = `${30+Math.random()*30}px`;
         emojiRain.appendChild(e);
         setTimeout(()=>e.remove(),8000);
-    },400);
+    },200); // faster for smooth continuous rain
 }
 
-function stopRain(){ clearInterval(rainInterval); emojiRain.innerHTML=""; }
+function stopRain(){
+    clearInterval(rainInterval);
+    emojiRain.innerHTML="";
+}
 
-// BROKEN HEART
+// BROKEN HEARTS
 function brokenRain(){
     stopRain();
     return setInterval(()=>{
@@ -74,32 +79,43 @@ function brokenRain(){
     },200);
 }
 
-// MAIN TITLE
+// MAIN TITLE animation
 typeWriter(title,"Sai, will you be my Valentine 💕",60,startRain);
 
 // NO BUTTON
 noBtn.onclick=()=>{
     noCount++;
     main.classList.add("hidden");
+    sadScreen.classList.remove("hidden");
+    sadMusic.play();
+    brokenInterval = brokenRain();
+
+    const msgs=[
+        "Sai… does my love mean nothing? 💔",
+        "My heart only beats for you Sai… 🥀",
+        "Without you everything feels empty… 🖤"
+    ];
+
     if(noCount<=3){
-        sadScreen.classList.remove("hidden");
-        sadMusic.play();
-        brokenInterval=brokenRain();
-        const msgs=[
-            "Sai… does my love mean nothing? 💔",
-            "My heart only beats for you Sai… 🥀",
-            "Without you everything feels empty… 🖤"
-        ];
         typeWriter(sadText,msgs[noCount-1]);
-    } else {
-        // show tease.gif on main page
+    }
+
+    if(noCount>=4){
+        sadMusic.pause();
+        clearInterval(brokenInterval);
         sadScreen.classList.add("hidden");
         main.classList.remove("hidden");
         teaseContainer.classList.remove("hidden");
-        noBtn.onmouseenter=()=>{ noBtn.style.left=Math.random()*80+"vw"; noBtn.style.top=Math.random()*60+"vh"; };
+        typeWriter(title,"You are mine already ❤️");
+        // runaway NO button
+        noBtn.onmouseenter=()=>{
+            noBtn.style.left=Math.random()*80+"vw";
+            noBtn.style.top=Math.random()*60+"vh";
+        };
     }
 };
 
+// THINK AGAIN BUTTON
 thinkBtn.onclick=()=>{
     sadMusic.pause();
     sadMusic.currentTime=0;
@@ -116,10 +132,18 @@ yesBtn.onclick=()=>{
     teaseContainer.classList.add("hidden");
     stopRain();
     happyMusic.play();
+    happyGif.src="assets/gifs/happy.gif";
+    typeWriter(happyText,"Thank you my love for accepting it, let's begin our love week journey 💖");
+
+    // Canva-style confetti
     const duration=4000;
     const end=Date.now()+duration;
     (function frame(){
-        confetti({particleCount:7,spread:120,origin:{x:Math.random(),y:Math.random()-0.2}});
+        confetti({
+            particleCount:7,
+            spread:120,
+            origin:{x:Math.random(),y:Math.random()-0.2}
+        });
         if(Date.now()<end) requestAnimationFrame(frame);
     })();
 };
@@ -132,9 +156,83 @@ document.getElementById("openCal").onclick=()=>{
     startRain();
 };
 
-// BACK TO MAIN
+// BACK TO MAIN (Calendar only)
 backToMain.onclick=()=>{
     calendarScreen.classList.add("hidden");
     main.classList.remove("hidden");
     typeWriter(title,"Sai, will you be my Valentine 💕",60,startRain);
+};
+
+// CALENDAR
+function loadCalendar(){
+    const cal=document.getElementById("calendar");
+    cal.innerHTML="";
+    for(let d=7;d<=14;d++){
+        const box=document.createElement("div");
+        box.className="day";
+        box.innerHTML="Feb "+d;
+        if(d!==7 && d!==14){
+            box.classList.add("locked");
+            box.onclick=()=>alert("Wait for our special day my love 💌");
+        }else{
+            box.onclick=()=>openDay(d);
+        }
+        cal.appendChild(box);
+    }
+}
+
+// OPEN DAY
+function openDay(day){
+    calendarScreen.classList.add("hidden");
+    dayScreen.classList.remove("hidden");
+    stopRain();
+
+    document.getElementById("dayGif").src=`assets/gifs/day${day}.gif`;
+
+    const poemEl=document.getElementById("poem");
+    setTimeout(()=>{
+        typeWriter(poemEl,poems[day],40,()=>{
+            const imgBox=document.getElementById("images");
+            imgBox.innerHTML="";
+            for(let i=1;i<=5;i++){
+                setTimeout(()=>{
+                    const im=document.createElement("img");
+                    im.src=`assets/images/day${day}-${i}.jpg`;
+                    im.style.display="inline-block";
+                    imgBox.appendChild(im);
+                },i*1200);
+            }
+        });
+    },1000);
+
+    ["tl","tr","bl","br"].forEach(p=>{
+        const h=document.createElement("div");
+        h.className="corner "+p;
+        h.innerHTML="❤️";
+        document.body.appendChild(h);
+    });
+
+    if(day==14){
+        setTimeout(()=>{
+            const end=Date.now()+5000;
+            (function frame(){
+                confetti({
+                    particleCount:8,
+                    spread:100,
+                    shapes:["heart"],
+                    origin:{x:Math.random(),y:Math.random()-0.2},
+                    scalar:1.5
+                });
+                if(Date.now()<end) requestAnimationFrame(frame);
+            })();
+        },2000);
+    }
+}
+
+// BACK BUTTON (Day)
+document.getElementById("backBtn").onclick=()=>{
+    dayScreen.classList.add("hidden");
+    calendarScreen.classList.remove("hidden");
+    document.querySelectorAll(".corner").forEach(e=>e.remove());
+    startRain();
 };
