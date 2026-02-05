@@ -1,115 +1,143 @@
 body{
 margin:0;
-background:#000;
-color:#fff;
+background:#ffd6e8;
 font-family:'Caveat',cursive;
 overflow:hidden;
 text-align:center;
 }
 
-.page{
-display:none;
-height:100vh;
-justify-content:center;
-align-items:center;
+/* screens */
+.screen{
+min-height:100vh;
+display:flex;
 flex-direction:column;
-position:relative;
-z-index:2;
+align-items:center;
+justify-content:center;
 }
 
-.active{display:flex;}
+.hidden{display:none}
 
-.black{background:black;}
-
-.bigText{
-font-size:3.5rem;
-font-family:'Pacifico',cursive;
-text-shadow:0 0 20px pink,0 0 40px red;
-animation:bounce 2s infinite;
-padding:20px;
+/* TEXT */
+h1,h2{
+font-size:55px;
+color:black;
+font-weight:bold;
+text-shadow:
+0 0 5px #fff,
+0 0 15px #ffb6c1,
+0 0 25px hotpink;
 }
 
-@keyframes bounce{
-0%,100%{transform:translateY(0)}
-50%{transform:translateY(-10px)}
-}
-
-.btnBox button,
-button{
-padding:15px 30px;
-font-size:1.3rem;
-margin:15px;
-border:none;
-border-radius:30px;
-background:linear-gradient(45deg,pink,red);
-color:white;
-cursor:pointer;
-box-shadow:0 0 15px pink;
-}
-
-.gif{
-width:260px;
-border-radius:20px;
+/* BUTTONS */
+.buttons button{
+padding:20px 50px;
+font-size:24px;
 margin:20px;
+border:none;
+border-radius:40px;
+cursor:pointer;
 }
 
-.calendar{
+#yesBtn{
+background:white;
+color:red;
+animation:beat 1s infinite;
+}
+
+@keyframes beat{
+50%{transform:scale(1.15);}
+}
+
+#noBtn{
+background:white;
+}
+
+/* HEART THINK BTN */
+.heart-btn{
+background:white;
+padding:20px 35px;
+border-radius:50px;
+font-size:22px;
+border:none;
+margin-top:30px;
+}
+
+/* GIF */
+.gif{
+width:320px;
+margin:20px;
+border-radius:20px;
+}
+
+/* CALENDAR */
+#calendar{
 display:grid;
-grid-template-columns:repeat(2,150px);
+grid-template-columns:repeat(4,1fr);
 gap:20px;
-margin-top:20px;
+background:white;
+padding:40px;
+border-radius:30px;
+box-shadow:0 0 40px hotpink;
+animation:breath 2s infinite;
+}
+
+@keyframes breath{
+50%{transform:scale(1.05);}
 }
 
 .day{
-font-size:1.2rem;
-padding:15px;
-background:pink;
-color:black;
-border-radius:15px;
-}
-
-.poem{
-font-size:1.7rem;
-width:85%;
-max-width:700px;
-line-height:2.1rem;
-margin-top:20px;
-text-shadow:0 0 10px pink;
-animation:fade 2s ease;
-}
-
-@keyframes fade{
-from{opacity:0; transform:translateY(20px)}
-to{opacity:1; transform:translateY(0)}
-}
-
-#images img{
-width:200px;
-margin:10px;
+padding:25px;
+background:#ffe6f0;
 border-radius:20px;
-box-shadow:0 0 15px pink;
+font-size:22px;
+cursor:pointer;
 }
 
-/* FLOATING RAIN */
-#rainContainer{
+.day.locked{
+opacity:.4;
+}
+
+/* back buttons */
+.backBtn{
+margin-top:30px;
+padding:15px 30px;
+border:none;
+border-radius:30px;
+font-size:20px;
+cursor:pointer;
+}
+
+/* rain */
+.rain{
 position:fixed;
-width:100%;
-height:100%;
-top:0;
-left:0;
-overflow:hidden;
-z-index:1;
-pointer-events:none;
+font-size:45px;
+animation:fall 8s linear infinite;
 }
 
-.float{
-position:absolute;
-font-size:30px;
-animation:floatUp linear infinite;
-opacity:.9;
+@keyframes fall{
+from{transform:translateY(-10vh);}
+to{transform:translateY(110vh);}
 }
 
-@keyframes floatUp{
-0%{transform:translateY(100vh) rotate(0deg)}
-100%{transform:translateY(-10vh) rotate(360deg)}
+/* heartbreak */
+.broken{
+position:fixed;
+font-size:70px;
+animation:fallRotate 3s linear infinite;
 }
+
+@keyframes fallRotate{
+from{transform:translateY(-10vh) rotate(0);}
+to{transform:translateY(110vh) rotate(360deg);}
+}
+
+/* corner hearts */
+.corner{
+position:fixed;
+font-size:45px;
+animation:beat 1s infinite;
+}
+.tl{top:10px;left:10px}
+.tr{top:10px;right:10px}
+.bl{bottom:10px;left:10px}
+.br{bottom:10px;right:10px}
