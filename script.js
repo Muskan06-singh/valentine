@@ -1,251 +1,269 @@
-// pages
-const pages={
-home:document.getElementById("page1"),
-yes:document.getElementById("yesPage"),
-sad:document.getElementById("sadPage"),
-cal:document.getElementById("calendarPage"),
-day:document.getElementById("dayPage")
-};
-
+/* ========= ELEMENTS ========= */
 const mainText=document.getElementById("mainText");
-const sadText=document.getElementById("sadText");
-const teaseBox=document.getElementById("teaseBox");
+const yesBtn=document.getElementById("yesBtn");
+const noBtn=document.getElementById("noBtn");
+const mainGif=document.getElementById("mainGif");
 
-// music
+const valPage=document.getElementById("valentine-page");
+const calPage=document.getElementById("calendar-page");
+const dayPage=document.getElementById("day-page");
+
+const calendar=document.getElementById("calendar");
+const backBtn=document.getElementById("backBtn");
+const backCal=document.getElementById("backCal");
+
+const dayGif=document.getElementById("dayGif");
+const poemBox=document.getElementById("poemBox");
+const imagesBox=document.getElementById("imagesBox");
+
+const layer=document.getElementById("floating-layer");
+
+/* ========= MUSIC ========= */
 const happyMusic=new Audio("assets/music/happy.mp3");
-happyMusic.loop=true;
 const sadMusic=new Audio("assets/music/sad.mp3");
+happyMusic.loop=true;
 
-// typewriter
-function typeText(el,text,speed=40){
+/* ========= TYPE ========= */
+function type(el,text,spd=40){
 el.innerHTML="";
 let i=0;
-let t=setInterval(()=>{
+const int=setInterval(()=>{
 el.innerHTML+=text[i];
 i++;
-if(i>=text.length)clearInterval(t);
-},speed);
+if(i>=text.length)clearInterval(int);
+},spd);
 }
 
-// show page
-function show(p){
-for(let k in pages) pages[k].classList.remove("active");
-p.classList.add("active");
-}
-
-// MAIN TEXT
-typeText(mainText,"Sai… will you be my Valentine? 💕");
-
-// emoji rain
-let emojiInt;
-function startRain(){
-emojiInt=setInterval(()=>{
-let e=document.createElement("div");
-e.className="emoji";
-e.innerText=Math.random()>0.5?"💖":"🌼";
+/* ========= FLOAT ========= */
+let floatInt;
+function startFloat(){
+clearInterval(floatInt);
+floatInt=setInterval(()=>{
+const e=document.createElement("div");
+const arr=["❤️","🌼","🌸"];
+e.innerHTML=arr[Math.floor(Math.random()*arr.length)];
+e.className="float";
 e.style.left=Math.random()*100+"vw";
-e.style.animationDuration=4+Math.random()*4+"s";
-document.body.appendChild(e);
-setTimeout(()=>e.remove(),7000);
-},250);
+e.style.animationDuration=5+Math.random()*4+"s";
+layer.appendChild(e);
+setTimeout(()=>e.remove(),9000);
+},300);
 }
-function stopRain(){clearInterval(emojiInt);}
-startRain();
+function stopFloat(){clearInterval(floatInt);layer.innerHTML=""}
 
-// YES
-document.getElementById("yesBtn").onclick=()=>{
-show(pages.yes);
-happyMusic.play();
-confettiFull();
-};
-
-// NO logic
-let noCount=0;
-document.getElementById("noBtn").onclick=()=>{
-noCount++;
-
-if(noCount<3){
-show(pages.sad);
-sadMusic.play();
-typeText(sadText,"Sai… don't break my heart 💔");
-heartbreakRain();
-}
-else{
-teaseBox.innerHTML=`<img src="assets/gifs/tease.gif" class="mainGif">
-<h2 class="glow">You are already mine ❤️😌</h2>`;
-runAway();
-}
-};
-
-// runaway button
-function runAway(){
-const btn=document.getElementById("noBtn");
-btn.onmouseover=()=>{
-btn.style.position="absolute";
-btn.style.left=Math.random()*80+"vw";
-btn.style.top=Math.random()*80+"vh";
-};
-}
-
-// sad again
-document.getElementById("againBtn").onclick=()=>{
-sadMusic.pause();
-show(pages.home);
-};
-
-// confetti
-function confettiFull(){
-let duration=3*1000;
-let end=Date.now()+duration;
-(function frame(){
-confetti({
-particleCount:6,
-spread:120,
-origin:{x:Math.random(),y:Math.random()-0.2}
-});
-if(Date.now()<end)requestAnimationFrame(frame);
-})();
-}
-
-// heartbreak rain
-function heartbreakRain(){
-let int=setInterval(()=>{
-let b=document.createElement("div");
-b.className="emoji";
-b.innerText="💔";
+/* ========= BROKEN ========= */
+let breakInt;
+function startBroken(){
+stopFloat();
+breakInt=setInterval(()=>{
+const b=document.createElement("div");
+b.innerHTML="💔";
+b.className="broken";
 b.style.left=Math.random()*100+"vw";
-b.style.fontSize="70px";
+b.style.animationDuration=3+Math.random()*2+"s";
 document.body.appendChild(b);
-setTimeout(()=>b.remove(),4000);
-},200);
-setTimeout(()=>clearInterval(int),4000);
+setTimeout(()=>b.remove(),5000);
+},180);
+}
+function stopBroken(){clearInterval(breakInt)}
+
+/* ========= START ========= */
+type(mainText,"Sai… will you be my Valentine? 💕");
+startFloat();
+
+/* ========= NO ========= */
+let noCount=0;
+noBtn.onclick=()=>{
+noCount++;
+sadMusic.play();
+startBroken();
+
+if(noCount===3){
+mainGif.src="assets/gifs/tease.gif";
+mainGif.classList.remove("hidden");
+type(mainText,"You are already mine ❤️😌");
 }
 
-// open calendar
-document.getElementById("openCal").onclick=()=>{
-show(pages.cal);
-buildCalendar();
+if(noCount>=3){
+noBtn.onmouseover=()=>{
+noBtn.style.position="absolute";
+noBtn.style.left=Math.random()*80+"vw";
+noBtn.style.top=Math.random()*80+"vh";
+};
+}
 };
 
-// calendar
+/* ========= YES ========= */
+yesBtn.onclick=()=>{
+stopBroken();
+sadMusic.pause();
+happyMusic.play();
+mainGif.src="assets/gifs/happy.gif";
+mainGif.classList.remove("hidden");
+
+confetti({particleCount:200,spread:120,origin:{y:0.6}});
+
+setTimeout(()=>{
+valPage.classList.remove("active");
+calPage.classList.add("active");
+buildCalendar();
+},2500);
+};
+
+/* ========= BACK ========= */
+backBtn.onclick=()=>{
+calPage.classList.remove("active");
+valPage.classList.add("active");
+};
+backCal.onclick=()=>{
+dayPage.classList.remove("active");
+calPage.classList.add("active");
+startFloat();
+};
+
+/* ========= CALENDAR ========= */
 function buildCalendar(){
-let cal=document.getElementById("calendar");
-cal.innerHTML="";
-let today=new Date().getDate();
+calendar.innerHTML="";
+const today=new Date().getDate();
 
 for(let d=7;d<=14;d++){
-let box=document.createElement("div");
-box.className="day";
-box.innerText="Feb "+d;
+const div=document.createElement("div");
+div.className="day";
+div.innerText="Feb "+d;
 
-if(d!==7 && d!==14 && d>today){
-box.classList.add("locked");
+if(d!==7 && d!==14 && d!==today){
+div.classList.add("locked");
+div.onclick=()=>alert("My love… wait for the right day 💕");
 }else{
-box.onclick=()=>openDay(d);
+div.onclick=()=>openDay(d);
 }
 
-cal.appendChild(box);
+calendar.appendChild(div);
 }
 }
 
-// open day
+/* ========= POEMS ========= */
+const poems={
+7:`🌹 Sai my rose blooms for you,
+Every petal whispers I love you,
+Soft winds carry your name,
+My heart burns like gentle flame,
+With you life feels divine,
+Forever yours, forever mine,
+Your smile paints my sky,
+With you my dreams fly,
+Rose day begins our story,
+Sai you are my glory 💖`,
+
+8:`💍 Sai today I confess,
+You are my happiness,
+Not just today but forever,
+I promise leaving never,
+Every heartbeat says your name,
+Life with you not same,
+Hold my hand always,
+Stay with me all days,
+This proposal from my soul,
+Sai you make me whole 💘`,
+
+9:`🍫 Sweet like chocolate you,
+Sai my world feels new,
+Every bite reminds of you,
+Every dream comes true,
+Stay close never far,
+You my shining star,
+Melting heart for you,
+Only love so true,
+Chocolate day we shine,
+Sai forever mine 🤎`,
+
+10:`🧸 Sai my teddy heart,
+Hugs that never part,
+Soft love warm and tight,
+You make world bright,
+Holding you feels home,
+Never let you roam,
+In your arms peace,
+All fears cease,
+Teddy day feels right,
+Sai my pure light 🧸`,
+
+11:`🤝 Promises in air,
+Sai I always care,
+Through storm and rain,
+I’ll stay the same,
+Forever by your side,
+With you I reside,
+No matter what we face,
+You my safe place,
+Promise day we vow,
+I choose you now 💞`,
+
+12:`🤗 Sai my warm hug,
+Love wrapped snug,
+Every heartbeat calm,
+In your loving palm,
+Your arms my peace,
+All worries cease,
+Hold me tight,
+Day and night,
+Hug day says true,
+I live for you 💕`,
+
+13:`💋 Sai your smile kiss,
+Heavenly bliss,
+Soul meets soul,
+You make me whole,
+Every glance fire,
+You my desire,
+Love so deep,
+Memories keep,
+Kiss day say this,
+You’re my bliss 😘`,
+
+14:`💕 Sai forever we,
+Just you and me,
+Through time and fate,
+Love so great,
+Hearts align,
+Your hand mine,
+Destiny wrote,
+Every love note,
+Valentine forever,
+Leave you never ❤️`
+};
+
+/* ========= OPEN DAY ========= */
 function openDay(d){
-show(pages.day);
-stopRain();
+stopFloat();
+calPage.classList.remove("active");
+dayPage.classList.add("active");
 
-let area=document.getElementById("dayContent");
-area.innerHTML="";
+dayGif.src=`assets/gifs/day${d}.gif`;
+poemBox.innerHTML="";
+imagesBox.innerHTML="";
 
-let gif=document.createElement("img");
-gif.src=`assets/gifs/day${d}.gif`;
-gif.className="mainGif";
-area.appendChild(gif);
+type(poemBox,poems[d],35);
 
-// poem
-let poem=document.createElement("h2");
-area.appendChild(poem);
-
-let text=getPoem(d);
-typeText(poem,text,35);
-
-// images one by one
 let i=1;
-let imgInt=setInterval(()=>{
-let im=document.createElement("img");
-im.src=`assets/images/day${d}-${i}.jpg`;
-im.style.width="140px";
-im.style.margin="8px";
-area.appendChild(im);
+const imgInt=setInterval(()=>{
+if(i>5){clearInterval(imgInt);return;}
+const img=document.createElement("img");
+img.src=`assets/images/day${d}-${i}.jpg`;
+imagesBox.appendChild(img);
 i++;
-if(i>5)clearInterval(imgInt);
-},800);
+},900);
 
-// 14 special heart confetti
-if(d==14){
+if(d===14){
 setTimeout(()=>{
-let int=setInterval(()=>{
-let e=document.createElement("div");
-e.className="emoji";
-e.innerText="💕";
-e.style.left=Math.random()*100+"vw";
-document.body.appendChild(e);
-setTimeout(()=>e.remove(),3000);
-},150);
-setTimeout(()=>clearInterval(int),4000);
-},2000);
+for(let i=0;i<60;i++){
+const heart=document.createElement("div");
+heart.innerHTML="💕";
+heart.className="float";
+heart.style.left=Math.random()*100+"vw";
+layer.appendChild(heart);
+setTimeout(()=>heart.remove(),4000);
+}
+},1200);
 }
 }
-
-// poems
-function getPoem(d){
-const p={
-7:`🌹 Sai my rose of love,
-Your smile blooms in my heart,
-Every petal whispers you,
-My world begins with you,
-Stay mine forever Sai 💖`,
-8:`💍 Sai today I propose,
-Not with ring but heart,
-Every lifetime choose you,
-Stay with me always,
-You are my forever 💕`,
-9:`🍫 Sweet like chocolate Sai,
-Love melts near you,
-Every bite feels you,
-My heart is yours,
-Forever yours 💖`,
-10:`🧸 My teddy Sai,
-Soft love warm hugs,
-Your arms my home,
-Stay forever near,
-I love you always 💕`,
-11:`🤝 Promise day Sai,
-I promise forever,
-Through storms and smiles,
-Only yours always,
-My heart is yours 💖`,
-12:`🤗 Hug day Sai,
-Come into my arms,
-Let hearts speak,
-Feel my love,
-Stay forever 💕`,
-13:`💋 Kiss day Sai,
-Your smile my kiss,
-Your eyes magic,
-Every breath love,
-Forever mine 💖`,
-14:`💖 Valentine Sai,
-You are my destiny,
-My heart chose you,
-Every life again,
-Forever only you 💕`
-};
-return p[d];
-}
-
-// back buttons
-document.getElementById("backHome").onclick=()=>show(pages.home);
-document.getElementById("backCal").onclick=()=>{
-show(pages.cal);
-startRain();
-};
