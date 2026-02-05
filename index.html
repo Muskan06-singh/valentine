@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,52 +7,48 @@
 
 <link rel="stylesheet" href="style.css">
 
+<!-- scribble bold font -->
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+
 <!-- confetti -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 
 <body>
 
-<!-- emoji rain layer -->
-<div id="emoji-layer"></div>
+<!-- floating layer -->
+<div id="floating-layer"></div>
+
+<!-- MAIN -->
+<div id="app">
 
 <!-- FIRST PAGE -->
-<div id="page1" class="page active">
-    <h1 id="mainText"></h1>
+<section id="valentine-page" class="page active">
+  <h1 id="mainText"></h1>
 
-    <div class="btns">
-        <button id="yesBtn">YES 💖</button>
-        <button id="noBtn">NO 💔</button>
-    </div>
+  <div class="btns">
+    <button id="yesBtn" class="yes">YES 💘</button>
+    <button id="noBtn" class="no">NO 💔</button>
+  </div>
 
-    <div id="teaseBox"></div>
-</div>
-
-<!-- HAPPY PAGE -->
-<div id="yesPage" class="page">
-    <img src="assets/gifs/happy.gif" class="mainGif">
-    <h2 class="glow">Yay Sai accepted me 💖</h2>
-    <button id="openCal">Open Love Calendar 💌</button>
-</div>
-
-<!-- SAD PAGE -->
-<div id="sadPage" class="page dark">
-    <img src="assets/gifs/sad.gif" class="mainGif">
-    <h2 id="sadText"></h2>
-    <button id="againBtn">❤️ Think again my Love ❤️</button>
-</div>
+  <img id="mainGif" class="gif hidden">
+</section>
 
 <!-- CALENDAR -->
-<div id="calendarPage" class="page">
-    <h2 class="glow">Our Love Week 💕</h2>
-    <div id="calendar"></div>
-    <button id="backHome">⬅ Back to Valentine Page</button>
-</div>
+<section id="calendar-page" class="page">
+  <button id="backBtn">⬅ Back to Valentine</button>
+  <h2 class="title">Our Love Week 💕</h2>
+  <div id="calendar"></div>
+</section>
 
 <!-- DAY PAGE -->
-<div id="dayPage" class="page">
-    <div id="dayContent"></div>
-    <button id="backCal">⬅ Back to Calendar</button>
+<section id="day-page" class="page">
+  <button id="backCal">⬅ Back to Calendar</button>
+  <img id="dayGif" class="gif">
+  <div id="poemBox"></div>
+  <div id="imagesBox"></div>
+</section>
+
 </div>
 
 <script src="script.js"></script>
