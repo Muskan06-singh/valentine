@@ -1,303 +1,239 @@
-/* ========= ELEMENTS ========= */
-const askPage = document.getElementById("page-ask");
-const calPage = document.getElementById("page-calendar");
-const dayPage = document.getElementById("page-day");
-const sadPage = document.getElementById("page-sad");
+const mainText=document.getElementById("mainText");
+const rain=document.getElementById("rainContainer");
+const pages=document.querySelectorAll(".page");
 
-const askText = document.getElementById("askText");
-const yesBtn = document.getElementById("yesBtn");
-const noBtn = document.getElementById("noBtn");
-const askGif = document.getElementById("askGif");
+const bgMusic=document.getElementById("bgMusic");
+const sadMusic=document.getElementById("sadMusic");
+const happyMusic=document.getElementById("happyMusic");
 
-const calendar = document.getElementById("calendar");
-const backHome = document.getElementById("btn-back-home");
-const backCal = document.getElementById("btn-back-cal");
+let noCount=0;
 
-const dayGif = document.getElementById("dayGif");
-const poemBox = document.getElementById("poemBox");
-const imagesBox = document.getElementById("imagesBox");
+// ---------- TYPEWRITER ----------
+const msg="Sai… will you be my Valentine 💕🥺";
+let i=0;
+function type(){
+ if(i<msg.length){
+  mainText.innerHTML+=msg.charAt(i);
+  i++;
+  setTimeout(type,60);
+ }
+}
+type();
 
-const sadText = document.getElementById("sadText");
-const thinkBtn = document.getElementById("btn-think");
+// ---------- RAIN ----------
+function startRain(type){
+ rain.innerHTML="";
+ let emojis=["💖","🌸","🌼","💗","🌺"];
+ if(type==="broken") emojis=["💔","💔","💔"];
 
-const layer = document.getElementById("floating-layer");
+ for(let i=0;i<40;i++){
+   let e=document.createElement("div");
+   e.className="float";
+   e.innerText=emojis[Math.floor(Math.random()*emojis.length)];
+   e.style.left=Math.random()*100+"vw";
+   e.style.animationDuration=(6+Math.random()*6)+"s";
+   e.style.fontSize=(20+Math.random()*40)+"px";
+   rain.appendChild(e);
+ }
+}
+startRain("love");
 
-/* ========= MUSIC ========= */
-const happyMusic = new Audio("assets/music/happy.mp3");
-happyMusic.loop = true;
-const sadMusic = new Audio("assets/music/sad.mp3");
-
-/* ========= TYPEWRITER ========= */
-function typeWriter(el, text, speed = 40) {
-  el.innerHTML = "";
-  let i = 0;
-  const t = setInterval(() => {
-    el.innerHTML += text[i] || "";
-    i++;
-    if (i >= text.length) clearInterval(t);
-  }, speed);
+// ---------- PAGE SWITCH ----------
+function show(id){
+ pages.forEach(p=>p.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
 }
 
-/* ========= FLOATING EMOJI RAIN ========= */
-let floatInt;
-function startFloat() {
-  clearInterval(floatInt);
-  floatInt = setInterval(() => {
-    const e = document.createElement("div");
-    const arr = ["❤️", "🌼", "🌸"];
-    e.innerHTML = arr[Math.floor(Math.random() * arr.length)];
-    e.className = "float";
-    e.style.left = Math.random() * 100 + "vw";
-    e.style.animationDuration = 5 + Math.random() * 4 + "s";
-    layer.appendChild(e);
-    setTimeout(() => e.remove(), 9000);
-  }, 300);
-}
-function stopFloat() {
-  clearInterval(floatInt);
-  layer.innerHTML = "";
-}
+// ---------- NO BUTTON ----------
+document.getElementById("noBtn").onclick=()=>{
+ noCount++;
 
-/* ========= HEARTBREAK RAIN ========= */
-let brokenInt;
-function startBroken() {
-  stopFloat();
-  brokenInt = setInterval(() => {
-    const b = document.createElement("div");
-    b.innerHTML = "💔";
-    b.className = "broken";
-    b.style.left = Math.random() * 100 + "vw";
-    b.style.animationDuration = 3 + Math.random() * 2 + "s";
-    document.body.appendChild(b);
-    setTimeout(() => b.remove(), 5000);
-  }, 180);
-}
-function stopBroken() {
-  clearInterval(brokenInt);
-}
+ if(noCount==3){
+   show("teasePage");
+   startRain("love");
+   return;
+ }
 
-/* ========= START ========= */
-typeWriter(askText, "Sai… will you be my Valentine? 💕");
-startFloat();
+ if(noCount>3){
+   const btn=document.getElementById("noBtn");
+   btn.style.position="absolute";
+   btn.style.left=Math.random()*80+"%";
+   btn.style.top=Math.random()*80+"%";
+   return;
+ }
 
-/* ========= INITIAL FLOW ========= */
-// YES
-yesBtn.onclick = () => {
-  stopBroken();
-  sadMusic.pause();
-  happyMusic.play();
-  askGif.src = "assets/gifs/happy.gif";
-  askGif.classList.remove("hidden");
-
-  // full-screen confetti
-  confetti({ particleCount: 200, spread: 120, origin: { y: 0.6 } });
-
-  setTimeout(() => {
-    askPage.classList.remove("active");
-    calPage.classList.add("active");
-    buildCalendar();
-  }, 2500);
+ show("sadPage");
+ startRain("broken");
+ sadMusic.play();
 };
 
-// NO
-let noCount = 0;
-noBtn.onclick = () => {
-  noCount++;
-  sadMusic.play();
-  startBroken();
-
-  if (noCount === 1) {
-    askGif.classList.add("hidden");
-    askPage.classList.remove("active");
-    sadPage.classList.add("active");
-    typeWriter(sadText, "Sai… my heart feels empty 💔");
-  } else if (noCount === 2) {
-    typeWriter(sadText, "Please don’t leave my love alone 🥀");
-  } else if (noCount >= 3) {
-    // tease vibe
-    askGif.src = "assets/gifs/tease.gif";
-    askGif.classList.remove("hidden");
-    askPage.classList.add("active");
-    sadPage.classList.remove("active");
-    typeWriter(askText, "You are already mine ❤️😌");
-
-    // runaway no button
-    noBtn.onmouseover = () => {
-      noBtn.style.position = "absolute";
-      noBtn.style.left = Math.random() * 80 + "vw";
-      noBtn.style.top = Math.random() * 80 + "vh";
-    };
-  }
+// think again
+document.getElementById("thinkBtn").onclick=()=>{
+ show("mainPage");
+ sadMusic.pause();
+ startRain("love");
 };
 
-// Think again
-thinkBtn.onclick = () => {
-  sadMusic.pause();
-  askPage.classList.add("active");
-  sadPage.classList.remove("active");
-  startFloat();
-  stopBroken();
+// tease accept
+document.getElementById("acceptBtn").onclick=()=>{
+ show("yesPage");
+ happyMusic.play();
 };
 
-/* ========= CALENDAR ========= */
-backHome.onclick = () => {
-  calPage.classList.remove("active");
-  askPage.classList.add("active");
-  startFloat();
+// ---------- YES ----------
+document.getElementById("yesBtn").onclick=()=>{
+ show("yesPage");
+ happyMusic.play();
 };
 
-backCal.onclick = () => {
-  dayPage.classList.remove("active");
-  calPage.classList.add("active");
-  startFloat();
+// open calendar
+document.getElementById("openCalendar").onclick=()=>{
+ show("calendarPage");
+ startRain("love");
 };
 
-function buildCalendar() {
-  calendar.innerHTML = "";
-  const today = new Date().getDate();
-
-  for (let d = 7; d <= 14; d++) {
-    const box = document.createElement("div");
-    box.className = "day";
-    box.innerText = "Feb " + d;
-
-    if (d !== 7 && d !== 14 && d !== today) {
-      box.classList.add("locked");
-      box.onclick = () => alert("My love… wait for the right day 💕");
-    } else {
-      box.onclick = () => openDay(d);
-    }
-
-    calendar.appendChild(box);
-  }
-}
-
-/* ========= POEMS ========= */
-const poems = {
-  7: `🌹 Sai my rose blooms for you,
-Every petal whispers I love you,
-Soft winds carry your name,
-My heart burns like gentle flame,
-With you life feels divine,
-Forever yours, forever mine,
-Your smile paints my sky,
-With you my dreams fly,
-Rose day begins our story,
-Sai you are my glory 💖`,
-
-  8: `💍 Sai today I confess,
-You are my happiness,
-Not just today but forever,
-I promise leaving never,
-Every heartbeat says your name,
-Life with you not same,
-Hold my hand always,
-Stay with me all days,
-This proposal from my soul,
-Sai you make me whole 💘`,
-
-  9: `🍫 Sweet like chocolate you,
-Sai my world feels new,
-Every bite reminds of you,
-Every dream comes true,
-Stay close never far,
-You my shining star,
-Melting heart for you,
-Only love so true,
-Chocolate day we shine,
-Sai forever mine 🤎`,
-
-  10: `🧸 Sai my teddy heart,
-Hugs that never part,
-Soft love warm and tight,
-You make world bright,
-Holding you feels home,
-Never let you roam,
-In your arms peace,
-All fears cease,
-Teddy day feels right,
-Sai my pure light 🧸`,
-
-  11: `🤝 Promises in air,
-Sai I always care,
-Through storm and rain,
-I’ll stay the same,
-Forever by your side,
-With you I reside,
-No matter what we face,
-You my safe place,
-Promise day we vow,
-I choose you now 💞`,
-
-  12: `🤗 Sai my warm hug,
-Love wrapped snug,
-Every heartbeat calm,
-In your loving palm,
-Your arms my peace,
-All worries cease,
-Hold me tight,
-Day and night,
-Hug day says true,
-I live for you 💕`,
-
-  13: `💋 Sai your smile kiss,
-Heavenly bliss,
-Soul meets soul,
-You make me whole,
-Every glance fire,
-You my desire,
-Love so deep,
-Memories keep,
-Kiss day say this,
-You’re my bliss 😘`,
-
-  14: `💕 Sai forever we,
-Just you and me,
-Through time and fate,
-Love so great,
-Hearts align,
-Your hand mine,
-Destiny wrote,
-Every love note,
-Valentine forever,
-Leave you never ❤️`
+// back home
+document.getElementById("backHome").onclick=()=>{
+ show("mainPage");
 };
 
-/* ========= OPEN DAY ========= */
-function openDay(d) {
-  stopFloat();
-  calPage.classList.remove("active");
-  dayPage.classList.add("active");
+// ---------- DAY DATA ----------
+const poems={
+7:`🌹 Rose day blooms with love for you  
+Every petal whispers "I adore you" 💕  
+Your smile is my morning sun ☀  
+Your eyes outshine every rose 🌹  
+My heart chose you forever ❤️  
+Let this rose seal our story…  
+Of laughter, madness and magic ✨  
+Stay mine in every lifetime 😌  
+Because loving you feels destiny 💖  
+Happy Rose Day my love 🌹💘`,
 
-  dayGif.src = `assets/gifs/day${d}.gif`;
+8:`💍 Today I gather courage to say  
+My heart chose you long ago 💕  
+Will you walk beside me always?  
+Through chaos and calm together 🌙  
+I promise laughter and loyalty  
+Dreams wrapped in your arms 😌  
+Say yes and make my world  
+A forever kind of beautiful 💖  
+My love kneels only for you 💍  
+Happy Propose Day 💘`,
 
-  poemBox.innerHTML = "";
-  imagesBox.innerHTML = "";
-  typeWriter(poemBox, poems[d], 35);
+9:`🧸 A teddy as soft as my love  
+Comes to hug you tight today 💕  
+Whenever you feel alone  
+Hold it and feel my arms 🤗  
+Its cotton holds my heartbeat ❤️  
+Its smile holds my warmth  
+Distance will never matter  
+Because my soul sits beside you 😌  
+Be my forever comfort  
+Happy Teddy Day 🧸💖`,
 
-  // images one by one
-  let i = 1;
-  const imgInterval = setInterval(() => {
-    if (i > 5) { clearInterval(imgInterval); return; }
-    const img = document.createElement("img");
-    img.src = `assets/images/day${d}-${i}.jpg`;
-    imagesBox.appendChild(img);
-    i++;
-  }, 800);
+10:`🍫 Sweet like chocolate  
+Is every moment with you 💕  
+Your words melt my heart  
+Like cocoa in warm milk ☕  
+I crave your presence daily  
+Like my favorite dessert 🍫  
+Life tastes better with you  
+More sugary and magical 😌  
+Stay my sweetness always  
+Happy Chocolate Day 🍫💘`,
 
-  // special February 14 heart confetti
-  if (d === 14) {
-    setTimeout(() => {
-      // small burst of hearts
-      for (let i = 0; i < 60; i++) {
-        const heart = document.createElement("div");
-        heart.innerHTML = "💕";
-        heart.className = "float";
-        heart.style.left = Math.random() * 100 + "vw";
-        layer.appendChild(heart);
-        setTimeout(() => heart.remove(), 4000);
-      }
-    }, 1200);
-  }
+11:`💌 Every promise I make  
+Is carved in my soul for you 💕  
+Through storms or sunshine  
+My hand won't leave yours 🤝  
+I promise loyalty and laughter  
+Endless care and madness  
+A forever kind of love ❤️  
+Where you are my home  
+Now and every lifetime  
+Happy Promise Day 💍`,
+
+12:`🤗 One hug from you  
+Fixes my broken universe 💕  
+In your arms I find peace  
+A home I never had before 🏡  
+Hold me when I’m chaos  
+Hold me when I’m quiet  
+Because your heartbeat  
+Feels like destiny to mine ❤️  
+Let me stay there forever  
+Happy Hug Day 🤗💘`,
+
+13:`💋 If kisses were stars  
+I'd gift you a galaxy tonight 🌌  
+Each one sealing my love  
+Soft and eternal for you 💕  
+Your lips hold my poetry  
+Your breath holds my calm 😌  
+Come closer and feel  
+How loud my heart beats ❤️  
+One kiss = forever promise  
+Happy Kiss Day 💋`,
+
+14:`💕 Today is ours completely  
+A love written by destiny 💖  
+You are my today & forever  
+My calm in chaos always 😌  
+Every heartbeat spells your name  
+Every dream holds your face 🌙  
+Stay with me through lifetimes  
+Through madness and magic  
+Because loving you is fate  
+Happy Valentine's Day Sai 💕💘`
+};
+
+// ---------- DAY CLICK ----------
+document.querySelectorAll(".day").forEach(btn=>{
+ btn.onclick=()=>{
+   const day=btn.dataset.day;
+   const today=new Date().getDate();
+
+   if(parseInt(day)!==today){
+     alert("Wait for the right day my love 💕");
+     return;
+   }
+
+   show("dayPage");
+   document.getElementById("poem").innerText=poems[day];
+   document.getElementById("dayGif").src=`assets/day${day}.gif`;
+
+   // load images
+   let imgBox=document.getElementById("images");
+   imgBox.innerHTML="";
+   let n=1;
+   let interval=setInterval(()=>{
+     if(n>5){clearInterval(interval); return;}
+     let img=document.createElement("img");
+     img.src=`assets/day${day}-${n}.jpg`;
+     imgBox.appendChild(img);
+     n++;
+   },800);
+
+   if(day=="14") heartConfetti();
+ };
+});
+
+// back calendar
+document.getElementById("backCal").onclick=()=>{
+ show("calendarPage");
+};
+
+// ---------- HEART CONFETTI ----------
+function heartConfetti(){
+ for(let i=0;i<80;i++){
+   let h=document.createElement("div");
+   h.innerText="💕";
+   h.className="float";
+   h.style.left=Math.random()*100+"vw";
+   h.style.fontSize="35px";
+   h.style.animationDuration="4s";
+   rain.appendChild(h);
+ }
 }
 
