@@ -32,26 +32,28 @@ happyMusic.loop=true;
 /* QUESTION */
 typeWriter(questionText,"Sai, will you be my valentine 💕");
 
-/* RAIN */
+/* 🌸 FULL SCREEN RAIN */
 let rainInt;
 function startRain(){
 stopRain();
 rainInt=setInterval(()=>{
 let e=document.createElement("div");
 e.className="rain";
-e.innerText=Math.random()>0.5?"❤️":"🌼";
+let emojis=["❤️","🌼","🌸","💖"];
+e.innerText=emojis[Math.floor(Math.random()*emojis.length)];
 e.style.left=Math.random()*100+"vw";
 document.body.appendChild(e);
 setTimeout(()=>e.remove(),8000);
-},500);
+},300);
 }
+
 function stopRain(){
 clearInterval(rainInt);
 document.querySelectorAll(".rain").forEach(e=>e.remove());
 }
 startRain();
 
-/* HEARTBREAK */
+/* 💔 HEARTBREAK FULL SCREEN */
 let heartInt;
 function startHeartbreak(){
 stopRain();
@@ -62,7 +64,7 @@ b.innerText="💔";
 b.style.left=Math.random()*100+"vw";
 document.body.appendChild(b);
 setTimeout(()=>b.remove(),3000);
-},200);
+},120);
 }
 function stopHeartbreak(){
 clearInterval(heartInt);
@@ -158,6 +160,7 @@ cal.appendChild(box);
 document.getElementById("backHome").onclick=()=>{
 calScreen.classList.add("hidden");
 qScreen.classList.remove("hidden");
+startRain();
 };
 
 /* OPEN DAY */
