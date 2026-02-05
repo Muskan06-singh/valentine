@@ -8,77 +8,65 @@
 <link rel="stylesheet" href="style.css">
 
 <!-- Scribble bold font -->
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+
+<!-- Canvas confetti -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 
 <body>
 
-<!-- Floating emoji rain -->
-<div id="rainContainer"></div>
+<!-- 🌼❤️ Rain layer -->
+<div id="rain-layer"></div>
 
-<!-- MUSIC (keep your same files) -->
-<audio id="bgMusic" src="assets/music.mp3" loop></audio>
-<audio id="sadMusic" src="assets/sad.mp3" loop></audio>
-<audio id="happyMusic" src="assets/happy.mp3" loop></audio>
+<!-- MAIN -->
+<div id="app">
 
-<!-- MAIN QUESTION PAGE -->
-<div id="mainPage" class="page active">
-  <h1 id="mainText" class="bigText"></h1>
+  <!-- QUESTION -->
+  <div id="question-screen" class="screen">
+    <h1 id="questionText"></h1>
 
-  <div class="btnBox">
-    <button id="yesBtn">YES 💖</button>
-    <button id="noBtn">NO 💔</button>
-  </div>
-</div>
-
-<!-- SAD PAGE -->
-<div id="sadPage" class="page black">
-  <img src="assets/sad.gif" class="gif">
-  <h2 class="sadText">My heart shattered… 💔</h2>
-  <button id="thinkBtn">Think again my love ❤️</button>
-</div>
-
-<!-- TEASE PAGE -->
-<div id="teasePage" class="page black">
-  <img src="assets/tease.gif" class="gif">
-  <h2 class="sadText">You are already mine ❤️😌</h2>
-  <button id="acceptBtn">Okay fine 💕</button>
-</div>
-
-<!-- HAPPY PAGE -->
-<div id="yesPage" class="page">
-  <img src="assets/happy.gif" class="gif">
-  <h1 class="bigText">Yaaay Sai accepted me 💕</h1>
-  <button id="openCalendar">Open our love calendar 📅</button>
-</div>
-
-<!-- CALENDAR -->
-<div id="calendarPage" class="page">
-  <h1 class="bigText">Our Valentine Week 💘</h1>
-
-  <div class="calendar">
-    <button class="day" data-day="7">Feb 7</button>
-    <button class="day" data-day="8">Feb 8</button>
-    <button class="day" data-day="9">Feb 9</button>
-    <button class="day" data-day="10">Feb 10</button>
-    <button class="day" data-day="11">Feb 11</button>
-    <button class="day" data-day="12">Feb 12</button>
-    <button class="day" data-day="13">Feb 13</button>
-    <button class="day" data-day="14">Feb 14 💕</button>
+    <div class="buttons">
+      <button id="yesBtn">YES 💘</button>
+      <button id="noBtn">NO 💔</button>
+    </div>
   </div>
 
-  <button id="backHome">⬅ Back to start</button>
-</div>
+  <!-- SAD SCREEN -->
+  <div id="sad-screen" class="screen hidden">
+    <img id="sadGif" class="gif">
+    <h2 id="sadText"></h2>
 
-<!-- DAY PAGE -->
-<div id="dayPage" class="page">
-  <img id="dayGif" class="gif">
-  <div id="poem" class="poem"></div>
-  <div id="images"></div>
-  <button id="backCal">⬅ Back to calendar</button>
+    <button id="thinkBtn" class="heart-btn">❤️ Think again my Love ❤️</button>
+  </div>
+
+  <!-- YES SCREEN -->
+  <div id="yes-screen" class="screen hidden">
+    <img src="assets/gifs/happy.gif" class="gif">
+    <h2 id="yesText"></h2>
+    <button id="openCal">Open Love Calendar 💌</button>
+  </div>
+
+  <!-- CALENDAR -->
+  <div id="calendar-screen" class="screen hidden">
+    <h2 class="title">Our Love Week 💖</h2>
+    <div id="calendar"></div>
+
+    <button id="backHome" class="backBtn">⬅ Back to Valentine Page</button>
+  </div>
+
+  <!-- DAY PAGE -->
+  <div id="day-screen" class="screen hidden">
+    <img id="dayGif" class="gif">
+    <h2 id="poem"></h2>
+
+    <div id="images"></div>
+
+    <button id="backCal" class="backBtn">⬅ Back to Calendar</button>
+  </div>
+
 </div>
 
 <script src="script.js"></script>
 </body>
 </html>
-
