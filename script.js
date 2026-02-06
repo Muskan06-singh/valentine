@@ -526,3 +526,152 @@ const poems = {
 ]
 
 }
+// ===============================
+// 🎭 CHATPATE DRAMAS FOR SAI 💖
+// ===============================
+const dramas = [
+    {
+        name: "Jealous Sai Drama 😤",
+        run: () => {
+            alert("Sai! 😡 Why are you looking at someone else? My heart can't take this 💔💖");
+        }
+    },
+    {
+        name: "Missing Sai Drama 🥹",
+        run: () => {
+            darkBouncyTypeWriter(document.getElementById("questionText"), "Sai… why aren’t you here? My heart aches without you 😢💘");
+        }
+    },
+    {
+        name: "Crazy Dance Drama 💃",
+        run: () => {
+            confetti({ particleCount: 400, spread: 360, origin: { y: 0.6 } });
+            darkBouncyTypeWriter(document.getElementById("questionText"), "Sai! 💃 Let’s dance till the stars fall! 🌟💖");
+        }
+    },
+    {
+        name: "Sleepy Sai Drama 😴",
+        run: () => {
+            darkBouncyTypeWriter(document.getElementById("questionText"), "Sai… you better sleep now 😴💤 or I’ll come and steal your dreams 💘✨");
+        }
+    },
+    {
+        name: "Teasing Sai Drama 😏",
+        run: () => {
+            alert("Hehe Sai 😏… you thought you can hide from me? My love sees all 💖");
+        }
+    },
+    {
+        name: "Romantic Overload 😍",
+        run: () => {
+            darkBouncyTypeWriter(document.getElementById("questionText"), "Sai 💖… My heart beats only for you 💓💓💓 Forever and always ✨🌹💌");
+            confetti({ particleCount: 500, spread: 360, origin: { y: 0.5 } });
+        }
+    },
+    {
+        name: "Heart Rain Drama 🌧️💖",
+        run: () => {
+            for (let i = 0; i < 30; i++) {
+                let e = document.createElement("div");
+                e.className = "rain";
+                e.innerHTML = Math.random() > 0.5 ? "💖" : "💌";
+                e.style.left = Math.random() * 100 + "vw";
+                e.style.fontSize = (20 + Math.random() * 30) + "px";
+                e.style.animationDuration = (2 + Math.random() * 2) + "s";
+                document.body.appendChild(e);
+                setTimeout(() => e.remove(), 5000);
+            }
+        }
+    },
+    {
+        name: "Bouncy Emoji Drama 🤩",
+        run: () => {
+            darkBouncyTypeWriter(document.getElementById("questionText"), "Sai 🤩🌟💘… you make my heart bounce like crazy 💓💓!");
+        }
+    },
+    {
+        name: "Confetti Blast 🎊",
+        run: () => {
+            confetti({ particleCount: 600, spread: 360, origin: { y: 0.5 } });
+        }
+    },
+    {
+        name: "Mini Proposal Reminder 💍",
+        run: () => {
+            darkBouncyTypeWriter(document.getElementById("questionText"), "Sai 💖… don’t forget, my heart is already yours 💘💌");
+        }
+    },
+    {
+        name: "Emoji Shower 🌈",
+        run: () => {
+            const emojis = ["💖","💌","🌹","🌟","✨","🥰","🍫"];
+            for (let i = 0; i < 50; i++) {
+                let e = document.createElement("div");
+                e.className = "rain";
+                e.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+                e.style.left = Math.random() * 100 + "vw";
+                e.style.fontSize = (15 + Math.random() * 30) + "px";
+                e.style.animationDuration = (2 + Math.random() * 2) + "s";
+                document.body.appendChild(e);
+                setTimeout(() => e.remove(), 5000);
+            }
+        }
+    },
+    {
+        name: "Funny Tease 😏",
+        run: () => {
+            alert("Sai 😏… Stop teasing me with your smile! My heart can’t handle it 💓😂");
+        }
+    },
+    {
+        name: "Random Hug 🤗",
+        run: () => {
+            darkBouncyTypeWriter(document.getElementById("questionText"), "Sai 🤗💞… sending you a virtual hug right now!");
+        }
+    },
+    {
+        name: "Star Shower ✨",
+        run: () => {
+            for (let i = 0; i < 40; i++) {
+                let e = document.createElement("div");
+                e.className = "rain";
+                e.innerHTML = "✨";
+                e.style.left = Math.random() * 100 + "vw";
+                e.style.fontSize = (20 + Math.random() * 25) + "px";
+                e.style.animationDuration = (2 + Math.random() * 2) + "s";
+                document.body.appendChild(e);
+                setTimeout(() => e.remove(), 5000);
+            }
+        }
+    },
+    {
+        name: "Chocolate Love 🍫",
+        run: () => {
+            darkBouncyTypeWriter(document.getElementById("questionText"), "Sai 🍫💖… You are sweeter than any chocolate!");
+        }
+    },
+    {
+        name: "Random Confetti & Love 💞",
+        run: () => {
+            confetti({ particleCount: 400, spread: 360, origin: { y: 0.5 } });
+            darkBouncyTypeWriter(document.getElementById("questionText"), "Sai 💞… every second with you is magical ✨🌹");
+        }
+    }
+];
+
+// ===============================
+// 🎲 RANDOM DRAMA FUNCTION
+// ===============================
+function playRandomDrama() {
+    if (insideSpecial) return; // no dramas in sad/calendar/day screens
+    const drama = dramas[Math.floor(Math.random() * dramas.length)];
+    console.log("Drama running:", drama.name);
+    drama.run();
+}
+
+// ===============================
+// 🕹️ AUTO DRAMA EVERY 25s (RISK-FREE)
+setInterval(() => {
+    playRandomDrama();
+}, 25000); // every 25 seconds
+
