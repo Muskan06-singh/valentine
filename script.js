@@ -37,6 +37,8 @@ function typeWriter(el, text, speed=40){
         i++;
         if(i>=text.length) clearInterval(timer);
     },speed);
+}
+
 
 // ===============================
 // 🌸 HEART + DAISY RAIN
@@ -160,6 +162,7 @@ document.getElementById("noBtn").onclick = ()=>{
     sadText.style.color="white";  // glowing white
     sadText.style.textShadow="0 0 10px white,0 0 25px hotpink,0 0 40px pink";
 
+   
     if(noClick<=3){
         sadGif.src="assets/gifs/sad.gif";
 
