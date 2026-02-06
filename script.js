@@ -648,3 +648,48 @@ setInterval(()=>{
         drama();
     }
 },2000);
+// ===============================
+// 💓 BIG BREATHING HEART FOR FEB 14
+function showBigHeart(){
+    // Prevent multiple hearts
+    if(document.getElementById("bigHeart")) return;
+
+    const heart = document.createElement("div");
+    heart.id = "bigHeart";
+    heart.textContent = "💖";
+    heart.style.position = "fixed";
+    heart.style.top = "50%";
+    heart.style.left = "50%";
+    heart.style.transform = "translate(-50%, -50%) scale(0)";
+    heart.style.fontSize = "150px";
+    heart.style.zIndex = 9999;
+    heart.style.pointerEvents = "none";
+    heart.style.textShadow = "0 0 30px #ff4d6d, 0 0 60px #ff0080, 0 0 90px #ff69b4";
+    heart.style.transition = "transform 0.5s ease";
+
+    document.body.appendChild(heart);
+
+    // Pop in animation
+    setTimeout(()=>heart.style.transform = "translate(-50%, -50%) scale(1)", 50);
+
+    // Breathing effect
+    let grow = true;
+    const beat = setInterval(()=>{
+        if(!document.body.contains(heart)){ 
+            clearInterval(beat); 
+            return;
+        }
+        heart.style.transform = grow 
+            ? "translate(-50%, -50%) scale(1.1)"
+            : "translate(-50%, -50%) scale(1)";
+        grow = !grow;
+    }, 800);
+}
+
+// ===============================
+// 🔥 TRIGGER BIG HEART ON FEB 14
+// Make sure this is added inside your openDay function for day 14
+if(day === 14){
+    setTimeout(showBigHeart, 1000); // 1s delay for pop effect
+}
+
