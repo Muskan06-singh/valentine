@@ -22,7 +22,7 @@ function glowingTypeWriter(el, text, speed=40){
     let timer=setInterval(()=>{
         let span = document.createElement("span");
         span.textContent = text.charAt(i);
-        span.style.textShadow = "0 0 10px white,0 0 25px black,0 0 50px red";
+        span.style.textShadow = "0 0 10px black,0 0 25px hotpink,0 0 50px red";
         span.style.color="white";
         el.appendChild(span);
         i++;
