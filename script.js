@@ -268,6 +268,7 @@ i++;
 // after 14 final proposal
 if(day==14){
 setTimeout(finalProposal,7000);
+setTimeout(startFinalProposal,9000); // 💍 real proposal after ring
 }
 }
 
@@ -311,3 +312,177 @@ spread:200,
 origin:{y:.6}
 });
 }
+/* =========================
+   💍 FINAL SAI PROPOSAL MODE
+   ========================= */
+
+function startFinalProposal(){
+
+    document.body.innerHTML = `
+    <div id="proposalScene" style="
+        position:fixed;
+        top:0;left:0;
+        width:100%;
+        height:100%;
+        background:radial-gradient(circle at center,#000,#050505,#000);
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        overflow:hidden;
+        font-family:'Caveat',cursive;
+        color:white;
+        text-align:center;
+    ">
+
+        <h1 id="proposalText" style="
+            font-size:60px;
+            opacity:0;
+            transform:scale(0.5);
+            transition:1.5s;
+            text-shadow:0 0 25px pink,0 0 60px red;
+        ">Sai 💖</h1>
+
+        <h2 id="marryText" style="
+            font-size:80px;
+            margin-top:20px;
+            opacity:0;
+            transition:2s;
+            text-shadow:0 0 30px red,0 0 80px hotpink;
+        ">Will You Marry Me? 💍</h2>
+
+        <div id="proposalBtns" style="margin-top:40px;display:none;">
+            <button onclick="acceptProposal()" style="
+                padding:15px 35px;
+                font-size:25px;
+                border:none;
+                border-radius:40px;
+                background:linear-gradient(45deg,#ff0080,#ff4d6d);
+                color:white;
+                cursor:pointer;
+                box-shadow:0 0 25px pink;
+                margin-right:20px;
+            ">YES 💍</button>
+
+            <button onclick="runNoFinal(this)" style="
+                padding:15px 35px;
+                font-size:25px;
+                border:none;
+                border-radius:40px;
+                background:#111;
+                color:white;
+                cursor:pointer;
+            ">NO 😭</button>
+        </div>
+
+        <canvas id="explosionCanvas" style="position:absolute;top:0;left:0;"></canvas>
+
+    </div>
+    `;
+
+    playMusic("happy.mp3");
+
+    setTimeout(()=>{
+        document.getElementById("proposalText").style.opacity=1;
+        document.getElementById("proposalText").style.transform="scale(1)";
+    },800);
+
+    setTimeout(()=>{
+        document.getElementById("marryText").style.opacity=1;
+        proposalExplosion();
+    },2200);
+
+    setTimeout(()=>{
+        document.getElementById("proposalBtns").style.display="block";
+    },4200);
+}
+
+/* =========================
+   💥 PROPOSAL EXPLOSION
+   ========================= */
+function proposalExplosion(){
+    const canvas = document.getElementById("explosionCanvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particles=[];
+
+    for(let i=0;i<150;i++){
+        particles.push({
+            x:canvas.width/2,
+            y:canvas.height/2,
+            radius:Math.random()*4+2,
+            color:`hsl(${Math.random()*360},100%,60%)`,
+            speedX:(Math.random()-0.5)*8,
+            speedY:(Math.random()-0.5)*8,
+            life:120
+        });
+    }
+
+    function animate(){
+        ctx.fillStyle="rgba(0,0,0,0.2)";
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+
+        particles.forEach(p=>{
+            ctx.beginPath();
+            ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);
+            ctx.fillStyle=p.color;
+            ctx.fill();
+
+            p.x+=p.speedX;
+            p.y+=p.speedY;
+            p.life--;
+        });
+
+        particles = particles.filter(p=>p.life>0);
+        if(particles.length>0) requestAnimationFrame(animate);
+    }
+    animate();
+}
+
+/* =========================
+   💍 YES ACCEPT FINAL
+   ========================= */
+function acceptProposal(){
+    document.body.innerHTML=`
+    <div style="
+        height:100vh;
+        background:black;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        flex-direction:column;
+        font-family:'Caveat';
+        color:white;
+        text-align:center;
+    ">
+        <h1 style="font-size:80px;color:pink;text-shadow:0 0 40px red;">
+        SHE SAID YES 💍😭💖
+        </h1>
+        <img src="happy.gif" style="width:300px;margin-top:20px;">
+    </div>
+    `;
+    playMusic("happy.mp3");
+}
+
+/* =========================
+   😭 NO BUTTON RUN AWAY FINAL
+   ========================= */
+function runNoFinal(btn){
+    btn.style.position="absolute";
+    btn.style.top=Math.random()*80+"%";
+    btn.style.left=Math.random()*80+"%";
+}
+
+/* =========================
+   🔊 MUSIC FUNCTION
+   ========================= */
+let currentAudio;
+function playMusic(file){
+    if(currentAudio) currentAudio.pause();
+    currentAudio = new Audio(file);
+    currentAudio.loop = true;
+    currentAudio.play().catch(()=>{});
+}
+
