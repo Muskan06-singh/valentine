@@ -1,57 +1,96 @@
-/* ---------------- HEART RAIN ---------------- */
-function heartRain(){
+/* ---------- HEART + DAISY RAIN ---------- */
+let rainInterval;
+
+function startRain(){
+stopRain();
+rainInterval=setInterval(()=>{
 let e=document.createElement("div");
-e.innerText="💗";
 e.className="rain";
+let emojis=["❤️","🌸","🌼","💖"];
+e.innerText=emojis[Math.floor(Math.random()*emojis.length)];
 e.style.left=Math.random()*100+"vw";
-e.style.fontSize=(20+Math.random()*25)+"px";
+e.style.fontSize=(25+Math.random()*30)+"px";
+e.style.animationDuration=(4+Math.random()*4)+"s";
 document.body.appendChild(e);
-setTimeout(()=>e.remove(),4000);
+setTimeout(()=>e.remove(),8000);
+},120);
 }
-setInterval(heartRain,120);
 
+function stopRain(){
+clearInterval(rainInterval);
+document.querySelectorAll(".rain").forEach(e=>e.remove());
+}
 
-/* ---------------- NO BUTTON STORY FLOW ---------------- */
+startRain();
+
+/* ---------- HEARTBREAK RAIN ---------- */
+let breakInterval;
+
+function startHeartbreak(){
+stopRain();
+breakInterval=setInterval(()=>{
+let b=document.createElement("div");
+b.className="broken";
+b.innerText="💔";
+b.style.left=Math.random()*100+"vw";
+b.style.fontSize=(30+Math.random()*40)+"px";
+b.style.animationDuration="3s";
+document.body.appendChild(b);
+setTimeout(()=>b.remove(),3000);
+},120);
+}
+
+function stopHeartbreak(){
+clearInterval(breakInterval);
+document.querySelectorAll(".broken").forEach(e=>e.remove());
+}
+
+/* ---------- ELEMENTS ---------- */
+const qScreen=document.getElementById("question-screen");
+const sadScreen=document.getElementById("sad-screen");
+const yesScreen=document.getElementById("yes-screen");
+const calScreen=document.getElementById("calendar-screen");
+const dayScreen=document.getElementById("day-screen");
+
+const yesBtn=document.getElementById("yesBtn");
+const noBtn=document.getElementById("noBtn");
+const thinkBtn=document.getElementById("thinkBtn");
+
+const sadText=document.getElementById("sadText");
+const sadGif=document.getElementById("sadGif");
+
+/* ---------- NO BUTTON STORY ---------- */
 let noCount=0;
-let noBtn=document.getElementById("noBtn");
 
-function clickNo(){
-
+noBtn.onclick=()=>{
 noCount++;
+qScreen.classList.add("hidden");
+sadScreen.classList.remove("hidden");
+startHeartbreak();
 
-let msg=document.getElementById("message");
-let gif=document.getElementById("sadGif");
-let tease=document.getElementById("teaseGif");
-
-/* first 3 clicks → SAD MODE */
+/* first 3 sad */
 if(noCount<=3){
 
-tease.style.display="none";
-gif.style.display="block";
+sadGif.src="assets/gifs/sad.gif";
 
 const sadLines=[
-`Sai… my heart just skipped a beat 💔`,
-`Sai… don’t do this to our love 🥺`,
-`Sai… say yes and save me tonight 😭`
+"Sai… my heart hurts without you 💔",
+"Sai… don’t break our love story 🥺",
+"Sai… please say yes and save me 😭"
 ];
 
-msg.innerHTML=`<p>${sadLines[noCount-1]}</p>`;
+sadText.innerHTML=sadLines[noCount-1];
 }
 
-
-/* 4th click → TEASE MODE */
+/* 4th tease */
 if(noCount==4){
+sadGif.src="assets/gifs/tease.gif";
 
-gif.style.display="none";
-tease.style.display="block";
-
-msg.innerHTML=`
-<p>Sai… you are mine already 😏</p>
-<p>Stop pressing no and accept fate 💘</p>
-<p>Because you + me = forever 💍</p>
+sadText.innerHTML=`
+Sai… you are mine already 😏💘 <br>
+Stop pressing NO and accept fate ❤️
 `;
 
-/* make NO run away */
 noBtn.style.position="absolute";
 
 noBtn.onmouseover=()=>{
@@ -59,172 +98,99 @@ noBtn.style.left=Math.random()*80+"vw";
 noBtn.style.top=Math.random()*80+"vh";
 };
 
-/* disable clicking */
 noBtn.onclick=()=>{};
 }
+};
 
-}
+/* THINK AGAIN */
+thinkBtn.onclick=()=>{
+sadScreen.classList.add("hidden");
+qScreen.classList.remove("hidden");
+stopHeartbreak();
+startRain();
+};
 
+/* YES CLICK */
+yesBtn.onclick=()=>{
+qScreen.classList.add("hidden");
+yesScreen.classList.remove("hidden");
+};
 
-/* ---------------- YES CLICK ---------------- */
-function clickYes(){
-document.getElementById("firstPage").style.display="none";
-document.getElementById("calendarPage").style.display="block";
-}
+/* OPEN CALENDAR */
+document.getElementById("openCal").onclick=()=>{
+yesScreen.classList.add("hidden");
+showCalendar();
+};
 
-
-/* ---------------- POEMS ---------------- */
+/* ---------- POEMS ---------- */
 const poems = {
-
-7: [
-"🌹 Sai, every rose whispers your name tonight",
-"Petals glow soft in your love’s light ✨",
-"Fragrance travels where you are 💌",
-"My heart blooms only for Sai, my star ⭐",
-"Each thorn fades when you are near 💞",
-"Every bloom sings love so clear 🎶",
-"Rose Day feels warmer with you 🌹",
-"My forever begins with Sai, it’s true 💖",
-"Every garden envies my fate 🌸",
-"Because loving Sai is my destiny and my date ❤️"
-],
-
-8: [
-"💍 Sai, today my heart kneels to you",
-"Not with a ring, but love so true 💞",
-"Every heartbeat softly says your name 🥹",
-"In every lifetime, I’d love you the same ✨",
-"If forever had a start, it begins with you 💖",
-"Sai, be mine forever ❤️"
-],
-
-9: [
-"🍫 Sai, sweetness learned from you",
-"Every chocolate envies your hue 🤎",
-"My heart melts for you every while 💘",
-"Sai, you are my sweetest addiction 💖",
-"My forever chocolate of affection 🍫"
-],
-
-10: [
-"🧸 Sai, today I send you a teddy hug",
-"Soft like love, warm and snug 🤗",
-"With you I never feel alone 💞",
-"Sai, be my comfort always 💖"
-],
-
-11: [
-"💌 Sai, promises bloom today",
-"I promise laughter through tears 💞",
-"In storms I’ll hold you tight 🌧️",
-"I choose only you now 💖"
-],
-
-12: [
-"🤗 Sai, today I send you my hug",
-"In your arms I feel peace 🥹",
-"With you I feel whole 💖",
-"Sai, hold me forever tight 💓"
-],
-
-13: [
-"😘 Sai, kisses speak without sound",
-"In your love my world is found 💞",
-"Your smile feels like a kiss 😌",
-"My heart forever the same 💓"
-],
-
-14: [
-"❤️ Sai, today is our forever day",
-"My world begins with you 💖",
-"Valentine writes our destiny 💌",
-"Sai, my heart is only yours ❤️"
-]
-
+7:["🌹 Sai, every rose whispers your name tonight","Petals glow soft in your love’s light ✨","Fragrance travels where you are 💌","My heart blooms only for Sai, my star ⭐","Each thorn fades when you are near 💞","Every bloom sings love so clear 🎶","Rose Day feels warmer with you 🌹","My forever begins with Sai, it’s true 💖","Every garden envies my fate 🌸","Because loving Sai is my destiny ❤️"],
+8:["💍 Sai, today my heart kneels to you","Not with a ring, but love so true 💞","Every heartbeat softly says your name 🥹","In every lifetime, I’d love you the same ✨","If forever had a start, it begins with you 💖","Sai be mine forever ❤️"],
+9:["🍫 Sai, sweetness learned from you","Every chocolate envies your hue 🤎","My heart melts for you every while 💘","Sai, you are my sweetest addiction 💖","My forever chocolate 🍫"],
+10:["🧸 Sai, today I send you a teddy hug","Soft like love, warm and snug 🤗","With you I never feel alone 💞","Sai my comfort always 💖"],
+11:["💌 Sai, promises bloom today","I promise laughter through tears 💞","In storms I’ll hold you tight 🌧️","I choose only you 💖"],
+12:["🤗 Sai, today I send you my hug","In your arms I feel peace 🥹","With you I feel whole 💖","Sai hold me forever 💓"],
+13:["😘 Sai, kisses speak without sound","In your love my world is found 💞","Your smile feels like a kiss 😌","My heart forever same 💓"],
+14:["❤️ Sai, today is our forever day","My world begins with you 💖","Valentine writes our destiny 💌","Sai my heart only yours ❤️"]
 };
 
+/* ---------- CALENDAR ---------- */
+function showCalendar(){
+calScreen.classList.remove("hidden");
+const cal=document.getElementById("calendar");
+cal.innerHTML="";
 
-/* ---------------- GIF PER DAY ---------------- */
-const dayGifs={
-7:"7.gif",
-8:"8.gif",
-9:"9.gif",
-10:"10.gif",
-11:"11.gif",
-12:"12.gif",
-13:"13.gif",
-14:"14.gif"
+for(let d=7;d<=14;d++){
+let box=document.createElement("div");
+box.className="day";
+box.innerText="Feb "+d;
+box.onclick=()=>openDay(d);
+cal.appendChild(box);
+}
+}
+
+/* BACK HOME */
+document.getElementById("backHome").onclick=()=>{
+calScreen.classList.add("hidden");
+qScreen.classList.remove("hidden");
 };
 
-
-/* ---------------- OPEN DAY ---------------- */
+/* ---------- OPEN DAY ---------- */
 function openDay(day){
+calScreen.classList.add("hidden");
+dayScreen.classList.remove("hidden");
+stopRain();
 
-document.getElementById("calendarPage").style.display="none";
-let page=document.getElementById("dayPage");
-page.style.display="block";
+document.getElementById("dayGif").src=`assets/gifs/day${day}.gif`;
 
-let gif=document.getElementById("dayGif");
-gif.src=dayGifs[day];
-
-let poemBox=document.getElementById("poemBox");
-poemBox.innerHTML="";
-
+/* poem */
+const poemEl=document.getElementById("poem");
+poemEl.innerHTML="";
 poems[day].forEach(line=>{
 let p=document.createElement("p");
 p.innerHTML=line;
-poemBox.appendChild(p);
+poemEl.appendChild(p);
 });
 
+/* images one by one */
+const imgBox=document.getElementById("images");
+imgBox.innerHTML="";
+let i=1;
 
-/* final proposal */
-if(day==14){
-setTimeout(()=>{
-showProposal();
-},5000);
+let inter=setInterval(()=>{
+let img=document.createElement("img");
+img.src=`assets/images/day${day}-${i}.jpg`;
+img.className="loveImg";
+
+img.onerror=()=>clearInterval(inter);
+img.onload=()=>imgBox.appendChild(img);
+i++;
+},1200);
 }
 
-}
-
-
-/* ---------------- PROPOSAL ---------------- */
-function showProposal(){
-
-let div=document.createElement("div");
-div.id="proposalScene";
-
-div.innerHTML=`
-<div style="font-size:120px">💍</div>
-<h1 style="font-size:60px">Sai… will you marry me? ❤️</h1>
-<button onclick="finalYes()" class="foreverBtn">YES 💍</button>
-`;
-
-document.body.appendChild(div);
-
-/* confetti */
-setInterval(()=>{
-confetti({
-particleCount:120,
-spread:100,
-origin:{y:0.6}
-});
-},400);
-}
-
-
-/* ---------------- FINAL YES ---------------- */
-function finalYes(){
-let box=document.getElementById("proposalScene");
-box.innerHTML=`
-<h1 style="font-size:80px;color:white">
-Sai said YES 💍❤️
-</h1>
-`;
-setInterval(()=>{
-confetti({
-particleCount:200,
-spread:140,
-origin:{y:0.6}
-});
-},400);
-}
+/* BACK CAL */
+document.getElementById("backCal").onclick=()=>{
+dayScreen.classList.add("hidden");
+showCalendar();
+startRain();
+};
