@@ -182,22 +182,50 @@ btn.style.top=y+"px";
 // ===============================
 // 📅 REAL LIFE SYNC CALENDAR
 // ===============================
+// ===============================
+// 📅 AESTHETIC LIVE CALENDAR (SAFE)
+// ===============================
 const calendar=document.getElementById("calendar");
+calendar.innerHTML="";
+
+const today = new Date();
+const todayDate = today.getDate();
 
 for(let d=7; d<=14; d++){
+
 let box=document.createElement("div");
 box.className="day";
 box.innerHTML="Feb "+d;
 
-box.onclick=()=>{
+// floating soft animation
+box.style.transition="0.4s";
+box.style.animation="textFloat 3s ease-in-out infinite alternate";
 
+// ⭐ only 7 & 14 clickable
 if(d===7 || d===14){
-openDay(d);
+
+box.style.boxShadow="0 0 25px hotpink, 0 0 60px pink";
+box.style.transform="scale(1.08)";
+box.style.animation="glowPulse 1.5s infinite alternate";
+
+box.onclick=()=>openDay(d);
 }
+
+// 🔒 locked poetic popup
 else{
-alert("Not today my love 🌙\nThis memory will bloom on its destined day 💌");
-}
+box.classList.add("locked");
+
+box.onclick=()=>{
+alert("⏳ My love… not yet.\nOur memory will bloom on its destined day 🌸💌");
 };
+}
+
+// 🌟 REAL DATE GLOW
+if(todayDate===d){
+box.style.boxShadow="0 0 40px #ff69b4, 0 0 90px pink";
+box.style.transform="scale(1.15)";
+box.style.animation="glowPulse 1s infinite alternate";
+}
 
 calendar.appendChild(box);
 }
