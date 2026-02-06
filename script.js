@@ -1,257 +1,192 @@
-/* TYPEWRITER */
-function typeWriter(el,text,speed=40){
-el.innerHTML="";
-let i=0;
-let timer=setInterval(()=>{
-el.innerHTML+=text.charAt(i);
-i++;
-if(i>=text.length) clearInterval(timer);
-},speed);
+// ============================
+// 🌸 GLOBAL VARIABLES
+// ============================
+let noClickCount = 0;
+let rainInterval;
+let isInsideSpecialPage = false; // sad page or calendar day open
+
+// ============================
+// 🌸 START HEART + DAISY RAIN
+// ============================
+function startRain() {
+    stopRain();
+
+    rainInterval = setInterval(() => {
+        if (isInsideSpecialPage) return;
+
+        const emoji = Math.random() > 0.5 ? "💖" : "🌼";
+        const drop = document.createElement("div");
+        drop.className = "rainDrop";
+        drop.innerHTML = emoji;
+
+        drop.style.left = Math.random() * window.innerWidth + "px";
+        drop.style.fontSize = (Math.random() * 20 + 20) + "px";
+
+        document.body.appendChild(drop);
+
+        setTimeout(() => {
+            drop.remove();
+        }, 4000);
+    }, 120);
 }
 
-/* ELEMENTS */
-const qScreen=document.getElementById("question-screen");
-const sadScreen=document.getElementById("sad-screen");
-const yesScreen=document.getElementById("yes-screen");
-const calScreen=document.getElementById("calendar-screen");
-const dayScreen=document.getElementById("day-screen");
-
-const yesBtn=document.getElementById("yesBtn");
-const noBtn=document.getElementById("noBtn");
-const thinkBtn=document.getElementById("thinkBtn");
-const openCalBtn=document.getElementById("openCal");
-const backHomeBtn=document.getElementById("backHome");
-
-const sadGif=document.getElementById("sadGif");
-const sadText=document.getElementById("sadText");
-const questionText=document.getElementById("questionText");
-const yesText=document.getElementById("yesText");
-
-/* OPENING */
-typeWriter(questionText,"Sai… will you be my Valentine? 💌✨");
-
-/* HEART + FLOWER RAIN */
-let rainInt;
-function startRain(){
-stopRain();
-rainInt=setInterval(()=>{
-let e=document.createElement("div");
-e.className="rain";
-e.innerText=["❤️","🌸","🌼","💖"][Math.floor(Math.random()*4)];
-e.style.left=Math.random()*100+"vw";
-e.style.fontSize=(25+Math.random()*25)+"px";
-e.style.animationDuration=(4+Math.random()*3)+"s";
-document.body.appendChild(e);
-setTimeout(()=>e.remove(),7000);
-},150);
-}
-function stopRain(){
-clearInterval(rainInt);
-document.querySelectorAll(".rain").forEach(e=>e.remove());
-}
-startRain();
-
-/* BROKEN HEART RAIN */
-let brokenInt;
-function startBrokenRain(){
-stopBrokenRain();
-brokenInt=setInterval(()=>{
-let b=document.createElement("div");
-b.innerHTML="💔";
-b.style.position="fixed";
-b.style.left=Math.random()*100+"vw";
-b.style.top="-40px";
-b.style.fontSize="40px";
-b.style.animation="fall 3s linear";
-document.body.appendChild(b);
-setTimeout(()=>b.remove(),3000);
-},200);
-}
-function stopBrokenRain(){
-clearInterval(brokenInt);
+function stopRain() {
+    clearInterval(rainInterval);
 }
 
-/* YES CLICK */
-yesBtn.onclick=()=>{
-qScreen.classList.add("hidden");
-yesScreen.classList.remove("hidden");
+// ============================
+// 🌸 YES BUTTON CLICK
+// ============================
+function clickYes() {
+    document.getElementById("firstPage").style.display = "none";
+    document.getElementById("calendarPage").style.display = "block";
 
-typeWriter(yesText,
-"Yaaay 💖 Sai said YES… and my heart just found its forever home 💍✨");
+    startRain();
+}
 
-confetti({particleCount:300,spread:200,origin:{y:0.6}});
+// ============================
+// 🌸 NO BUTTON CLICK
+// ============================
+function clickNo() {
+    noClickCount++;
+
+    if (noClickCount >= 3) {
+        document.getElementById("teaseGif").style.display = "block";
+    }
+
+    document.getElementById("sadPage").style.display = "block";
+    document.getElementById("firstPage").style.display = "none";
+
+    isInsideSpecialPage = true;
+    stopRain();
+}
+
+// ============================
+// 🌸 BACK FROM SAD PAGE
+// ============================
+function backFromSad() {
+    document.getElementById("sadPage").style.display = "none";
+    document.getElementById("firstPage").style.display = "block";
+
+    isInsideSpecialPage = false;
+    startRain();
+}
+
+// ============================
+// 🌸 OPEN CALENDAR DAY
+// ============================
+function openDay(day) {
+    isInsideSpecialPage = true;
+    stopRain();
+
+    document.getElementById("calendarPage").style.display = "none";
+    document.getElementById("dayPage").style.display = "block";
+
+    let title = document.getElementById("dayTitle");
+    let poem = document.getElementById("dayPoem");
+    let gif = document.getElementById("dayGif");
+
+    if(day==7){
+        title.innerHTML="🌹 Rose Day";
+        poem.innerHTML="You are my rose, my heart’s delight 🌹💖<br>Every moment with you feels right ✨";
+        gif.src="7.gif";
+    }
+    if(day==8){
+        title.innerHTML="💍 Propose Day";
+        poem.innerHTML="From today till forever I say 💍<br>Will you be mine in every way? 💖";
+        gif.src="8.gif";
+    }
+    if(day==9){
+        title.innerHTML="🧸 Teddy Day";
+        poem.innerHTML="Soft like teddy, warm like you 🧸💗<br>My happiest place is beside you ✨";
+        gif.src="9.gif";
+    }
+    if(day==10){
+        title.innerHTML="🍫 Chocolate Day";
+        poem.innerHTML="Sweeter than chocolate you are 🍫💖<br>My shining moon, my star ✨";
+        gif.src="10.gif";
+    }
+    if(day==11){
+        title.innerHTML="🤝 Promise Day";
+        poem.innerHTML="I promise laughs, hugs and care 🤝💗<br>Forever with you, always there ✨";
+        gif.src="11.gif";
+    }
+    if(day==12){
+        title.innerHTML="🤗 Hug Day";
+        poem.innerHTML="One hug from you heals all 🤗💖<br>In your arms I never fall ✨";
+        gif.src="12.gif";
+    }
+    if(day==13){
+        title.innerHTML="😘 Kiss Day";
+        poem.innerHTML="A kiss of love soft and true 😘💗<br>My whole world begins with you ✨";
+        gif.src="13.gif";
+    }
+    if(day==14){
+        title.innerHTML="❤️ Valentine Day";
+        poem.innerHTML="From first hello till life through 💖<br>Every heartbeat belongs to you ✨";
+        gif.src="14.gif";
+    }
+}
+
+// ============================
+// 🌸 BACK TO CALENDAR
+// ============================
+function backToCalendar(){
+    document.getElementById("dayPage").style.display="none";
+    document.getElementById("calendarPage").style.display="block";
+
+    isInsideSpecialPage=false;
+    startRain();
+}
+
+// ============================
+// 💍 FINAL MARRY ME SCENE
+// ============================
+function finalProposal(){
+    document.getElementById("calendarPage").style.display="none";
+    document.getElementById("finalPage").style.display="block";
+
+    isInsideSpecialPage=false;
+    startRain();
+
+    let text = document.getElementById("marryText");
+
+    let scale = 1;
+    setInterval(()=>{
+        scale = scale === 1 ? 1.15 : 1;
+        text.style.transform = `scale(${scale})`;
+    },600);
+
+    // glitter effect
+    setInterval(()=>{
+        text.style.textShadow = `
+        0 0 10px #ff69b4,
+        0 0 20px #ff1493,
+        0 0 40px #ff69b4,
+        0 0 80px #ff1493`;
+    },500);
+}
+
+// ============================
+// ✨ TEXT GLOW ANIMATION ALL
+// ============================
+function glowAllText(){
+    const texts = document.querySelectorAll("h1,h2,h3,p,button");
+
+    setInterval(()=>{
+        texts.forEach(t=>{
+            t.style.textShadow = `
+            0 0 5px #ff69b4,
+            0 0 15px #ff1493,
+            0 0 30px #ff69b4`;
+        });
+    },800);
+}
+
+// ============================
+// 🌸 ON LOAD
+// ============================
+window.onload = () => {
+    startRain();
+    glowAllText();
 };
-
-/* OPEN CALENDAR BUTTON */
-openCalBtn.onclick=()=>{
-yesScreen.classList.add("hidden");
-showCalendar();
-};
-
-/* NO CLICK LOGIC */
-let noCount=0;
-
-const sadPoems=[
-"Sai… my heart broke hearing that 💔",
-"Sai… even your no feels cute to me 🥺",
-"Sai… I will still choose you forever 🌙"
-];
-
-noBtn.onclick=()=>{
-noCount++;
-
-qScreen.classList.add("hidden");
-sadScreen.classList.remove("hidden");
-
-/* make sad page black */
-document.body.style.background="black";
-sadText.style.color="white";
-
-/* broken rain */
-startBrokenRain();
-
-/* first 3 times */
-if(noCount<=3){
-sadGif.src="assets/gifs/sad.gif";
-typeWriter(sadText,sadPoems[noCount-1]);
-}
-
-/* 4th time tease */
-else if(noCount==4){
-sadGif.src="assets/gifs/tease.gif";
-typeWriter(sadText,"Sai… you are mine already 😌 stop pressing NO");
-}
-
-/* after 4th run */
-else{
-noBtn.style.position="absolute";
-noBtn.onmouseover=()=>{
-noBtn.style.left=Math.random()*80+"vw";
-noBtn.style.top=Math.random()*80+"vh";
-};
-}
-};
-
-/* THINK AGAIN BUTTON */
-thinkBtn.onclick=()=>{
-sadScreen.classList.add("hidden");
-qScreen.classList.remove("hidden");
-document.body.style.background="#ffd6e7";
-stopBrokenRain();
-startRain();
-};
-
-/* SHOW CALENDAR */
-function showCalendar(){
-calScreen.classList.remove("hidden");
-document.body.style.background="#ffd6e7";
-
-const cal=document.getElementById("calendar");
-cal.innerHTML="";
-
-for(let d=7;d<=14;d++){
-let box=document.createElement("div");
-box.className="day";
-box.innerText="Feb "+d;
-
-if(d==7 || d==14){
-box.onclick=()=>openDay(d);
-}else{
-box.classList.add("locked");
-box.onclick=()=>{
-alert("Please wait for the correct day my love 💌⏳");
-};
-}
-
-cal.appendChild(box);
-}
-}
-
-/* BACK TO VALENTINE */
-backHomeBtn.onclick=()=>{
-calScreen.classList.add("hidden");
-qScreen.classList.remove("hidden");
-};
-
-/* CUSTOM POEMS */
-const poems={
-7:["🌹 Sai every rose whispers your name tonight"],
-8:["💍 Sai my heart proposes only to you"],
-9:["🍫 Sai sweetness begins with you"],
-10:["🧸 Sai my comfort forever"],
-11:["💌 Sai promises only yours"],
-12:["🤗 Sai hold me forever"],
-13:["😘 Sai kiss of destiny"],
-14:["❤️ Sai forever ours 💍"]
-};
-
-/* OPEN DAY */
-function openDay(day){
-calScreen.classList.add("hidden");
-dayScreen.classList.remove("hidden");
-
-document.getElementById("dayGif").src=`assets/gifs/day${day}.gif`;
-
-/* poem */
-const poemEl=document.getElementById("poem");
-poemEl.innerHTML="";
-poems[day].forEach(line=>{
-let p=document.createElement("p");
-p.innerHTML=line;
-poemEl.appendChild(p);
-});
-
-/* images */
-const imgBox=document.getElementById("images");
-imgBox.innerHTML="";
-let i=1;
-
-let inter=setInterval(()=>{
-let img=new Image();
-img.src=`assets/images/day${day}-${i}.jpg`;
-img.className="loveImg";
-
-img.onload=()=>imgBox.appendChild(img);
-img.onerror=()=>clearInterval(inter);
-i++;
-},1200);
-
-/* FINAL DAY 14 PROPOSAL */
-if(day==14){
-setTimeout(()=>{
-showFinalProposal();
-},8000);
-}
-}
-
-/* BACK TO CALENDAR */
-document.getElementById("backCal").onclick=()=>{
-dayScreen.classList.add("hidden");
-showCalendar();
-};
-
-/* FINAL PROPOSAL AFTER 14 */
-function showFinalProposal(){
-let box=document.createElement("div");
-box.style.position="fixed";
-box.style.top="0";
-box.style.left="0";
-box.style.width="100%";
-box.style.height="100%";
-box.style.background="black";
-box.style.display="flex";
-box.style.flexDirection="column";
-box.style.justifyContent="center";
-box.style.alignItems="center";
-box.style.zIndex="9999";
-box.style.color="white";
-
-box.innerHTML=`
-<h1 style="font-size:70px">💍 MARRY ME SAI 💖</h1>
-<p style="font-size:28px">You are my forever</p>
-`;
-
-document.body.appendChild(box);
-
-confetti({particleCount:500,spread:360});
-}
