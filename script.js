@@ -1,199 +1,227 @@
 // ============================
 // 🌸 VARIABLES
 // ============================
-let noClickCount = 0;
+let noCount = 0;
 let rainInterval;
-let isInsideSpecialPage = false;
-
-// ============================
-// 🌸 SAFE ELEMENT GET
-// ============================
-function show(id){
-    document.getElementById(id).style.display="block";
-}
-function hide(id){
-    document.getElementById(id).style.display="none";
-}
+let insideSpecial = false;
 
 // ============================
 // 🌧️ HEART + DAISY RAIN
 // ============================
 function startRain(){
-    stopRain();
+clearInterval(rainInterval);
 
-    rainInterval = setInterval(()=>{
-        if(isInsideSpecialPage) return;
+rainInterval = setInterval(()=>{
+if(insideSpecial) return;
 
-        const emoji = Math.random()>0.5 ? "💖":"🌼";
-        const drop = document.createElement("div");
-        drop.innerHTML = emoji;
-        drop.className="rainDrop";
+const emoji = Math.random()>0.5 ? "💖":"🌼";
+const drop = document.createElement("div");
+drop.className="rain";
+drop.innerHTML=emoji;
 
-        drop.style.position="fixed";
-        drop.style.top="-50px";
-        drop.style.left=Math.random()*window.innerWidth+"px";
-        drop.style.fontSize=(20+Math.random()*25)+"px";
-        drop.style.animation="fall 4s linear forwards";
-        drop.style.zIndex="999";
+drop.style.left=Math.random()*window.innerWidth+"px";
+drop.style.fontSize=(20+Math.random()*25)+"px";
+drop.style.animationDuration=(3+Math.random()*2)+"s";
 
-        document.body.appendChild(drop);
+document.body.appendChild(drop);
 
-        setTimeout(()=>{ drop.remove(); },4000);
-    },120);
+setTimeout(()=>drop.remove(),5000);
+},120);
 }
 
 function stopRain(){
-    clearInterval(rainInterval);
+clearInterval(rainInterval);
 }
 
 // ============================
-// ❤️ YES CLICK
+// 🎬 FIRST LOAD
 // ============================
-function clickYes(){
-    hide("firstPage");
-    show("calendarPage");
+window.onload=()=>{
 
-    isInsideSpecialPage=false;
-    startRain();
+startRain();
+
+// poetic question typing
+let text="Sai… will you be my Valentine? 💌✨";
+let i=0;
+let q=document.getElementById("questionText");
+
+let typing=setInterval(()=>{
+q.innerHTML+=text[i];
+i++;
+if(i>=text.length) clearInterval(typing);
+},60);
+};
+
+// ============================
+// 😍 YES BUTTON
+// ============================
+document.getElementById("yesBtn").onclick=()=>{
+
+document.getElementById("question-screen").classList.add("hidden");
+document.getElementById("yes-screen").classList.remove("hidden");
+
+confetti({
+particleCount:200,
+spread:120,
+origin:{y:.6}
+});
+
+document.getElementById("yesText").innerHTML=
+"Yaaayyy 💖 Sai said YES 😭✨<br>Now you are officially mine forever ♾️💘";
+};
+
+// open calendar
+document.getElementById("openCal").onclick=()=>{
+document.getElementById("yes-screen").classList.add("hidden");
+document.getElementById("calendar-screen").classList.remove("hidden");
+};
+
+// ============================
+// 😭 NO BUTTON
+// ============================
+document.getElementById("noBtn").onclick=()=>{
+
+noCount++;
+
+document.getElementById("question-screen").classList.add("hidden");
+document.getElementById("sad-screen").classList.remove("hidden");
+
+insideSpecial=true;
+stopRain();
+
+let sadGif=document.getElementById("sadGif");
+let sadText=document.getElementById("sadText");
+
+if(noCount==1){
+sadGif.src="assets/gifs/sad.gif";
+sadText.innerHTML="Sai… my heart just cracked 💔<br>Why you do this to your girl 😭";
+}
+else if(noCount==2){
+sadGif.src="assets/gifs/sad.gif";
+sadText.innerHTML="Sai… love is crying today 🌧️<br>Come back to me please 💔";
+}
+else if(noCount==3){
+sadGif.src="assets/gifs/sad.gif";
+sadText.innerHTML="Sai… last chance 😭<br>Don’t break our love story 💔";
+}
+else{
+sadGif.src="assets/gifs/tease.gif";
+sadText.innerHTML="You are mine already 😌💖<br>No escape from loving me 😏";
+moveNoButton();
+}
+};
+
+// think again
+document.getElementById("thinkBtn").onclick=()=>{
+document.getElementById("sad-screen").classList.add("hidden");
+document.getElementById("question-screen").classList.remove("hidden");
+insideSpecial=false;
+startRain();
+};
+
+// ============================
+// 🏃 RUNNING NO BUTTON
+// ============================
+function moveNoButton(){
+const btn=document.getElementById("noBtn");
+
+setInterval(()=>{
+btn.style.position="absolute";
+btn.style.top=Math.random()*80+"%";
+btn.style.left=Math.random()*80+"%";
+},700);
 }
 
 // ============================
-// 😒 NO CLICK
+// 📅 CALENDAR
 // ============================
-function clickNo(){
-    noClickCount++;
+const days=[7,8,9,10,11,12,13,14];
+const calendar=document.getElementById("calendar");
 
-    hide("firstPage");
-    show("sadPage");
+days.forEach(d=>{
+let box=document.createElement("div");
+box.className="day";
+box.innerHTML="Feb "+d;
 
-    isInsideSpecialPage=true;
-    stopRain();
-
-    if(noClickCount>=3){
-        let tease=document.getElementById("teaseGif");
-        if(tease) tease.style.display="block";
-    }
-}
+box.onclick=()=>openDay(d);
+calendar.appendChild(box);
+});
 
 // ============================
-// 🔙 BACK FROM SAD
-// ============================
-function backFromSad(){
-    hide("sadPage");
-    show("firstPage");
-
-    isInsideSpecialPage=false;
-    startRain();
-}
-
-// ============================
-// 📅 OPEN DAY
+// 📖 OPEN DAY
 // ============================
 function openDay(day){
-    hide("calendarPage");
-    show("dayPage");
 
-    isInsideSpecialPage=true;
-    stopRain();
+document.getElementById("calendar-screen").classList.add("hidden");
+document.getElementById("day-screen").classList.remove("hidden");
 
-    let title=document.getElementById("dayTitle");
-    let poem=document.getElementById("dayPoem");
-    let gif=document.getElementById("dayGif");
+insideSpecial=true;
+stopRain();
 
-    if(day==7){
-        title.innerHTML="🌹 Rose Day";
-        poem.innerHTML="You are my rose 🌹 my heart’s light 💖<br>With you everything feels right ✨";
-        gif.src="7.gif";
-    }
-    if(day==8){
-        title.innerHTML="💍 Propose Day";
-        poem.innerHTML="A question from heart so true 💍<br>Will you let me love only you? 💖";
-        gif.src="8.gif";
-    }
-    if(day==9){
-        title.innerHTML="🧸 Teddy Day";
-        poem.innerHTML="Soft teddy hugs and you 🧸💖<br>My happiest dream came true ✨";
-        gif.src="9.gif";
-    }
-    if(day==10){
-        title.innerHTML="🍫 Chocolate Day";
-        poem.innerHTML="Sweeter than chocolate you 🍫💖<br>My forever boo 😘";
-        gif.src="10.gif";
-    }
-    if(day==11){
-        title.innerHTML="🤝 Promise Day";
-        poem.innerHTML="Promise to stay always near 🤝💖<br>Love you more each year ✨";
-        gif.src="11.gif";
-    }
-    if(day==12){
-        title.innerHTML="🤗 Hug Day";
-        poem.innerHTML="One hug from you 🤗💖<br>Feels like whole world too ✨";
-        gif.src="12.gif";
-    }
-    if(day==13){
-        title.innerHTML="😘 Kiss Day";
-        poem.innerHTML="A kiss so sweet 😘💖<br>Makes my heart skip beat ✨";
-        gif.src="13.gif";
-    }
-    if(day==14){
-        title.innerHTML="❤️ Valentine Day";
-        poem.innerHTML="From today till forever 💖<br>Let’s stay together ✨";
-        gif.src="14.gif";
-    }
+let gif=document.getElementById("dayGif");
+let poem=document.getElementById("poem");
+let images=document.getElementById("images");
+
+images.innerHTML="";
+
+gif.src=`assets/gifs/${day}.gif`;
+
+poem.innerHTML=`Sai 💖<br>
+Day ${day} with you feels like magic ✨<br>
+Every second loving you more 😭💘`;
+
+// load images
+for(let i=1;i<=3;i++){
+let img=document.createElement("img");
+img.src=`assets/images/${day}-${i}.jpg`;
+img.className="loveImg";
+images.appendChild(img);
 }
 
-// ============================
-// 🔙 BACK TO CALENDAR
-// ============================
-function backToCalendar(){
-    hide("dayPage");
-    show("calendarPage");
-
-    isInsideSpecialPage=false;
-    startRain();
+// after 14 → proposal
+if(day==14){
+setTimeout(showProposal,6000);
 }
+}
+
+// back calendar
+document.getElementById("backCal").onclick=()=>{
+document.getElementById("day-screen").classList.add("hidden");
+document.getElementById("calendar-screen").classList.remove("hidden");
+insideSpecial=false;
+startRain();
+};
+
+// back home
+document.getElementById("backHome").onclick=()=>{
+document.getElementById("calendar-screen").classList.add("hidden");
+document.getElementById("question-screen").classList.remove("hidden");
+insideSpecial=false;
+startRain();
+};
 
 // ============================
 // 💍 FINAL PROPOSAL
 // ============================
-function finalProposal(){
-    hide("calendarPage");
-    show("finalPage");
+function showProposal(){
 
-    isInsideSpecialPage=false;
-    startRain();
+let box=document.createElement("div");
+box.id="finalBox";
 
-    let text=document.getElementById("marryText");
+box.innerHTML=`
+<div class="ringWrap">
+<div class="bigRing">💍</div>
+<div class="marryGlow">SAI WILL YOU MARRY ME?</div>
+<div class="sparkle">✨✨ FOREVER US ✨✨</div>
+</div>
+`;
 
-    // bounce animation
-    let scale=1;
-    setInterval(()=>{
-        scale = scale==1?1.2:1;
-        text.style.transform=`scale(${scale})`;
-    },500);
+document.body.appendChild(box);
 
-    // glow animation
-    setInterval(()=>{
-        text.style.textShadow=`
-        0 0 10px #ff69b4,
-        0 0 25px #ff1493,
-        0 0 60px #ff69b4,
-        0 0 90px #ff1493`;
-    },400);
+confetti({
+particleCount:500,
+spread:180,
+origin:{y:.5}
+});
 }
-
-// ============================
-// ✨ ON LOAD FIX (IMPORTANT)
-// ============================
-window.onload=function(){
-
-    // hide all pages except first
-    hide("calendarPage");
-    hide("sadPage");
-    hide("dayPage");
-    hide("finalPage");
-    show("firstPage");
-
-    startRain();
-};
 
