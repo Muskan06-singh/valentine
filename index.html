@@ -3,72 +3,102 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sai 💕</title>
+<title>A Monster Calls</title>
 
-<link rel="stylesheet" href="style.css">
+<style>
+body{
+margin:0;
+overflow:hidden;
+background:black;
+font-family:Arial;
+}
 
-<!-- Scribble bold font -->
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+#ui{
+position:absolute;
+top:20px;
+left:20px;
+color:white;
+font-size:18px;
+z-index:10;
+}
 
-<!-- Canvas confetti -->
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+#story{
+position:absolute;
+bottom:40px;
+width:100%;
+text-align:center;
+color:white;
+font-size:22px;
+z-index:10;
+text-shadow:0 0 10px red;
+}
+</style>
 </head>
 
 <body>
 
-<!-- 🌼❤️ Rain layer -->
-<div id="rain-layer"></div>
+<div id="ui">🌑 A Monster Calls</div>
+<div id="story">The forest is silent... but something watches you</div>
 
-<!-- MAIN -->
-<div id="app">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-  <!-- QUESTION -->
-  <div id="question-screen" class="screen">
-    <h1 id="questionText"></h1>
+<script>
+let scene = new THREE.Scene();
+scene.fog = new THREE.Fog(0x000000, 10, 80);
 
-    <div class="buttons">
-      <button id="yesBtn">YES 💘</button>
-      <button id="noBtn">NO 💔</button>
-    </div>
-  </div>
+let camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight,0.1,1000);
+let renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
 
-  <!-- SAD SCREEN -->
-  <div id="sad-screen" class="screen hidden">
-    <img id="sadGif" class="gif">
-    <h2 id="sadText"></h2>
+renderer.shadowMap.enabled = true;
 
-    <button id="thinkBtn" class="heart-btn">❤️ Think again my Love ❤️</button>
-  </div>
+let light = new THREE.DirectionalLight(0xff0000,1);
+light.position.set(5,20,10);
+light.castShadow = true;
+scene.add(light);
 
-  <!-- YES SCREEN -->
-  <div id="yes-screen" class="screen hidden">
-    <img src="assets/gifs/happy.gif" class="gif">
-    <h2 id="yesText"></h2>
-    <button id="openCal">Open Love Calendar 💌</button>
-  </div>
+let ambient = new THREE.AmbientLight(0x222222);
+scene.add(ambient);
 
-  <!-- CALENDAR -->
-  <div id="calendar-screen" class="screen hidden">
-    <h2 class="title">Our Love Week 💖</h2>
-    <div id="calendar"></div>
+let groundGeo = new THREE.PlaneGeometry(200,200);
+let groundMat = new THREE.MeshStandardMaterial({color:0x111111});
+let ground = new THREE.Mesh(groundGeo,groundMat);
+ground.rotation.x = -Math.PI/2;
+ground.receiveShadow = true;
+scene.add(ground);
 
-    <button id="backHome" class="backBtn">⬅ Back to Valentine Page</button>
-  </div>
+function createTree(x,z){
+let trunkGeo = new THREE.CylinderGeometry(0.5,1,8,8);
+let trunkMat = new THREE.MeshStandardMaterial({color:0x2d1b0f});
+let trunk = new THREE.Mesh(trunkGeo,trunkMat);
+trunk.position.set(x,4,z);
+trunk.castShadow = true;
+scene.add(trunk);
 
-  <!-- DAY PAGE -->
-  <div id="day-screen" class="screen hidden">
-    <img id="dayGif" class="gif">
-    <h2 id="poem"></h2>
+let eyeGeo = new THREE.SphereGeometry(0.15,16,16);
+let eyeMat = new THREE.MeshBasicMaterial({color:"red"});
+let eye1 = new THREE.Mesh(eyeGeo,eyeMat);
+let eye2 = new THREE.Mesh(eyeGeo,eyeMat);
+eye1.position.set(x-0.2,6,z+0.5);
+eye2.position.set(x+0.2,6,z+0.5);
+scene.add(eye1);
+scene.add(eye2);
+}
 
-    <div id="images"></div>
+for(let i=0;i<30;i++){
+createTree((Math.random()-0.5)*150,(Math.random()-0.5)*150);
+}
 
-    <button id="backCal" class="backBtn">⬅ Back to Calendar</button>
-  </div>
+camera.position.set(0,6,15);
 
-</div>
-
-<script src="script.js"></script>
+function animate(){
+requestAnimationFrame(animate);
+camera.position.x = Math.sin(Date.now()*0.0003)*20;
+camera.lookAt(0,0,0);
+renderer.render(scene,camera);
+}
+animate();
+</script>
 </body>
 </html>
-
-
