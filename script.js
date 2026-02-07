@@ -209,11 +209,20 @@ function runAwayNo(){
 // ===============================
 // 📅 CALENDAR
 // ===============================
+// ===============================
+// 📅 CALENDAR (REAL TIME INDIA SYNC)
+// ===============================
 const calendar=document.getElementById("calendar");
 calendar.innerHTML="";
 
-const today = new Date();
-const todayDate = today.getDate();
+// force India real time (IMPORTANT for GitHub)
+const now = new Date();
+const indiaTime = new Date(
+  now.toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+);
+
+const todayDate = indiaTime.getDate();
+const todayMonth = indiaTime.getMonth()+1; // Feb = 2
 
 for(let d=7; d<=14; d++){
     let box=document.createElement("div");
@@ -222,23 +231,29 @@ for(let d=7; d<=14; d++){
     box.style.transition="0.4s";
     box.style.animation="textFloat 3s ease-in-out infinite alternate";
 
-    if(d===7 || d===14){
+    // ⭐ UNLOCK BASED ON REAL DATE
+    if(todayMonth===2 && todayDate>=d){
         box.style.boxShadow="0 0 25px hotpink, 0 0 60px pink";
         box.style.transform="scale(1.08)";
         box.style.animation="glowPulse 1.5s infinite alternate";
         box.onclick=()=>openDay(d);
     }else{
         box.classList.add("locked");
-        box.onclick=()=>{ alert("⏳ My love… not yet.\nOur memory will bloom on its destined day 🌸💌"); };
+        box.onclick=()=>{
+            alert("⏳ My love… not yet.\nOur memory will bloom on its destined day 🌸💌");
+        };
     }
 
-    if(todayDate===d){
+    // highlight today
+    if(todayMonth===2 && todayDate===d){
         box.style.boxShadow="0 0 40px #ff69b4,0 0 90px pink";
         box.style.transform="scale(1.15)";
         box.style.animation="glowPulse 1s infinite alternate";
     }
+
     calendar.appendChild(box);
 }
+
 
 // ===============================
 // 📖 OPEN DAY
@@ -689,7 +704,3 @@ function showBigHeart(){
 // ===============================
 // 🔥 TRIGGER BIG HEART ON FEB 14
 // Make sure this is added inside your openDay function for day 14
-if(day === 14){
-    setTimeout(showBigHeart, 1000); // 1s delay for pop effect
-}
-
